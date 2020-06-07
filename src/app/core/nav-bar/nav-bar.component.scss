@@ -12,3 +12,12 @@
     right: 32px;
 
 }
+
+
+.dropdown-menu-center {
+    left: 50% !important;
+    right: auto !important;
+    text-align: left !important;
+    transform: translate(-50%, 0) !important;
+    top:75px !important;
+  }

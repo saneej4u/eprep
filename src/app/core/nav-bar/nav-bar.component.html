@@ -2,18 +2,58 @@
   class="d-flex flex-column flex-md-row align-items-center justify-content-between p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm fixed-top">
   <img src="/assets/images/logo.png" style="max-height: 90px" alt="E-Prep" />
   <nav class="my-2 my-md-0 mr-md-3 text-uppercase" style="font-size: larger">
-    <a class="p-2 text-dark" href="#">Home</a>
-    <span class="position-relative" dropdown (onShown)="onShown()" (onHidden)="onHidden()" (isOpenChange)="isOpenChange()">
-        <a href id="basic-link" dropdownToggle (click)="false"
-           aria-controls="basic-link-dropdown" class="p-2 text-dark" >Category</a>
-        <ul style="position: absolute;" id="basic-link-dropdown" *dropdownMenu class="dropdown-menu"
-            role="menu" aria-labelledby="basic-link">
-          <li *ngFor="let choice of items">
-            <a class="dropdown-item" href="#">{{choice}}</a>
-          </li>
-        </ul>
-      </span>
-    <a class="p-2 text-dark" href="#">Teach</a>  
+    <div class="btn-group">
+      <a class="p-2 text-dark" href="#">Home</a>
+
+      <div dropdown class="p-2 text-dark">
+        <a id="button-basic" dropdownToggle class="dropdown-toggle" aria-controls="dropdown-basic"> Categories<span
+            class="caret"></span></a>
+        <!-- your mega menu starts here! -->
+        <div id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-center" role="menu"
+          aria-labelledby="button-basic" aria-labelledby="servicesDropdown">
+
+          <!-- the standard dropdown items -->
+          <a class="dropdown-item" href="#">What we do</a>
+          <a class="dropdown-item" href="#">How we fit your needs</a>
+
+          <!-- next, a divider to tidy things up -->
+          <div class="dropdown-divider"></div>
+
+          <!-- finally, using flex to create your layout -->
+          <div class="d-md-flex align-items-start justify-content-start">
+
+            <div>
+              <div class="dropdown-header">Development</div>
+              <a class="dropdown-item" href="#">Bespoke software</a>
+              <a class="dropdown-item" href="#">Mobile apps</a>
+              <a class="dropdown-item" href="#">Websites</a>
+            </div>
+
+            <div>
+              <div class="dropdown-header">Professional Services</div>
+              <a class="dropdown-item" href="#">Project rescue</a>
+              <a class="dropdown-item" href="#">Source code recovery</a>
+              <a class="dropdown-item" href="#">Application support &amp; maintenance</a>
+            </div>
+
+            <div>
+              <div class="dropdown-header">Fixed Price Services</div>
+              <a class="dropdown-item" href="#">Add cookie consent</a>
+              <a class="dropdown-item" href="#">Add captcha</a>
+              <a class="dropdown-item" href="#">Add core data</a>
+              <a class="dropdown-item" href="#">Custom error pages</a>
+              <a class="dropdown-item" href="#">Contact form creation</a>
+              <a class="dropdown-item" href="#">Automated backups</a>
+              <a class="dropdown-item" href="#">Image to HTML</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a class="p-2 text-dark" href="#">Teach</a>
+    </div>
+
+
   </nav>
 
   <div class="d-flex align-items-center">
