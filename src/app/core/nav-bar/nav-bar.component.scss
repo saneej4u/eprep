@@ -19,5 +19,20 @@
     right: auto !important;
     text-align: left !important;
     transform: translate(-50%, 0) !important;
-    top:75px !important;
+    top:68px !important;
   }
+
+  dropdown-item:focus, .dropdown-item:hover {
+    color: black;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.dropdown-item
+{
+    color:black;
+}
+
+a:hover {
+    text-decoration:none;
+}
