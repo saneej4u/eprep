@@ -19,6 +19,12 @@ export class ShopService {
     return this.courseCollection.valueChanges({idField: 'Id'});
   }
 
+  getCourseById(id: string): Observable<ICourse>
+  {
+    this.courseDocument = this.firestore.doc<ICourse>('Courses/' + id);
+    return this.courseDocument.valueChanges();
+  }
+
   addCourse(course: ICourse)
   {
     this.courseCollection = this.firestore.collection<ICourse>('Courses');

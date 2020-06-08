@@ -1,8 +1,11 @@
-
-
-.active
+.main-banner
 {
-    //border-bottom: 4px solid #18629F;
+    background-image: url("/assets/images/main-banner.jpg");
+    background-size: cover;
+    height: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
 }
 
 .btn-group
@@ -15,9 +18,9 @@
 width: 50%;
 }
 
-::ng-deep .carousel-control-prev, ::ng-deep .carousel-control-next {
-    //background-color: white;
-  }
+// ::ng-deep .carousel-control-prev, ::ng-deep .carousel-control-next {
+//     background-color: white;
+//   }
   ::ng-deep .carousel .carousel-control-prev-icon {
     background-color:#19639E;
     width: 50px;

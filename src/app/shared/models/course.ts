@@ -1,5 +1,6 @@
 export interface ICourse
 {
+    Id: string;
     BasicInfo: string;
     CategoryId: string;
     Currency: string;

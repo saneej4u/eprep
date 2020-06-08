@@ -11,6 +11,7 @@ export class ShopComponent implements OnInit {
 
   courses: ICourse[];
   itemsPerSlide = 4;
+  title = 'Wecome to  Novus';
 
   constructor(private shopService: ShopService) { }
 

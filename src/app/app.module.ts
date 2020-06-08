@@ -12,6 +12,7 @@ import { CoreModule } from './core/core.module';
 import { ShopModule } from './shop/shop.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { environment } from 'src/environments/environment';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { environment } from 'src/environments/environment';
     AngularFireDatabaseModule,
     CoreModule,
     ShopModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
