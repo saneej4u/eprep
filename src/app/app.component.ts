@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent implements OnInit{
 
   title = 'Wecome to  Novus';
-  constructor(private http: HttpClient){}
+  constructor(){}
 
-  ngOnInit(): void {
-    throw new Error("Method not implemented.");
-  }
+  ngOnInit(): void {}
 }

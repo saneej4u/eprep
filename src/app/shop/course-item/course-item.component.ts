@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ICourse } from 'src/app/shared/models/course';
 
 @Component({
   selector: 'app-course-item',
@@ -7,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CourseItemComponent implements OnInit {
 
-  @Input() slide: any;
+  @Input() course: ICourse;
 
   constructor() { }
 

@@ -1,16 +1,16 @@
-interface ICourse
+export interface ICourse
 {
-    basicInfo: string;
-    categoryId: string;
-    currency: string;
-    description: string;
-    instructorId: string;
-    instructorName: string;
-    price: number;
-    subCategoryId: string;
-    subTitle: string;
-    thumbnail: string;
-    title: string;
-    totalArticle: string;
-    totalVideoInHours: string;
+    BasicInfo: string;
+    CategoryId: string;
+    Currency: string;
+    Description: string;
+    InstructorId: string;
+    InstructorName: string;
+    Price: number;
+    SubCategoryId: string;
+    SubTitle: string;
+    Thumbnail: string;
+    Title: string;
+    TotalArticle: string;
+    TotalVideoInHours: string;
 }

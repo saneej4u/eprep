@@ -1,3 +1,6 @@
+
+
+
 <div class="row">
     <div class="col-md-12">
         <ul class="nav d-flex justify-content-start align-items-start my-4 font-weight-bold text-dark"
@@ -14,10 +17,10 @@
         </ul>
     </div>
 
-    <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset" [noWrap]="!noWrap"
-        [interval]="false" [startFromIndex]="1" (slideRangeChange)="onSlideRangeChange($event)">
-        <slide class="card h-100 shadow-sm ml-3" *ngFor="let slide of slides; let index=index">
-            <app-course-item [slide]="slide"></app-course-item>
+    <carousel *ngIf="courses"  [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]=false [noWrap]=true
+        [interval]="false" [startFromIndex]="1">
+        <slide class="card h-100 shadow-sm ml-3" *ngFor="let course of courses;let index=index">
+            <app-course-item [course]="course"></app-course-item>
         </slide>
     </carousel>
 </div>
@@ -27,10 +30,11 @@
         <h4>Top rated courses</h4>
     </div>
 
-    <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset" [noWrap]="!noWrap"
-        [interval]="false" [startFromIndex]="1" (slideRangeChange)="onSlideRangeChange($event)">
-        <slide class="card h-100 shadow-sm ml-3" *ngFor="let slide of slides; let index=index">
-            <app-course-item [slide]='slide'></app-course-item>
+    <carousel *ngIf="courses"  [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]=false [noWrap]=true
+        [interval]="false" [startFromIndex]="1" >
+        <slide class="card h-100 shadow-sm ml-3" *ngFor="let course of courses;let index=index">
+            <app-course-item [course]='course'></app-course-item>
         </slide>
     </carousel>
 </div>
+
