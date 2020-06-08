@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ICourse } from 'src/app/shared/models/course';
 import { ShopService } from '../shop.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-course-details',
@@ -11,7 +12,7 @@ export class CourseDetailsComponent implements OnInit {
 
   course: ICourse;
 
-  constructor(private shopService:ShopService) { }
+  constructor(private shopService: ShopService, private activateRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.loadCourse();
@@ -19,7 +20,7 @@ export class CourseDetailsComponent implements OnInit {
 
   loadCourse()
   {
-    this.shopService.getCourseById('3X0ohyOTBT0UoL4XdAIB').subscribe(course => {
+    this.shopService.getCourseById(this.activateRoute.snapshot.paramMap.get('id')).subscribe(course => {
       this.course = course;
     }, err => {
       console.log(err);
