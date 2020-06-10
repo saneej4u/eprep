@@ -19,5 +19,52 @@ export class ShopComponent implements OnInit {
     this.shopService.getCourses().subscribe(result => {
       this.courses = result;
     });
+
+    //this.addCourseSection();
+    //this.addCourseContent();
+
+    //this.addSubCollection();
+
+    console.log("Sub...");
+    this.loadSubCollection();
+  }
+
+  addCourseSection()
+  {
+    this.shopService.addCourseSection(
+      {
+      Id: '',
+      CourseId: "2Uoi3E8eVslwp575z41h",
+      Description: "Course section 3 - New dental course Descriptions ",
+      InstructorId: "Fathima",
+      SubTitle: "Course section 3 Sub title - New dental course",
+      Title: "Course section 3 Title - New dental course"
+    });
+  }
+
+  addCourseContent()
+  {
+    this.shopService.addCourseContent(
+      {
+      Id: '',
+      ContentType: "Video",
+      CourseSectionId: "2Uoi3E8eVslwp575z41h",
+      Info: "Fathima course",
+      IsPreview: "true",
+      SubTitle: "Course content 3 Sub title - New dental course",
+      Title: "Course content 3 Title - New dental course"
+    });
+  }
+
+  addSubCollection()
+  {
+    this.shopService.addSubCollection();
+  }
+
+  loadSubCollection()
+  {
+    this.shopService.loadSubCollectionWithDocument().subscribe(result => {
+      console.log("Sub collection: " + JSON.stringify(result));
+    });
   }
 }
