@@ -5,6 +5,7 @@ import { CourseItemComponent } from './course-item/course-item.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { CourseDetailsComponent } from './course-details/course-details.component';
 import { RouterModule } from '@angular/router';
+import { CoreModule } from '../core/core.module';
 
 
 
@@ -13,7 +14,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule,
-    CarouselModule.forRoot()
+    CoreModule
   ],
   exports:[ShopComponent]
 })

@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { ShopModule } from './shop/shop.module';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { environment } from 'src/environments/environment';
 import { HomeModule } from './home/home.module';
 
@@ -27,7 +26,6 @@ import { HomeModule } from './home/home.module';
     AngularFireDatabaseModule,
     CoreModule,
     ShopModule,
-    BsDropdownModule.forRoot(),
     HomeModule
   ],
   providers: [],
