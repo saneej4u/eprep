@@ -6,24 +6,29 @@ import { RouterModule } from '@angular/router';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { VideoModalComponent } from './video-modal/video-modal.component';
 
 
 
 
 @NgModule({
-  declarations: [NavBarComponent],
+  declarations: [NavBarComponent, VideoModalComponent],
   imports: [
     CommonModule,
     RouterModule,
     BrowserAnimationsModule,
     CarouselModule.forRoot(),
     BsDropdownModule.forRoot(),
-    AccordionModule.forRoot()
+    AccordionModule.forRoot(),
+    ModalModule.forRoot()
   ],
   exports: [
     NavBarComponent,
     CarouselModule,
-    AccordionModule
+    AccordionModule,
+    ModalModule,
+    VideoModalComponent
   ]
 })
 export class CoreModule { }

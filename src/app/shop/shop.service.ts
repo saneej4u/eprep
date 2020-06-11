@@ -84,12 +84,12 @@ export class ShopService {
       .valueChanges();
   }
 
-  loadSubCollectionWithDocument(): void {
+  loadSubCollectionWithDocument(): Observable<any[]> {
     var courseId = '2Uoi3E8eVslwp575z41h';
 
     console.log('Course id: ' + courseId);
 
-    this.firestore
+    return this.firestore
       .collection<ICourseSection>('CourseSections', ref =>
         ref.where('CourseId', '==', courseId)
       )
@@ -109,29 +109,7 @@ export class ShopService {
           return combineLatest(res);
         })
       )
-      .subscribe(
- 
-        (result) => {
-       // console.log("       SECTION      :       " + JSON.stringify(result));
 
-          result.forEach(courseSection => {
-            console.log("       SECTION      :       " + JSON.stringify(courseSection));
-
-            courseSection.courseContents.forEach(contents => {
-              console.log("      CONTENTS    :       " + JSON.stringify(contents));
-
-            });
-          });
-
-         
-        },
-        error => {
-          console.log('Error: ' + error);
-        },
-        () => {
-          console.log('Completed.');
-        }
-      );
 
     //return this.firestore.collection(`CourseSections/96luXnrKgqU0NMdI5OPZ/NewCourseContents`).valueChanges();
   }

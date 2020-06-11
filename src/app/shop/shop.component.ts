@@ -25,8 +25,7 @@ export class ShopComponent implements OnInit {
 
     //this.addSubCollection();
 
-    console.log("Sub...");
-    this.loadSubCollection();
+    //this.loadSubCollection();
   }
 
   addCourseSection()
@@ -59,18 +58,5 @@ export class ShopComponent implements OnInit {
   addSubCollection()
   {
     this.shopService.addSubCollection();
-  }
-
-  loadSubCollection()
-  {
-    this.shopService.loadSubCollectionWithDocument();
-    // this.shopService.loadSubCollectionWithDocument().subscribe(result => {
-
-    //   result.forEach(x => {
-
-    //      console.log(" hhh : " + JSON.stringify(x));
-    //   })
-    //   console.log("Sub collection: " + JSON.stringify(result));
-    // });
   }
 }

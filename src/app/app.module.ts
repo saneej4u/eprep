@@ -12,6 +12,7 @@ import { CoreModule } from './core/core.module';
 import { ShopModule } from './shop/shop.module';
 import { environment } from 'src/environments/environment';
 import { HomeModule } from './home/home.module';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HomeModule } from './home/home.module';
     AngularFireDatabaseModule,
     CoreModule,
     ShopModule,
-    HomeModule
+    HomeModule,
+    ModalModule.forRoot() 
   ],
   providers: [],
   bootstrap: [AppComponent]
