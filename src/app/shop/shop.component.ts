@@ -63,8 +63,14 @@ export class ShopComponent implements OnInit {
 
   loadSubCollection()
   {
-    this.shopService.loadSubCollectionWithDocument().subscribe(result => {
-      console.log("Sub collection: " + JSON.stringify(result));
-    });
+    this.shopService.loadSubCollectionWithDocument();
+    // this.shopService.loadSubCollectionWithDocument().subscribe(result => {
+
+    //   result.forEach(x => {
+
+    //      console.log(" hhh : " + JSON.stringify(x));
+    //   })
+    //   console.log("Sub collection: " + JSON.stringify(result));
+    // });
   }
 }

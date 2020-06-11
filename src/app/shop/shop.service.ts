@@ -4,7 +4,8 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument
 } from '@angular/fire/firestore';
-import { Observable, observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
 import { ICourse } from '../shared/models/course';
 import { ICourseSection } from '../shared/models/course-section';
 import { ICourseContent } from '../shared/models/course-content';
@@ -66,12 +67,12 @@ export class ShopService {
   addSubCollection() {
     this.firestore
       .collection('CourseSections')
-      .doc('96luXnrKgqU0NMdI5OPZ')
+      .doc('AOF0MWeCvODZnp0oi0hW')
       .collection('NewCourseContents')
       .add({
-        SubTitle: 'Sub collection Title',
-        SubSubTitle: 'Sub Collection Sub Title',
-        SubDesc: 'Sub Collection desc'
+        SubTitle: 'Sub collection Title - A',
+        SubSubTitle: 'Sub Collection Sub Title -A',
+        SubDesc: 'Sub Collection desc -a'
       });
   }
 
@@ -82,11 +83,57 @@ export class ShopService {
       .collection('NewCourseContents')
       .valueChanges();
   }
-  
-  loadSubCollectionWithDocument(): Observable<any[]> 
-  {
-    return this.firestore.collection(`CourseSections/96luXnrKgqU0NMdI5OPZ/NewCourseContents`).valueChanges();
 
+  loadSubCollectionWithDocument(): void {
+    var courseId = '2Uoi3E8eVslwp575z41h';
+
+    console.log('Course id: ' + courseId);
+
+    this.firestore
+      .collection<ICourseSection>('CourseSections', ref =>
+        ref.where('CourseId', '==', courseId)
+      )
+      .valueChanges({ idField: 'Id' })
+      .pipe(
+        switchMap((courseSections: ICourseSection[]) => {
+          const res = courseSections.map((r: any) => {
+            return this.firestore
+              .collection<ICourseContent>(`CourseSections/${r.Id}/NewCourseContents`)
+              .valueChanges()
+              .pipe(
+                map((courseContents: ICourseContent[]) =>
+                  Object.assign(r, { courseContents })
+                )
+              );
+          });
+          return combineLatest(res);
+        })
+      )
+      .subscribe(
+ 
+        (result) => {
+       // console.log("       SECTION      :       " + JSON.stringify(result));
+
+          result.forEach(courseSection => {
+            console.log("       SECTION      :       " + JSON.stringify(courseSection));
+
+            courseSection.courseContents.forEach(contents => {
+              console.log("      CONTENTS    :       " + JSON.stringify(contents));
+
+            });
+          });
+
+         
+        },
+        error => {
+          console.log('Error: ' + error);
+        },
+        () => {
+          console.log('Completed.');
+        }
+      );
+
+    //return this.firestore.collection(`CourseSections/96luXnrKgqU0NMdI5OPZ/NewCourseContents`).valueChanges();
   }
 }
 
