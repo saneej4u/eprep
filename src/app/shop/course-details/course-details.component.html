@@ -22,42 +22,38 @@
 
   <div class="row">
     <div class="col-md-8">
-<!-- 
-      <ul *ngFor="let section of curiculam">
-        <li>{{section?.Title}}</li>
-        <ul *ngFor="let res of section.courseContents">
-          <li>{{res?.SubTitle}}</li>
-
-        </ul>
-      </ul> -->
 
       <accordion>
         <accordion-group *ngFor="let section of curiculam">
           <button class="btn btn-link btn-block clearfix" accordion-heading type="button">
-            <div class="pull-left float-left">{{section?.Title}}</div>
+            <div class="pull-left float-left text-dark font-weight-bold">{{section?.Title}}</div>
             <span class="badge badge-danger float-right pull-right">Some HTML here</span>
           </button>
           <table class="table">
             <tbody>
               <tr *ngFor="let res of section.courseContents">
-                <td>{{res?.SubTitle}}</td>
-                <td style="width: 30px;">
-                  <button class="btn btn-outline btn-sm btn-secondary" (click)="openModal()">Preview</button>
-                </td>
+                <td>
+                  <div class="d-flex justify-content-between text-primary font-weight-bold small" style="cursor: pointer"  (click)="openModal()">
+                    
+                    <div>
+                        <i class="fa fa-play-circle pr-2" aria-hidden="true"></i> {{res?.SubTitle}}
+                    </div>
+                    <div>
+                        Preview
+                    </div>
+                  </div>
+                   
+                  
+                  </td>
+  
               </tr>
             </tbody>
           </table>
         </accordion-group>
-        <!-- <accordion-group>
-          <button class="btn btn-link" accordion-heading type="button">
-            I can have markup, too!
-          </button>
-          <span class="badge badge-secondary center">And some HTML here</span>
-        </accordion-group> -->
       </accordion>
     </div>
     <div class="col-md-4">
-      <div class="card sticky-top p-3 bg-light">
+      <div class="card p-3 bg-light">
         <h2 class="text-dark text-center">{{course?.Price | currency}}</h2>
         <div class="d-flex justify-content-center py-3">
           <button class="btn btn-outline btn-danger btn btn-rounded w-75">Add to Cart</button>
