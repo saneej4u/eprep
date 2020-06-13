@@ -1,32 +1,15 @@
 <div class="d-flex justify-content-center mt-5">
-  <div class="col-md-12">
-    <div class="container py-5">
-      <div class="row justify-content-sm-center">
-        <div class="col-sm-10 col-md-6">
-          <div class="card border-info">
-          
-            <div class="card-body">
-              <div class="row justify-content-sm-center">
-                <div class="col-md-8">
-                  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                    <!-- <input formControlName="email" type="text" class="form-control mb-2" placeholder="Email" required autofocus>
-                    <span class="text-danger" *ngIf="loginForm.get('email').invalid 
-                                              && loginForm.get('email').touched 
-                                              && loginForm.get('email').errors['pattern']">
-                      Email address is not valid
-                    </span> -->
-                    <app-text-input formControlName='email' [label]="'Email Address'"></app-text-input>
-                    <app-text-input formControlName='password' [label]="'Password'" [type]="'password'"></app-text-input>
-                    <!-- <input formControlName='password' type="password" class="form-control mb-2" placeholder="Password" required> -->
-                    <button class="btn btn-lg bg-dark btn-block mb-1 text-white" type="submit" >Login</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="col-3">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">Login</h1>
       </div>
-    </div>
+
+      <app-text-input formControlName="email" [label]="'Email Address'"></app-text-input>
+      <app-text-input formControlName="password" [label]="'Password'" [type]="'password'"></app-text-input>
+     
+      <button [disabled]="loginForm.invalid" class="btn btn-lg bg-dark btn-block text-white" type="submit">Sign in</button>
+    </form>
   </div>
 </div>
 
