@@ -8,6 +8,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { VideoModalComponent } from './video-modal/video-modal.component';
+import { VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule } from 'ngx-videogular';
 
 
 
@@ -21,7 +22,8 @@ import { VideoModalComponent } from './video-modal/video-modal.component';
     CarouselModule.forRoot(),
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule
   ],
   exports: [
     NavBarComponent,

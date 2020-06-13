@@ -1,16 +1,19 @@
 <div
   class="d-flex flex-column flex-md-row align-items-center justify-content-between p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm fixed-top">
-  <img src="/assets/images/logo.png" style="max-height: 90px" class="logo" alt="E-Prep" [routerLink]="['/shop']" routerLinkActive="router-link-active"  />
+  <img src="/assets/images/logo.png" style="max-height: 90px" class="logo" alt="E-Prep" [routerLink]="['/shop']"
+    routerLinkActive="router-link-active" />
+
   <nav class="my-2 my-md-0 mr-md-3 text-uppercase" style="font-size: larger">
     <div class="btn-group">
-      <a class="px-3" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]='{exact:true}' >Home</a>
-      <a class="px-3" [routerLink]="['/shop']" routerLinkActive="active" >Shop</a>
+      <a class="px-3" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]='{exact:true}'>Home</a>
+      <a class="px-3" [routerLink]="['/shop']" routerLinkActive="active">Shop</a>
       <div dropdown class="px-3">
         <a id="button-basic" dropdownToggle class="dropdown-toggle" aria-controls="dropdown-basic"> Categories<span
             class="caret"></span></a>
         <!-- your mega menu starts here! -->
-        <div id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-center" style="background-color:white; border:1px solid lightgray" role="menu"
-          aria-labelledby="button-basic" aria-labelledby="servicesDropdown">
+        <div id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-center"
+          style="background-color:white; border:1px solid lightgray" role="menu" aria-labelledby="button-basic"
+          aria-labelledby="servicesDropdown">
 
           <!-- finally, using flex to create your layout -->
           <div class="d-md-flex align-items-start justify-content-start py-3 text-capitalize">
@@ -51,10 +54,38 @@
 
   <div class="d-flex align-items-center">
     <a class="position-relative">
-      <i class="fa fa-shopping-cart fa-2x mr-5 text-dark"></i>
+      <i class="fa fa-shopping-cart fa-2x mr-4 text-dark"></i>
       <div class="cart-no">5</div>
     </a>
-    <a class="btn btn-outline-secondary mr-2">Login</a>
-    <a class="btn btn-outline-secondary mr-3">Sign up</a>
+
+    <ng-container *ngIf="(currentUser == null)">
+      <a class="btn btn-outline-secondary mr-2" routerLink='/account/login'>Login</a>
+      <a class="btn btn-outline-secondary mr-3" routerLink='/account/register'>Sign up</a>
+    </ng-container>
+
+    <ng-container *ngIf="currentUser" >
+
+      <div class="btn-group" dropdown placement="bottom lefts">
+        <a id="button-basic" dropdownToggle class="dropdown-toggle" aria-controls="dropdown-basic"> <span class="lead"> Hello, Saneej</span><span class="caret mr-5"></span>
+      </a>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-lefts dropdown-menu-center-log-out" style="cursor: pointer"
+            role="menu" aria-labelledby="button-basic">
+            <li role="menuitem"><h6 class="dropdown-item" href="#">Saneej Cherakadavath</h6></li>
+            <li role="menuitem"><a class="dropdown-item" href="#">{{currentUser.email}} </a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" href="#">My Courses</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="#">My Cart</a></li>
+           
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" href="#">Account Settings</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="#">Edit Profile</a></li>
+              <li role="menuitem"><a class="dropdown-item" href="#">Purchase History</a>
+            </li>
+            <li class="divider dropdown-divider"></li>
+          <li role="menuitem"><a class="dropdown-item" style="cursor: pointer" (click)="logOut()">Logout</a></li>
+        </ul>
+      </div>
+
+    </ng-container>
   </div>
 </div>

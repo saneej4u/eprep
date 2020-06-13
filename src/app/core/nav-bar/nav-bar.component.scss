@@ -19,6 +19,15 @@
   top: 68px !important;
 }
 
+.dropdown-menu-center-log-out
+{
+  left: 50% !important;
+  right: auto !important;
+  text-align: left !important;
+  transform: translate(-50%, 0) !important;
+  top: 65px !important;
+}
+
 dropdown-item:focus,
 .dropdown-item:hover {
   color: black;
