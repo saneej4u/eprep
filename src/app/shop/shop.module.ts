@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShopComponent } from './shop.component';
 import { CourseItemComponent } from './course-item/course-item.component';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { CourseDetailsComponent } from './course-details/course-details.component';
 import { CoreModule } from '../core/core.module';
 import { ShopRoutingModule } from './shop-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -14,7 +14,7 @@ import { ShopRoutingModule } from './shop-routing.module';
   imports: [
     CommonModule,
     ShopRoutingModule,
-    CoreModule
+    SharedModule
   ]
 })
 export class ShopModule { }

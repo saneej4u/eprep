@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ICourseSection } from 'src/app/shared/models/course-section';
 import { ICourseContent } from 'src/app/shared/models/course-content';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { VideoModalComponent } from 'src/app/core/video-modal/video-modal.component';
+import { VideoModalComponent } from 'src/app/shared/components/video-modal/video-modal.component';
 
 @Component({
   selector: 'app-course-details',
