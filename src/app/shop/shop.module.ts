@@ -4,8 +4,8 @@ import { ShopComponent } from './shop.component';
 import { CourseItemComponent } from './course-item/course-item.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { CourseDetailsComponent } from './course-details/course-details.component';
-import { RouterModule } from '@angular/router';
 import { CoreModule } from '../core/core.module';
+import { ShopRoutingModule } from './shop-routing.module';
 
 
 
@@ -13,9 +13,8 @@ import { CoreModule } from '../core/core.module';
   declarations: [ShopComponent, CourseItemComponent, CourseDetailsComponent],
   imports: [
     CommonModule,
-    RouterModule,
+    ShopRoutingModule,
     CoreModule
-  ],
-  exports:[ShopComponent]
+  ]
 })
 export class ShopModule { }

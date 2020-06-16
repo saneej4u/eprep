@@ -27,10 +27,9 @@ import { AccountModule } from './account/account.module';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     CoreModule,
-    ShopModule,
     HomeModule,
     AccountModule,
-    ModalModule.forRoot() 
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

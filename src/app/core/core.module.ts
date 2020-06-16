@@ -18,7 +18,6 @@ import { VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule 
   imports: [
     CommonModule,
     RouterModule,
-    BrowserAnimationsModule,
     CarouselModule.forRoot(),
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
