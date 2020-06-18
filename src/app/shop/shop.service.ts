@@ -43,6 +43,8 @@ export class ShopService {
   }
 
   addCourseSection(courseSection: ICourseSection) {
+    console.log("Course Sections: " + courseSection);
+    
     this.firestore
       .collection<ICourseSection>('CourseSections')
       .add(courseSection);

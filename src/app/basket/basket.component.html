@@ -1,0 +1,61 @@
+<div class="container">
+
+    <div class="row my-5">
+        <div class="col-md-8">
+            <ng-container *ngIf="basketItems" class="my-5">
+                <div id="basket-id">
+                    <div class="row p-1 border-bottom border-left border-right" *ngFor="let item of basketItems">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-horizontal d-flex justify-content-start align-items-center">
+                                    <div class="img-square-wrapper">
+                                        <img class="img-fluid" src="http://via.placeholder.com/300x180"
+                                            alt="Card image cap">
+                                    </div>
+                                    <div class="card-body align-items-start">
+                                        <h6 class="card-title">{{item.courseName}}</h6>
+                                        <p class="card-text text-muted">{{item.instructorName}}</p>
+                                    </div>
+                                    <div class="d-flex align-items-start justify-content-start">
+                                        <a class="small" href="#"> Remove</a>
+
+                                    </div>
+                                    <div class="ml-5 d-flex align-items-start ">
+                                        <h6 class="text-danger">{{item.price | currency}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ng-container>
+        </div>
+        <div class="col-md-4">
+            <div class="col-md-12">
+                <h6 class="text-uppercase">Summary</h6>
+            </div>
+            <div class="row font-weight-normal">
+                <div class="col-md-8 font-weight-normal text-right">Original: </div>
+                <div class="col-md-4">£123.45</div>
+            </div>
+            <div class="row font-weight-normal">
+                <div class="col-md-8 text-right">Discount: </div>
+                <div class="col-md-4">£75.45</div>
+            </div>
+            <hr>
+            <div class="row font-weight-normal mt-2">
+                <div class="col-md-8 text-right"><strong>Total: </strong></div>
+                <div class="col-md-4 text-danger"> <h4>£45.87</h4> </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mt-4">
+                    <button class="btn btn-danger btn-lg btn-block text-uppercase">Checkout</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

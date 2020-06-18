@@ -3,6 +3,7 @@ import { IUser } from 'src/app/shared/models/user';
 import { AccountService } from 'src/app/account/account.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { BasketService } from 'src/app/basket/basket.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,14 +11,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
-
   currentUser: IUser;
 
-  constructor(private accoutService: AccountService, private afAuth: AngularFireAuth, private router: Router) {
-  }
+  basketItemsCount: number;
+
+  constructor(
+    private accoutService: AccountService,
+    private afAuth: AngularFireAuth,
+    private router: Router,
+    private basketService: BasketService
+  ) {}
 
   ngOnInit(): void {
-
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.currentUser = user;
@@ -29,17 +34,20 @@ export class NavBarComponent implements OnInit {
         localStorage.setItem('user', null);
       }
     });
+
+    this.basketService.getBasketItems().subscribe(
+      result => {
+        this.basketItemsCount = result.length;
+      },
+      error => {
+        console.log('error');
+      }
+    );
   }
 
-  items: string[] = [
-    'Medical',
-    'Dental',
-    'Pharamacy'
-  ];
- 
-  logOut()
-  {
+  items: string[] = ['Medical', 'Dental', 'Pharamacy'];
+
+  logOut() {
     this.accoutService.logout();
   }
-
 }

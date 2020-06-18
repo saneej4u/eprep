@@ -32,8 +32,8 @@ export class ShopComponent implements OnInit {
   {
     this.shopService.addCourseSection(
       {
-      Id: '',
-      CourseId: "2Uoi3E8eVslwp575z41h",
+      Id: '123test',
+      CourseId: "2Uoi3E8eVslwp575z41hx",
       Description: "Course section 3 - New dental course Descriptions ",
       InstructorId: "Fathima",
       SubTitle: "Course section 3 Sub title - New dental course",

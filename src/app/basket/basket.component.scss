@@ -1,0 +1,17 @@
+// .card-horizontal {
+//     display: flex;
+    
+// }
+.card
+{
+    border: none;
+}
+
+img{
+    width:130px;
+    height: auto;;
+}
+
+div:last-child {
+   border-bottom: 1 px solid green($color: #000000);
+  }

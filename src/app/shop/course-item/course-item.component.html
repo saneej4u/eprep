@@ -8,7 +8,7 @@
         <span class="mb-4 font-weight-bold"> {{course?.Price | currency}}</span>
 
         <div class="btn-group mt-auto">
-            <button type="button" class="btn btn-outline-secondary fa fa-shopping-cart mr-2"></button>
+            <button type="button" class="btn btn-outline-secondary fa fa-shopping-cart mr-2" (click)='addItemToBasket()'></button>
             <button type="button" class="btn btn-outline-secondary" routerLink="/shop/{{course?.Id}}" routerLinkActive="router-link-active" >View</button>
         </div>
     </div>
