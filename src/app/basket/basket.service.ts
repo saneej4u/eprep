@@ -114,7 +114,7 @@ export class BasketService {
     return {
       courseName: course.Title,
       price: course.Price,
-      pictureUrl: '',
+      pictureUrl: course.Thumbnail,
       instructorName: course.InstructorName
     };
   }

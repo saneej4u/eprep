@@ -8,6 +8,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule } from 'ngx-videogular';
+import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
 
 
 
@@ -15,7 +16,8 @@ import { VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule 
 @NgModule({
   declarations: [
     TextInputComponent,
-    VideoModalComponent],
+    VideoModalComponent,
+    BasketSummaryComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -32,7 +34,8 @@ import { VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule 
     VideoModalComponent,
     CarouselModule,
     AccordionModule,
-    ModalModule
+    ModalModule,
+    BasketSummaryComponent
   ]
 })
 export class SharedModule { }
