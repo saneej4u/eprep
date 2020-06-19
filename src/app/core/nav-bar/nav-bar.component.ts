@@ -30,8 +30,8 @@ export class NavBarComponent implements OnInit {
         localStorage.setItem('user', JSON.stringify(this.currentUser));
       } else {
         this.currentUser = null;
-        console.log('user: null');
         localStorage.setItem('user', null);
+        console.log('user: null');
       }
     });
 

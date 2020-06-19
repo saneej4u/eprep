@@ -8,11 +8,30 @@ import { IUser } from '../shared/models/user';
 })
 export class AccountService {
   currentUser: IUser;
-  constructor(private afAuth: AngularFireAuth, private router: Router) {}
+
+  authState = null;
+
+  constructor(private afAuth: AngularFireAuth, private router: Router) {
+
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.currentUser = user;
+        localStorage.setItem('user', JSON.stringify(this.currentUser));
+      } else {
+        this.currentUser = null;
+        localStorage.setItem('user', null);
+      }
+      this.authState = user;
+    });
+  }
+
+  get isLogedIn(): boolean
+  {
+    return this.authState != null;
+  }
 
   login(email: string, password: string) {
     this.afAuth.signInWithEmailAndPassword(email, password);
-    this.router.navigate(['shop']);
   }
 
   register(email: string, password: string) {
