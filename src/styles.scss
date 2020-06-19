@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~ngx-videogular/fonts/videogular.css';
 
+body{
+    min-height: 75rem;
+    padding-top: 6rem;
+}
 .bg-dark {
     background-color: #772953 !important;
 }
