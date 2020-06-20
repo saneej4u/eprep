@@ -14,3 +14,13 @@
         <h1>Welcome to Novus</h1>
     </div>
 </section>
+
+<ul *ngIf="allCourses">
+    <li *ngFor="let item of allCourses">
+      <a (click)='onSelectCourse(item.Id)'>  {{item.Id}} - {{item.Title}} - {{item.Description}} </a> 
+    </li>
+</ul>
+
+<h2 *ngIf="selectedCourse"> {{ selectedCourse?.Id}} - {{selectedCourse?.Title}}</h2>
+
+<button (click)='onUpdateCourse()' class="btn btn-danger btn-md">Update Selected course</button>

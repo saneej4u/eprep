@@ -40,6 +40,11 @@ export class BasketService {
       .update(basket);
   }
 
+  updateBasket(basket: IBasket) {
+    const basketId = localStorage.getItem('basket_id');
+    this.firestore.doc('basket/' + basketId).update(basket);
+  }
+
   getCurrentBasket(): Observable<IBasket> {
     const basketId = localStorage.getItem('basket_id');
 
@@ -84,8 +89,6 @@ export class BasketService {
         console.log('Error');
       }
     );
-
-    //this.setBasket(this.currentBasket);
   }
 
   createBasket(): IBasket {

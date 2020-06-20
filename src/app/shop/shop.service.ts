@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
-  AngularFirestoreDocument
+  AngularFirestoreDocument,
+  DocumentSnapshot,
+  Action
 } from '@angular/fire/firestore';
 import { Observable, combineLatest } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
@@ -21,6 +23,7 @@ export class ShopService {
 
   getCourses(): Observable<ICourse[]> {
     this.courseCollection = this.firestore.collection<ICourse>('Courses');
+
     return this.courseCollection.valueChanges({ idField: 'Id' });
   }
 
@@ -29,9 +32,18 @@ export class ShopService {
     return this.courseDocument.valueChanges();
   }
 
-  addCourse(course: ICourse) {
+  getCourseSnapById(id: string): Observable<Action<DocumentSnapshot<ICourse>>> {
+    this.courseDocument = this.firestore.doc<ICourse>('Courses/' + id);
+    return this.courseDocument.snapshotChanges();
+  }
+
+  createCourse(course: ICourse) {
     this.courseCollection = this.firestore.collection<ICourse>('Courses');
     this.courseCollection.add(course);
+  }
+
+  updateCourse(course: ICourse) {
+    this.firestore.doc('Courses/' + course.Id).update(course);
   }
 
   getCourseSectionsByCourseId(courseId: string): Observable<ICourseSection[]> {
@@ -43,8 +55,8 @@ export class ShopService {
   }
 
   addCourseSection(courseSection: ICourseSection) {
-    console.log("Course Sections: " + courseSection);
-    
+    console.log('Course Sections: ' + courseSection);
+
     this.firestore
       .collection<ICourseSection>('CourseSections')
       .add(courseSection);
@@ -100,7 +112,9 @@ export class ShopService {
         switchMap((courseSections: ICourseSection[]) => {
           const res = courseSections.map((r: any) => {
             return this.firestore
-              .collection<ICourseContent>(`CourseSections/${r.Id}/NewCourseContents`)
+              .collection<ICourseContent>(
+                `CourseSections/${r.Id}/NewCourseContents`
+              )
               .valueChanges()
               .pipe(
                 map((courseContents: ICourseContent[]) =>
@@ -110,8 +124,7 @@ export class ShopService {
           });
           return combineLatest(res);
         })
-      )
-
+      );
 
     //return this.firestore.collection(`CourseSections/96luXnrKgqU0NMdI5OPZ/NewCourseContents`).valueChanges();
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IBasketItem } from '../shared/models/basket';
+import { IBasketItem, IBasket } from '../shared/models/basket';
 import { BasketService } from './basket.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-basket',
@@ -9,9 +10,19 @@ import { BasketService } from './basket.service';
 })
 export class BasketComponent implements OnInit {
   basketItems: IBasketItem[];
-  constructor(private basketService: BasketService) {}
+  basket: IBasket;
+
+  constructor(private basketService: BasketService, private router: Router) {}
 
   ngOnInit(): void {
+
+    this.basketService.getCurrentBasket().subscribe(
+      (basket: IBasketItem) => {
+        this.basket = basket;
+      },
+      error => {}
+    );
+
     this.basketService.getBasketItems().subscribe(
       (items: IBasketItem[]) => {
         this.basketItems = items;
@@ -20,5 +31,16 @@ export class BasketComponent implements OnInit {
         console.log('Basket Items error: ' + error);
       }
     );
+  }
+
+  onCheckout()
+  {
+    // TODO: Update Basket
+    let basket = this.basket;
+    basket.isPaymentIntent = true;
+
+    this.basketService.updateBasket(basket);
+
+    this.router.navigate(['/checkout']);
   }
 }

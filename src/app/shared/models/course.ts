@@ -1,17 +1,20 @@
 export interface ICourse
 {
-    Id: string;
+    Id?: string;
+    Title: string;
+    Thumbnail: string;
     BasicInfo: string;
-    CategoryId: string;
-    Currency: string;
     Description: string;
+    Price: number;
+    Currency?: string;
+
     InstructorId: string;
     InstructorName: string;
-    Price: number;
+
+    CategoryId: string;
     SubCategoryId: string;
-    SubTitle: string;
-    Thumbnail: string;
-    Title: string;
-    TotalArticle: string;
-    TotalVideoInHours: string;
+ 
+    SubTitle?: string;
+    TotalArticle?: string;
+    TotalVideoInHours?: string;
 }
