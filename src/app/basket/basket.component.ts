@@ -41,6 +41,8 @@ export class BasketComponent implements OnInit {
 
     this.basketService.updateBasket(basket);
 
+    console.log("Checkout Clicked");
+    
     this.router.navigate(['/checkout']);
   }
 }

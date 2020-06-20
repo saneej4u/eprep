@@ -23,18 +23,6 @@ export class CheckoutComponent implements OnInit {
         console.log('Basket Items error: ' + error);
       }
     );
-
-    this.afAuth.authState.subscribe(user => {
-      if (user) {
-        this.accountService.authState = user;
-      } else {
-        this.accountService.authState = null;
-      }
-
-      console.log("Auth State: " + JSON.stringify(this.accountService.authState));
-      
-      //this.authState = user;
-    });
   }
 
 }
