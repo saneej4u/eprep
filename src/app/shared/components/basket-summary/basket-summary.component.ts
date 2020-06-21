@@ -8,11 +8,14 @@ import { IBasketItem } from '../../models/basket';
 })
 export class BasketSummaryComponent implements OnInit {
 
-  @Input() basketItems: IBasketItem[] = [];
+  @Input() basketItems: IBasketItem[];
 
   constructor() { }
 
   ngOnInit(): void {
+
+    console.log("Basket Summary :" + JSON.stringify(this.basketItems));
+    
   }
 
 }

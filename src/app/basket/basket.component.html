@@ -1,46 +1,57 @@
 <div class="container mt-5">
-    <div class="row my-5">
-        
-        <div class="col-md-8 shadow-lg py-3">
-            <ng-container *ngIf="basketItems" class="my-5">
-                <div id="basket-id">
-                    
-                    <div class="row p-1 border-bottom border-left border-right" *ngFor="let item of basketItems">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-horizontal d-flex justify-content-start align-items-center p-2">
-                                    <div class="img-square-wrapper">
-                                    <img class="img-fluid" src="{{item.pictureUrl}}"
-                                            alt="{{item.courseName}}">
-                                    </div>
-                                    <div class="card-body align-items-start">
-                                        <!-- <h6 class="card-title"></h6>
-                                        <p class="card-text text-muted"></p> -->
+    <div class="row my-1" *ngIf="basketItems?.length > 0; else basketEmpty">
+        <div class="col-md-8 shadow-lg py-1">
+            <div class="my-3">
+                <ng-container>
+                    <div id="basket-id">
 
-                                        <h6 class="my-0">{{item.courseName}}</h6>
-                                        <small class="text-muted">{{item.instructorName}}</small>
-                                    </div>
-                                    <div class="d-flex align-items-start justify-content-start">
-                                        <a class="small" href="#"> Remove</a>
+                        <div class="row p-1 border-bottom border-left border-right" *ngFor="let item of basketItems">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-horizontal d-flex justify-content-start align-items-center p-2">
+                                        <div class="img-square-wrapper">
+                                            <img class="img-fluid" src="{{item.pictureUrl}}" alt="{{item.courseName}}">
+                                        </div>
+                                        <div class="card-body align-items-start">
 
-                                    </div>
-                                    <div class="ml-5 d-flex align-items-start ">
-                                        <h6 class="text-danger">{{item.price | currency}}</h6>
+                                            <h6 class="my-0">{{item.courseName}}</h6>
+                                            <small class="text-muted">{{item.instructorName}}</small>
+                                        </div>
+                                        <div class="d-flex align-items-start justify-content-start">
+                                            <button class="btn btn-link btn-sm" (click)='onRemoveBasketItem(item.id)'> Remove</button>
+
+                                        </div>
+                                        <div class="ml-5 d-flex align-items-start justify-content-center ">
+                                            <h6 class="text-danger">{{item.price | currency}}</h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </ng-container>
+                </ng-container>
+            </div>
         </div>
         <div class="col-md-4">
-           <app-basket-summary [basketItems]=''></app-basket-summary>
-            <div class="row">
-                <div class="col-md-12 mt-4">
-                    <a class="btn btn-danger btn-lg btn-block text-uppercase text-white" (click)='onCheckout()'>Checkout</a>
+
+            <div>
+                <div>
+                    <app-basket-summary [basketItems]='basketItems'></app-basket-summary>
+                    <div class="row">
+                        <div class="col-md-12 mt-4">
+                            <a class="btn btn-danger btn-lg btn-block text-uppercase text-white"
+                                (click)='onCheckout()'>Checkout</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <ng-template #basketEmpty>
+        <div class="row my-5">
+                <div class="col-md-8 py-3"> <h3 class="text-center">Basket is empty!</h3></div>       
+        </div>
+        
+    </ng-template>
 </div>

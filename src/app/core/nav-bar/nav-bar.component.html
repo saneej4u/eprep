@@ -53,7 +53,7 @@
   <div class="d-flex align-items-center">
     <a class="position-relative" routerLink='/basket'>
       <i class="fa fa-shopping-cart fa-2x mr-4 text-dark"></i>
-    <div class="cart-no">{{basketItemsCount}}</div>
+    <div *ngIf="basketItemsCount > 0" class="cart-no">{{basketItemsCount}}</div>
     </a>
 
     <ng-container *ngIf="(currentUser == null)">

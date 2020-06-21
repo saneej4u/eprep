@@ -45,6 +45,12 @@ export class BasketService {
     this.firestore.doc('basket/' + basketId).update(basket);
   }
 
+  deleteBasketItem(basketItemId: string) {
+    const basketId = localStorage.getItem('basket_id');
+    this.firestore.collection('basket').doc(basketId).collection('basketItems').doc(basketItemId).delete();
+    
+  }
+
   getCurrentBasket(): Observable<IBasket> {
     const basketId = localStorage.getItem('basket_id');
 
@@ -65,7 +71,7 @@ export class BasketService {
     .collection<IBasket>('basket')
     .doc(basketId)
     .collection<IBasketItem>('basketItems')
-    .valueChanges();
+    .valueChanges({ idField: 'id' });
   }
 
   addItemToBasket(course: ICourse, quantity = 1) {

@@ -37,12 +37,19 @@ export class BasketComponent implements OnInit {
   {
     // TODO: Update Basket
     let basket = this.basket;
-    basket.isPaymentIntent = true;
+    //basket.isPaymentIntent = true;
 
     this.basketService.updateBasket(basket);
 
     console.log("Checkout Clicked");
     
     this.router.navigate(['/checkout']);
+  }
+
+  onRemoveBasketItem(basketItemId: string)
+  {
+    console.log('Remove Basket Items: ' + basketItemId);
+    
+    this.basketService.deleteBasketItem(basketItemId);
   }
 }
