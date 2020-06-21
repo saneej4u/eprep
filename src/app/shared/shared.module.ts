@@ -9,6 +9,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule } from 'ngx-videogular';
 import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -25,7 +26,11 @@ import { BasketSummaryComponent } from './components/basket-summary/basket-summa
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
     ModalModule.forRoot(),
-    VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule
+    VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true
+    })
   ],
   exports: [
     ReactiveFormsModule,
@@ -35,7 +40,8 @@ import { BasketSummaryComponent } from './components/basket-summary/basket-summa
     CarouselModule,
     AccordionModule,
     ModalModule,
-    BasketSummaryComponent
+    BasketSummaryComponent,
+    ToastrModule
   ]
 })
 export class SharedModule { }
