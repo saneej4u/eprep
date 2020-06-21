@@ -2,6 +2,10 @@ export interface IBasket {
   id?: string;
   createdOn?: string;
   expiresAt?: string;
+  amount?: number;
+  currency?: string;
+
+  clientSecret?: string;
   isPaymentIntent?: boolean;
   paymentIntentId?: string;
 }

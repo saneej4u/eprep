@@ -51,13 +51,13 @@ export class BasketService {
     
   }
 
-  getCurrentBasket(): Observable<IBasket> {
+  getCurrentBasket(): Observable<any> {
     const basketId = localStorage.getItem('basket_id');
 
     if (basketId != null) {
       return this.firestore
         .collection('basket')
-        .doc<IBasket>(basketId)
+        .doc<any>(basketId)
         .valueChanges();
     }
 
