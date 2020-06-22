@@ -26,12 +26,12 @@ export class NavBarComponent implements OnInit {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.currentUser = user;
-        console.log('user' + JSON.stringify(this.currentUser.email));
+       // console.log('Display Name: ' + JSON.stringify(this.currentUser.displayName));
         localStorage.setItem('user', JSON.stringify(this.currentUser));
       } else {
         this.currentUser = null;
         localStorage.setItem('user', null);
-        console.log('user: null');
+        //console.log('user: null');
       }
     });
 
