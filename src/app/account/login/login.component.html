@@ -9,6 +9,9 @@
       <app-text-input formControlName="password" [label]="'Password'" [type]="'password'"></app-text-input>
      
       <button [disabled]="loginForm.invalid" class="btn btn-lg bg-dark btn-block text-white" type="submit">Sign in</button>
+      <div *ngIf="error">
+        <p class="text-danger small my-3" > <strong>{{error}} </strong> </p>
+      </div>
     </form>
   </div>
 </div>

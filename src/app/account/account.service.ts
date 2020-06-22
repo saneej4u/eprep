@@ -5,6 +5,8 @@ import { IUser } from '../shared/models/user';
 import { ReplaySubject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,8 +19,8 @@ export class AccountService {
     this.loadCurrentUser();
   }
 
-  login(email: string, password: string) {
-    this.afAuth.signInWithEmailAndPassword(email, password);
+  login(email: string, password: string): Promise<any> {
+    return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
   register(values: any) {
