@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 export class HomeComponent implements OnInit {
   allCourses: ICourse[];
   selectedCourse: ICourse;
+  itemsPerSlide = 4;
   constructor(private shopService: ShopService) {}
 
   ngOnInit(): void {

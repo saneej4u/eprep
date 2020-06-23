@@ -10,6 +10,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule } from 'ngx-videogular';
 import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
 import { ToastrModule } from 'ngx-toastr';
+import { CourseItemComponent } from './components/course-item/course-item.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -18,10 +20,12 @@ import { ToastrModule } from 'ngx-toastr';
   declarations: [
     TextInputComponent,
     VideoModalComponent,
-    BasketSummaryComponent],
+    BasketSummaryComponent,
+    CourseItemComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterModule,
     CarouselModule.forRoot(),
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
@@ -41,7 +45,8 @@ import { ToastrModule } from 'ngx-toastr';
     AccordionModule,
     ModalModule,
     BasketSummaryComponent,
-    ToastrModule
+    ToastrModule,
+    CourseItemComponent
   ]
 })
 export class SharedModule { }
