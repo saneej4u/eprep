@@ -9,32 +9,44 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
+  error: string;
   signupForm: FormGroup;
   returnUrl: string;
 
-  constructor(private  accountService: AccountService, private router: Router, private activatedRoute: ActivatedRoute) { }
-
+  constructor(
+    private accountService: AccountService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.createLoginForm();
-    this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl || '/shop';
+    this.returnUrl =
+      this.activatedRoute.snapshot.queryParams.returnUrl || '/shop';
   }
 
-  createLoginForm()
-  {
+  createLoginForm() {
     this.signupForm = new FormGroup({
       fullname: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')
+      ]),
       password: new FormControl('', Validators.required)
     });
   }
 
-  onSubmit()
-  {
-    // this.accountService.register(this.signupForm.value.email, this.signupForm.value.password);
-    this.accountService.register(this.signupForm.value);
-    this.router.navigate([this.returnUrl]);
+  onSubmit() {
+    this.accountService
+      .register(this.signupForm.value)
+      .then(result => {
+        result.user.updateProfile({
+          displayName: this.signupForm.value.fullname
+        });
+        this.router.navigate([this.returnUrl]);
+      })
+      .catch(err => {
+        this.error = err;
+      });
   }
-
 }

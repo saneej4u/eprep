@@ -23,12 +23,8 @@ export class AccountService {
     return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
-  register(values: any) {
-    this.afAuth.createUserWithEmailAndPassword(values.email, values.password).then(result => {
-        return result.user.updateProfile ( {displayName: values.fullname});
-    }).then(item => {
-       
-    });
+  register(values: any): Promise<any> {
+    return this.afAuth.createUserWithEmailAndPassword(values.email, values.password);
   }
 
   logout() {
