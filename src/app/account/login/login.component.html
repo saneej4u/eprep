@@ -1,16 +1,28 @@
-<div class="d-flex justify-content-center mt-5">
-  <div class="col-xs-12 col-md-3">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+<div class="maina">
+  <div class="row main">
+  <div class="col-md-2 bg-dark">
 
+  </div>
+  <div class="col-md-2 bg-dark">
 
-      <app-text-input formControlName="email" [label]="'Email Address'"></app-text-input>
-      <app-text-input formControlName="password" [label]="'Password'" [type]="'password'"></app-text-input>
-     
-      <button [disabled]="loginForm.invalid" class="btn btn-lg btn-danger btn-block text-white" type="submit">Sign in</button>
-      <div *ngIf="error">
-        <p class="text-danger small my-3" > <strong>{{error}} </strong> </p>
+  </div>
+  <div class="col-md-8 position-relative">
+    <div class="mt-5">
+      <div class="col-xs-12 col-md-5 ml-5" style="position: absolute; top: 30%">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+          <app-text-input formControlName="email" [label]="'Email Address'"></app-text-input>
+          <app-text-input formControlName="password" [label]="'Password'" [type]="'password'"></app-text-input>
+
+          <button [disabled]="loginForm.invalid" class="btn btn-lg bg-dark btn-block text-white" type="submit">Sign in</button>
+          <div *ngIf="error">
+            <p class="text-danger small my-3"> <strong>{{error}} </strong> </p>
+          </div>
+
+          <button class="btn btn-lg btn-secondary btn-block text-white">Create Account</button>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 </div>
-
+</div>
