@@ -1,9 +1,16 @@
-<div class="maina">
+<div>
   <div class="row main">
-  <div class="col-md-2 bg-dark">
-
+  <div class="col-md-2 bg-dark position-relative">
+    <a  [routerLink]="['/']" routerLinkActive="router-link-active"  style="position: absolute; top: 40px; left: 60px"><i class="fa fa-long-arrow-left fa-2x text-white" style="cursor: pointer" aria-hidden="true"></i></a>
   </div>
-  <div class="col-md-2 bg-dark">
+  <div class="col-md-2 bg-dark position-relative">
+    <img src="/assets/images/logo.png" style="position: absolute; top: 20px;" class="logo" alt="E-Prep" [routerLink]="['/']"
+    routerLinkActive="router-link-active" />
+
+    <div style="position: absolute; top:40%">
+        <h2 class="text-white display-5 text-center" >Welcome Back! </h2>
+    <strong class="text-center text-white">Please login to your account</strong>
+    </div>
 
   </div>
   <div class="col-md-8 position-relative">
@@ -18,9 +25,8 @@
           <div *ngIf="error">
             <p class="text-danger small my-3"> <strong>{{error}} </strong> </p>
           </div>
-
-          <button class="btn btn-lg btn-secondary btn-block text-white">Create Account</button>
         </form>
+        <button class="btn btn-lg btn-secondary btn-block text-white my-3" (click)="onCreateAccount()" >Create Account</button>
       </div>
     </div>
   </div>

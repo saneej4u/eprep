@@ -23,14 +23,14 @@ const routes: Routes = [
         path: 'shop',
         loadChildren: () =>
           import('./shop/shop.module').then(mod => mod.ShopModule)
+      },
+      {
+        path: 'checkout',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('./checkout/checkout.module').then(mod => mod.CheckoutModule)
       }
     ]
-  },
-  {
-    path: 'checkout',
-    canActivate: [AuthGuard],
-    loadChildren: () =>
-      import('./checkout/checkout.module').then(mod => mod.CheckoutModule)
   },
   {
     path: 'account',

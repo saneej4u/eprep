@@ -45,4 +45,9 @@ export class LoginComponent implements OnInit {
         this.error = err;
       });
   }
+
+  onCreateAccount()
+  {
+    this.router.navigate(['/account/register']);
+  }
 }
