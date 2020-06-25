@@ -1,7 +1,15 @@
 <div class="container mt-5">
 
     <div class="row">
-        <section class="col-md-3">
+        <div class="col-md-12 mb-5">
+            <span class="badge badge-dark mr-3 p-2">ORE Part 1 <i class="fa fa-times-circle fa-1x text-white ml-2" aria-hidden="true"></i> </span>
+            <span class="badge badge-dark mr-3 p-2">LDS Part 2 <i class="fa fa-times-circle fa-1x text-white ml-2" aria-hidden="true"></i> </span>
+            <span class="badge badge-dark mr-2 p-2">MJDF <i class="fa fa-times-circle fa-1x text-white ml-2" aria-hidden="true"></i> </span>
+            <span class="badge badge-dark mr-3 p-2">LDS Part 2 <i class="fa fa-times-circle fa-1x text-white ml-2" aria-hidden="true"></i> </span>
+        </div>
+    </div>
+    <div class="row">
+        <section class="col-md-2">
             <ng-container *ngIf="true">
                 <!-- <h5 class="text-black ml-3 mt-4 mb-3">Sort</h5>
                 <select class="custom-select mb-4" (change)="onSortSelected($event.target.value)">
@@ -12,33 +20,47 @@
                                 </option>
                             </select> -->
 
-                <h5 class="text-dark ml-3">Category</h5>
-                <ul class="list-group my-3">
-                    <li class="list-group-item" [class.active]="true"> Dental </li>
-                    <li class="list-group-item" [class.active]="false"> Medicine </li>
-                </ul>
-                <h5 class="text-dark ml-3">Filter</h5>
-                <ul class="list-group my-3">
-                    <li class="list-group-item" [class.active]="true">
-                        ORE Part 1
-                    </li>
-                    <li class="list-group-item" [class.active]="false">
-                        ORE Part 2
-                    </li>
-                    <li class="list-group-item" [class.active]="false">
-                        LDS Part 1
-                    </li>
-                    <li class="list-group-item" [class.active]="false">
-                        LDS Part
-                    </li>
-                    <li class="list-group-item" [class.active]="false">
-                        MJDF Part 1
-                    </li>
-                </ul>
+                <h5 class="text-dark">Category</h5>
+                <div class="list-group my-3">
+                    <div class="custom-control custom-checkbox  mb-2">
+                        <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
+                        <label class="custom-control-label" for="customCheck">Dental</label>
+                    </div>
+                    <div class="custom-control custom-checkbox  mb-2">
+                        <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
+                        <label class="custom-control-label" for="customCheck">Medicine</label>
+                    </div>
+                </div>
+                <h5 class="text-dark">Filter</h5>
+                <div class="my-3">
+                    <div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
+                            <label class="custom-control-label" for="customCheck">ORE Part 1</label>
+                        </div>
+                        <div class="custom-control custom-checkbox  mb-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
+                            <label class="custom-control-label" for="customCheck">ORE Part 2</label>
+                        </div>
+                        <div class="custom-control custom-checkbox  mb-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
+                            <label class="custom-control-label" for="customCheck">LDS Part 1</label>
+                        </div>
+                        <div class="custom-control custom-checkbox  mb-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
+                            <label class="custom-control-label" for="customCheck">LDS Part 2</label>
+                        </div>
+                        <div class="custom-control custom-checkbox  mb-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
+                            <label class="custom-control-label" for="customCheck">MJDF 1</label>
+                        </div>
+                    </div>
+
+                </div>
             </ng-container>
         </section>
-        <section class="col-md-9">
-                <!-- <div class="d-flex justify-content-between align-items-center pb-2">
+        <section class="col-md-10">
+            <!-- <div class="d-flex justify-content-between align-items-center pb-2">
                         <div class="form-inline" *ngIf="true">
                             <input class="form-control mr-2" #search style="width: 300px" placeholder="Search" type="text">
                             <button class="btn btn-outline-primary my-2">Search</button>
