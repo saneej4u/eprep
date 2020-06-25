@@ -18,12 +18,11 @@
 
     <div class="row">
         <div class="col-md-12">
-            <carousel *ngIf="allCourses" [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]=false [showIndicators]=false
-                [noWrap]=true [interval]="false" [startFromIndex]="1">
-                <slide class="card h-100 shadow-sm ml-3" *ngFor="let course of allCourses;let index=index">
-                    <app-course-item [course]="course"></app-course-item>
-                </slide>
-            </carousel>
+            <div class="row">
+                    <div class="col-md-3 mb-4" *ngFor="let course of allCourses;let index=index">
+                        <app-course-item [course]="course"></app-course-item>
+                    </div>
+                </div>
         </div>
     </div>
 </div>

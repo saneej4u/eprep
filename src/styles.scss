@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~ngx-videogular/fonts/videogular.css';
+@import '~bootswatch/dist/united/bootstrap.min.css';
 
 body{
     height: 100%;
@@ -18,4 +19,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     margin-bottom: 0.5rem;
     font-weight: 500;
     line-height: 1.2;
+}
+
+.list-group-item.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #772953;
+    border-color: #772953;
 }

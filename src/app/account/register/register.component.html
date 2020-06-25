@@ -1,18 +1,21 @@
-<div class="d-flex justify-content-center mt-5">
+<app-nav-bar></app-nav-bar>
+<div style="padding-top: 6rem;">
+  <div class="d-flex justify-content-center mt-5">
     <div class="col-3">
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <div class="text-center mb-4">
           <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
         </div>
-  
+
         <app-text-input formControlName="fullname" [label]="'Full Name'"></app-text-input>
         <app-text-input formControlName="email" [label]="'Email Address'"></app-text-input>
         <app-text-input formControlName="password" [label]="'Password'" [type]="'password'"></app-text-input>
-       
-        <button [disabled]="signupForm.invalid" class="btn btn-lg btn-danger btn-block text-white" type="submit">Sign Up</button>
+
+        <button [disabled]="signupForm.invalid" class="btn btn-lg btn-dark btn-block text-white" type="submit">Sign Up</button>
         <div *ngIf="error">
-          <p class="text-danger small my-3" > <strong>{{error}} </strong> </p>
+          <p class="text-danger small my-3"> <strong>{{error}} </strong> </p>
         </div>
       </form>
     </div>
   </div>
+</div>

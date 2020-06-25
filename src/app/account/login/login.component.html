@@ -21,7 +21,7 @@
           <app-text-input formControlName="email" [label]="'Email Address'"></app-text-input>
           <app-text-input formControlName="password" [label]="'Password'" [type]="'password'"></app-text-input>
 
-          <button [disabled]="loginForm.invalid" class="btn btn-lg bg-dark btn-block text-white" type="submit">Sign in</button>
+          <button [disabled]="loginForm.invalid" class="btn btn-lg btn-dark btn-block text-white" type="submit">Sign in</button>
           <div *ngIf="error">
             <p class="text-danger small my-3"> <strong>{{error}} </strong> </p>
           </div>

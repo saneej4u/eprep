@@ -1,69 +1,66 @@
+<div class="container mt-5">
 
-   <div class="jumbotron p-5 p-md-5 pt-5 pb-5 text-white rounded bg-dark main-banner">
-        <div class="container">
-            <div class="col-md-6 px-0">
-                <h1 class="display-4 font-italic">{{ title }}</h1>
-                <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and
-                    efficiently about what’s most interesting in this post’s contents.</p>
-                <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
-            </div>
-        </div>
-    </div>
+    <div class="row">
+        <section class="col-md-3">
+            <ng-container *ngIf="true">
+                <!-- <h5 class="text-black ml-3 mt-4 mb-3">Sort</h5>
+                <select class="custom-select mb-4" (change)="onSortSelected($event.target.value)">
+                                <option *ngFor="let sort of sortOptions" 
+                                    [selected]="shopParams.sort === sort.value"
+                                    [value]="sort.value">
+                                    {{sort.name}}
+                                </option>
+                            </select> -->
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 my-2">
-                <h4>The world's largest selection of courses</h4>
-                <p>Choose from 100,000 online video courses with new additions published every month</p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <ul class="nav d-flex justify-content-start align-items-start my-4 font-weight-bold text-dark"
-                    style="border-bottom: 1px solid lightgrey">
-                    <li class="nav-item">
-                        <a class="nav-link active text-dark" href="#">LDS</a>
+                <h5 class="text-dark ml-3">Category</h5>
+                <ul class="list-group my-3">
+                    <li class="list-group-item" [class.active]="true"> Dental </li>
+                    <li class="list-group-item" [class.active]="false"> Medicine </li>
+                </ul>
+                <h5 class="text-dark ml-3">Filter</h5>
+                <ul class="list-group my-3">
+                    <li class="list-group-item" [class.active]="true">
+                        ORE Part 1
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="#">ORE</a>
+                    <li class="list-group-item" [class.active]="false">
+                        ORE Part 2
                     </li>
-                    <li class="nav-item text-dark text-uppercase">
-                        <a class="nav-link text-dark text-dark" href="#">MJDF</a>
+                    <li class="list-group-item" [class.active]="false">
+                        LDS Part 1
+                    </li>
+                    <li class="list-group-item" [class.active]="false">
+                        LDS Part
+                    </li>
+                    <li class="list-group-item" [class.active]="false">
+                        MJDF Part 1
                     </li>
                 </ul>
+            </ng-container>
+        </section>
+        <section class="col-md-9">
+                <!-- <div class="d-flex justify-content-between align-items-center pb-2">
+                        <div class="form-inline" *ngIf="true">
+                            <input class="form-control mr-2" #search style="width: 300px" placeholder="Search" type="text">
+                            <button class="btn btn-outline-primary my-2">Search</button>
+                            <button class="btn btn-outline-success ml-2 my-2">Reset</button>
+                        </div>
+                    </div> -->
+            <div class="row">
+                <div class="col-md-4 mb-4" *ngFor="let course of courses;let index=index">
+                    <app-course-item [course]="course"></app-course-item>
+                </div>
             </div>
-        
+        </section>
+    </div>
+</div>
+
+
+<!-- 
+    <div class="row">
             <carousel *ngIf="courses"  [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]=false [showIndicators]=true [noWrap]=true
                 [interval]="false" [startFromIndex]="1">
                 <slide class="card h-100 shadow-sm ml-3" *ngFor="let course of courses;let index=index">
                     <app-course-item [course]="course"></app-course-item>
                 </slide>
             </carousel>
-        </div>
-        
-        <div class="row my-5">
-            <div class="col-md-12 my-3">
-                <h4>Top rated courses</h4>
-            </div>
-        
-            <carousel *ngIf="courses"  [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]=false [noWrap]=true
-                [interval]="false" [startFromIndex]="1" >
-                <slide class="card h-100 shadow-sm ml-3" *ngFor="let course of courses;let index=index">
-                    <app-course-item [course]='course'></app-course-item>
-                </slide>
-            </carousel>
-        </div>
-    </div>
-
-    <div style="height: 250px; background-color:#6E1B52">
-        <div class="container text-white text-center py-5">
-            <h2>Get personal learning recommendations</h2>
-            <p class="lead">Multiple lines of text that form the lede.</p>
-        </div>
-    </div> 
-
-
-
-
-
+        </div> -->
