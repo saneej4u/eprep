@@ -1,0 +1,36 @@
+<form class="mt-4" [formGroup]="courseForm">
+    <div formGroupName="courseUploadForm">
+
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <label for="email">Title</label>
+                <input type="email" formControlName="courseTitle" class="form-control" id="email"
+                    placeholder="eg: video title">
+
+            </div>
+            <div class="col-md-12 mb-3">
+                <label for="email">Upload Video</label>
+                <input type="email" formControlName="courseTitle" class="form-control" id="email"
+                    placeholder="you@example.com">
+
+            </div>
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center">
+            <i class="fa fa-plus-circle fa-4x" style="color: #772953" aria-hidden="true"></i>
+        </div>
+
+
+        <hr class="mb-4">
+
+    </div>
+</form>
+
+<div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
+    <button class="btn btn-outline-dark" routerLink="/basket">
+        <i class="fa fa-angle-left"></i> Course Info
+    </button>
+    <button [disabled]="courseForm.get('courseInfoForm').pristine" class="btn btn-dark" cdkStepperNext>
+        Preview <i class="fa fa-angle-right"></i>
+    </button>
+</div>

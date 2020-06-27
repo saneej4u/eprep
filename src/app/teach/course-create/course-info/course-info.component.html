@@ -1,0 +1,68 @@
+<form class="mt-4" [formGroup]="courseForm">
+    <div formGroupName="courseInfoForm">
+
+        <div class="mb-3">
+            <label for="email">Course Title</label>
+            <input type="email" formControlName="courseTitle" class="form-control" id="email"
+                placeholder="you@example.com">
+
+        </div>
+
+        <div class="mb-3">
+            <label for="address2">Description</label>
+            <textarea class="form-control" rows="5" id="comment" placeholder="Apartment or suite"></textarea>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="country">Category</label>
+                <select formControlName="category" class="custom-select d-block w-100" id="country" required="">
+                    <option value="">Choose...</option>
+                    <option>Dental</option>
+                    <option>Medicine</option>
+                </select>
+      
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="state">Sub Category</label>
+                <select formControlName="subCategory" class="custom-select d-block w-100" id="state" required="">
+                    <option value="">Choose...</option>
+                    <option>ORE Part 1</option>
+                    <option>ORE Part 2</option>
+                    <option>LDS Part 1</option>
+                    <option>LDS Part 2</option>
+                    <option>MJDF Part 1</option>
+                </select>
+          
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+                <label for="address2">Price<span class="text-muted"> (in GBP)</span></label>
+                <input formControlName="price" type="text" class="form-control" id="price"
+                    placeholder="Apartment or suite">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="address2">Course Duration <span class="text-muted"> (in number of days)</span></label>
+                <input formControlName="duration" type="text" class="form-control" id="duration"
+                    placeholder="Apartment or suite">
+            </div>
+        </div>
+        <hr class="mb-4">
+
+    </div>
+
+    
+</form>
+
+
+<div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
+    <button class="btn btn-outline-dark" routerLink="/basket">
+        <i class="fa fa-angle-left"></i> Cancel
+    </button>
+    <button [disabled]="courseForm.get('courseInfoForm').pristine" class="btn btn-dark" (click)='onSaveCourseInfo()'>
+        Upload Course <i class="fa fa-angle-right"></i>
+    </button>
+</div>

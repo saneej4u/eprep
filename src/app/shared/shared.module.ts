@@ -12,6 +12,8 @@ import { BasketSummaryComponent } from './components/basket-summary/basket-summa
 import { ToastrModule } from 'ngx-toastr';
 import { CourseItemComponent } from './components/course-item/course-item.component';
 import { RouterModule } from '@angular/router';
+import { CdkStepperModule } from '@angular/cdk/stepper';
+import { StepperComponent } from './components/stepper/stepper.component';
 
 
 
@@ -21,7 +23,8 @@ import { RouterModule } from '@angular/router';
     TextInputComponent,
     VideoModalComponent,
     BasketSummaryComponent,
-    CourseItemComponent],
+    CourseItemComponent,
+    StepperComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -31,6 +34,7 @@ import { RouterModule } from '@angular/router';
     AccordionModule.forRoot(),
     ModalModule.forRoot(),
     VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule,
+    CdkStepperModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true
@@ -46,7 +50,9 @@ import { RouterModule } from '@angular/router';
     ModalModule,
     BasketSummaryComponent,
     ToastrModule,
-    CourseItemComponent
+    CourseItemComponent,
+    CdkStepperModule,
+    StepperComponent
   ]
 })
 export class SharedModule { }

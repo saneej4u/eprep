@@ -1,0 +1,29 @@
+.main {
+    position: relative;
+    display: block;
+    top: 50px;
+    left: 0;
+    padding: 15px;
+    padding-left: 75px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    &.active {
+      padding-left: 275px;
+      -webkit-transition: all .2s ease-in-out;
+      transition: all .2s ease-in-out;
+    }
+    .jumbotron {
+      background-color: #fff;
+      padding: 30px !important;
+      border: 1px solid #dfe8f1;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      h1 {
+        font-size: 24px;
+        margin: 0;
+        padding: 0;
+        margin-bottom: 12px;
+      }
+    }
+  }

@@ -3,10 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { AccountComponent } from './account/account.component';
-import { AppComponent } from './app.component';
 import { ShopModule } from './shop/shop.module';
-import { ShopComponent } from './shop/shop.component';
 import { HomeContentComponent } from './home/home-content/home-content.component';
+import { TeachModule } from './teach/teach.module';
+import { TeachComponent } from './teach/teach.component';
 
 const routes: Routes = [
   {
@@ -41,6 +41,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./account/account.module').then(mod => mod.AccountModule)
       }
+    ]
+  },
+  {
+    path: 'teach',
+    component: TeachComponent,
+    children: [
+      {path: '', loadChildren: () => import('./teach/teach.module').then(mod => mod.TeachModule)}
     ]
   },
   { path: '*', redirectTo: 'home', pathMatch: 'full' }
