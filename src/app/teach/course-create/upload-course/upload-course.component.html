@@ -1,11 +1,42 @@
-<form class="mt-4" [formGroup]="courseForm">
+<div class="row mt-5 mb-5">
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Title</th>
+                    <th>Video Url</th>
+                    <th style="width:20px;">Free</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td style="text-align: right"><i class="fa fa-check" aria-hidden="true"></i></td>
+                </tr>
+                <tr>
+                    <td>Mary</td>
+                    <td>Moe</td>
+                    <td style="text-align: right"><i class="fa fa-check" aria-hidden="true"></i></td>
+                </tr>
+                <tr>
+                    <td>July</td>
+                    <td>Dooley</td>
+                    <td style="text-align: right"><i class="fa fa-times" aria-hidden="true"></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<form class="my-5 p-4" [formGroup]="courseForm" style="border: 2px solid aliceblue; background-color:aliceblue">
     <div formGroupName="courseUploadForm">
         <div class="row">
             <div class="col-md-12 mb-3">
 
                 <div class="input-group mb-3">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input"  ng2FileSelect [uploader]="uploader" multiple >
+                        <input type="file" class="custom-file-input" ng2FileSelect [uploader]="uploader" >
                         <label class="custom-file-label">Choose file</label>
                     </div>
                 </div>
@@ -59,13 +90,37 @@
             </div>
         </div>
 
-        <div class="row mb-5">
+        <div class="row">
+            <div class="col-md-12 mb-5">
+                <label for="email">Course Title</label>
+                <input type="email" formControlName="contentTitle" class="form-control" id="email"
+                    placeholder="you@example.com">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                    <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="switch1">
+                            <label class="custom-control-label" for="switch1">Set this video as free view, Eg: Introduction video.</label>
+                          </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-end">
+                <button type="submit" class="btn btn-dark text-uppercase">Add</button>
+            </div>
+        </div>
+
+
+
+        <!-- <div class="row mb-5">
             <div class="col-md-12">
 
-                    <div class="progress" style="">
-                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }">
-                        </div>
+                <div class="progress" style="">
+                    <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }">
                     </div>
+                </div>
 
             </div>
 
@@ -82,14 +137,26 @@
                     <span class="glyphicon glyphicon-trash"></span> Remove all
                 </button>
             </div>
-        </div>
+        </div> -->
 
-        <hr class="mb-4">
+      
 
     </div>
 </form>
 
-<div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
+<div class="d-flex justify-content-center mb-3">
+    <div>
+            <i class="fa fa-plus-circle fa-4x" style="color: #772953" aria-hidden="true"></i>
+           
+    </div>
+</div>
+
+<div style="text-align: center">Click + sign to add course contents</div>
+
+
+<hr class="my-4">
+
+<div class="float-none d-flex justify-content-between flex-column flex-lg-row my-5">
     <button class="btn btn-outline-dark" routerLink="/basket">
         <i class="fa fa-angle-left"></i> Course Info
     </button>
