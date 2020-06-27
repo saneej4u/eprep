@@ -1,25 +1,88 @@
 <form class="mt-4" [formGroup]="courseForm">
     <div formGroupName="courseUploadForm">
-
         <div class="row">
             <div class="col-md-12 mb-3">
-                <label for="email">Title</label>
-                <input type="email" formControlName="courseTitle" class="form-control" id="email"
-                    placeholder="eg: video title">
 
-            </div>
-            <div class="col-md-12 mb-3">
-                <label for="email">Upload Video</label>
-                <input type="email" formControlName="courseTitle" class="form-control" id="email"
-                    placeholder="you@example.com">
+                <div class="input-group mb-3">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input"  ng2FileSelect [uploader]="uploader" multiple >
+                        <label class="custom-file-label">Choose file</label>
+                    </div>
+                </div>
+
 
             </div>
         </div>
 
-        <div class="mb-3 d-flex justify-content-center">
-            <i class="fa fa-plus-circle fa-4x" style="color: #772953" aria-hidden="true"></i>
+        <div class="row">
+            <div class="col-md-12 mb-5">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="50%">Name</th>
+                            <th>Size</th>
+                            <th>Progress</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of uploader.queue">
+                            <td><strong>{{ item?.file?.name }}</strong></td>
+                            <td *ngIf="uploader.options.isHTML5" nowrap>
+                                {{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+                            <td *ngIf="uploader.options.isHTML5">
+                                <div class="progress" style="margin-bottom: 0;">
+                                    <div class="progress-bar" role="progressbar"
+                                        [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <span *ngIf="item.isSuccess"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                <span *ngIf="item.isCancel"><i class="fa fa-ban"></i></span>
+                                <span *ngIf="item.isError"><i class="fa fa-times"></i></span>
+                            </td>
+                            <td nowrap>
+                                <button type="button" class="btn btn-success btn-xs mr-2" (click)="item.upload()"
+                                    [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                                    <i class="fa fa-upload"></i> Upload
+                                </button>
+                                <button type="button" class="btn  btn-danger btn-xs" (click)="item.remove()">
+                                    <i class="fa fa-trash-o"></i> Remove
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
         </div>
 
+        <div class="row mb-5">
+            <div class="col-md-12">
+
+                    <div class="progress" style="">
+                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }">
+                        </div>
+                    </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-success btn-s mr-3" (click)="uploader.uploadAll()"
+                    [disabled]="!uploader.getNotUploadedItems().length">
+                    <span class="glyphicon glyphicon-upload"></span> Upload all
+                </button>
+                <button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()"
+                    [disabled]="!uploader.queue.length">
+                    <span class="glyphicon glyphicon-trash"></span> Remove all
+                </button>
+            </div>
+        </div>
 
         <hr class="mb-4">
 

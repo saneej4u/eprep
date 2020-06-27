@@ -14,8 +14,8 @@ import { CourseItemComponent } from './components/course-item/course-item.compon
 import { RouterModule } from '@angular/router';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { StepperComponent } from './components/stepper/stepper.component';
-
-
+import { FileUploadModule } from 'ng2-file-upload';
+import { SortableModule } from 'ngx-bootstrap/sortable';
 
 
 @NgModule({
@@ -35,6 +35,8 @@ import { StepperComponent } from './components/stepper/stepper.component';
     ModalModule.forRoot(),
     VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule,
     CdkStepperModule,
+    FileUploadModule,
+    SortableModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true
@@ -52,7 +54,9 @@ import { StepperComponent } from './components/stepper/stepper.component';
     ToastrModule,
     CourseItemComponent,
     CdkStepperModule,
-    StepperComponent
+    StepperComponent,
+    FileUploadModule,
+    SortableModule
   ]
 })
 export class SharedModule { }

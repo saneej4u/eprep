@@ -7,6 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PreviewCourseComponent implements OnInit {
 
+  itemStringsLeft: any[] = [
+    'Windstorm',
+    'Bombasto',
+    'Magneta',
+    'Tornado'
+  ];
+ 
+  itemStringsRight: any[] = ['Mr. O', 'Tomato'];
+
   constructor() { }
 
   ngOnInit(): void {

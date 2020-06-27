@@ -9,8 +9,9 @@
                 <cdk-step [label]="'Upload Course'">
                    <app-upload-course [courseForm]="courseForm"></app-upload-course>
                 </cdk-step>
-                <cdk-step [label]="'Preview'">
-                    Step 3
+                <cdk-step [label]="'Review & Submit'">
+                  <app-preview-course></app-preview-course>
+
                 </cdk-step>
             </app-stepper>
         </div>

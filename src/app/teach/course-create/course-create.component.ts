@@ -28,8 +28,8 @@ export class CourseCreateComponent implements OnInit {
         duration:[null, Validators.required]
       }),
       courseUploadForm: this.fb.group({
-        courseSection: [null, Validators.required],
-        courseContent:[null, Validators.required]
+        courseContentTitle: [null, Validators.required],
+        courseContentVideo:[null, Validators.required]
       })
     });
   }
