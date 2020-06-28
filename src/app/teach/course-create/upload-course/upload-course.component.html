@@ -29,7 +29,7 @@
     </div>
 </div>
 
-<form class="my-5 p-4" [formGroup]="courseForm" style="border: 2px solid aliceblue; background-color:aliceblue">
+<!-- <form class="my-5 p-4" [formGroup]="courseForm" style="border: 2px solid aliceblue; background-color:aliceblue">
     <div formGroupName="courseUploadForm">
         <div class="row">
             <div class="col-md-12 mb-3">
@@ -114,7 +114,7 @@
 
 
 
-        <!-- <div class="row mb-5">
+        <div class="row mb-5">
             <div class="col-md-12">
 
                 <div class="progress" style="">
@@ -137,21 +137,20 @@
                     <span class="glyphicon glyphicon-trash"></span> Remove all
                 </button>
             </div>
-        </div> -->
+        </div>
 
       
 
     </div>
-</form>
+</form> -->
 
-<div class="d-flex justify-content-center mb-3">
-    <div>
-            <i class="fa fa-plus-circle fa-4x" style="color: #772953" aria-hidden="true"></i>
-           
-    </div>
+<div class="pb-3 border" style="cursor: pointer">
+    <div class="d-flex justify-content-center my-3" (click)='onAddCourseContent()'>
+    <div><i class="fa fa-plus-circle fa-4x" style="color: #772953" aria-hidden="true"></i></div>
+</div>
+<div style="text-align: center">Click + sign to add course contents</div>
 </div>
 
-<div style="text-align: center">Click + sign to add course contents</div>
 
 
 <hr class="my-4">

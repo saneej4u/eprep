@@ -2,6 +2,8 @@ import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CdkStepper } from '@angular/cdk/stepper';
 import { FileUploader } from 'ng2-file-upload';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { AddContentComponent } from '../add-content/add-content.component';
 
 
 const URL = 'http://localhost:4200/fileupload/';
@@ -20,11 +22,13 @@ export class UploadCourseComponent implements OnInit {
   hasAnotherDropZoneOver: boolean;
   response: string;
 
+  modalRef: BsModalRef;
+
   ngOnInit(): void {
   }
 
  
-  constructor (){
+  constructor (private modalService: BsModalService){
     this.uploader = new FileUploader({
       url: URL,
       disableMultipart: true, // 'DisableMultipart' must be 'true' for formatDataFunction to be called.
@@ -55,6 +59,16 @@ export class UploadCourseComponent implements OnInit {
  
   public fileOverAnother(e:any):void {
     this.hasAnotherDropZoneOver = e;
+  }
+
+  onAddCourseContent() {
+    this.modalRef = this.modalService.show(AddContentComponent,  {
+      initialState: {
+        title: 'Add',
+        data: {}
+      },
+      class: 'modal-lg'
+    });
   }
 
 }

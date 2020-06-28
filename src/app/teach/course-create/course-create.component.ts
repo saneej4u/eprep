@@ -11,7 +11,7 @@ export class CourseCreateComponent implements OnInit {
 
   courseForm: FormGroup;
   
-  constructor(private fb: FormBuilder, private accountService: AccountService,) { }
+  constructor(private fb: FormBuilder, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.createCheckoutForm();

@@ -1,6 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CdkStepper } from '@angular/cdk/stepper';
+import { TeachService } from '../../teach.service';
+import { ICourse } from 'src/app/shared/models/course';
+import { AccountService } from 'src/app/account/account.service';
+import { IUser } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-course-info',
@@ -11,16 +15,39 @@ export class CourseInfoComponent implements OnInit {
 
   @Input() appStepper: CdkStepper;
   @Input() courseForm: FormGroup;
-  constructor() { }
+  currentUser: IUser;
+
+  constructor(private accountService: AccountService,  private teachService: TeachService) { }
 
   ngOnInit(): void {
+    this.accountService.currentUser$.subscribe(user => {
+this.currentUser = user;
+
+console.log("Current user teach: " + JSON.stringify(this.currentUser));
+
+    },
+    (error) => {
+      console.log(error);
+      
+    })
   }
 
   onSaveCourseInfo()
   {
-    var a = this.courseForm.get('courseInfoForm').value;
+     const course = this.courseForm.get('courseInfoForm').value;
 
-    console.log("Upload videos" + JSON.stringify(a));
+     const courseInfo: ICourse = {
+      Title: course.courseTitle,
+      Description: course.courseDescription,
+      CategoryId : course.category,
+      SubCategoryId: course.subCategory,
+      Price: course.price,
+      RentInDays: course.duration,
+      InstructorId: this.currentUser.uid,
+      InstructorName: this.currentUser.displayName
+     };
+
+    this.teachService.createCourse(courseInfo)
 
     this.appStepper.next();
   }

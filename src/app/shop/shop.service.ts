@@ -78,6 +78,7 @@ export class ShopService {
       .add(courseContent);
   }
 
+
   addSubCollection() {
     this.firestore
       .collection('CourseSections')

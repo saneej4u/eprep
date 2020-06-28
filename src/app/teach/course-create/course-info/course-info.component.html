@@ -10,7 +10,7 @@
 
         <div class="mb-3">
             <label for="address2">Description</label>
-            <textarea class="form-control" rows="5" id="comment" placeholder="Apartment or suite"></textarea>
+            <textarea class="form-control" rows="5" formControlName="courseDescription"  placeholder="course description..."></textarea>
         </div>
 
         <div class="row">
@@ -38,23 +38,19 @@
         </div>
 
         <div class="row">
-
             <div class="col-md-6 mb-3">
                 <label for="address2">Price<span class="text-muted"> (in GBP)</span></label>
-                <input formControlName="price" type="text" class="form-control" id="price"
+                <input formControlName="price" type="number" class="form-control" id="price"
                     placeholder="Apartment or suite">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="address2">Course Duration <span class="text-muted"> (in number of days)</span></label>
-                <input formControlName="duration" type="text" class="form-control" id="duration"
+                <input formControlName="duration" type="number" class="form-control" id="duration"
                     placeholder="Apartment or suite">
             </div>
         </div>
         <hr class="mb-4">
-
-    </div>
-
-    
+    </div>   
 </form>
 
 

@@ -9,12 +9,13 @@ import { CourseInfoComponent } from './course-create/course-info/course-info.com
 import { UploadCourseComponent } from './course-create/upload-course/upload-course.component';
 import { PreviewCourseComponent } from './course-create/preview-course/preview-course.component';
 import { FormsModule } from '@angular/forms';
+import { AddContentComponent } from './course-create/add-content/add-content.component';
 
 
 
 
 @NgModule({
-  declarations: [TeachComponent, DashboardComponent, CourseCreateComponent, CourseInfoComponent, UploadCourseComponent, PreviewCourseComponent],
+  declarations: [TeachComponent, DashboardComponent, CourseCreateComponent, CourseInfoComponent, UploadCourseComponent, PreviewCourseComponent, AddContentComponent],
   imports: [
     CommonModule,
     FormsModule,
