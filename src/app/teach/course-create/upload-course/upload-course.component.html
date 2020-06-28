@@ -9,20 +9,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>John</td>
-                    <td>Doe</td>
+                <tr *ngFor="let content of contents">
+                    <td>{{content.Title}}</td>
+                    <td>{{content?.SubTitle}}</td>
                     <td style="text-align: right"><i class="fa fa-check" aria-hidden="true"></i></td>
-                </tr>
-                <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td style="text-align: right"><i class="fa fa-check" aria-hidden="true"></i></td>
-                </tr>
-                <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td style="text-align: right"><i class="fa fa-times" aria-hidden="true"></i></td>
                 </tr>
             </tbody>
         </table>

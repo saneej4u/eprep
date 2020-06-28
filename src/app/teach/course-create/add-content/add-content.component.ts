@@ -38,7 +38,7 @@ export class AddContentComponent implements OnInit {
     (error) => {
       console.log(error);
       
-    })
+    });
     this.resetForm();
   }
 

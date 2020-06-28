@@ -4,6 +4,9 @@ import { CdkStepper } from '@angular/cdk/stepper';
 import { FileUploader } from 'ng2-file-upload';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AddContentComponent } from '../add-content/add-content.component';
+import { TeachService } from '../../teach.service';
+import { ICourseContent } from 'src/app/shared/models/course-content';
+import { ActivatedRoute } from '@angular/router';
 
 
 const URL = 'http://localhost:4200/fileupload/';
@@ -23,43 +26,30 @@ export class UploadCourseComponent implements OnInit {
   response: string;
 
   modalRef: BsModalRef;
+  contents: ICourseContent[];
 
   ngOnInit(): void {
   }
 
  
-  constructor (private modalService: BsModalService){
-    this.uploader = new FileUploader({
-      url: URL,
-      disableMultipart: true, // 'DisableMultipart' must be 'true' for formatDataFunction to be called.
-      formatDataFunctionIsAsync: true,
-      formatDataFunction: async (item) => {
-        return new Promise( (resolve, reject) => {
-          resolve({
-            name: item._file.name,
-            length: item._file.size,
-            contentType: item._file.type,
-            date: new Date()
-          });
-        });
-      }
+  constructor(private modalService: BsModalService, private teachService: TeachService, private activatedRoute: ActivatedRoute)
+  {
+    this.activatedRoute.paramMap.subscribe(params => {
+      console.log("kkkk: " + params.get('id'));
+      
+      this.teachService.getContentByCourseId(params.get('id')).subscribe(
+        contents => {
+          this.contents = contents;
+
+          console.log("Contents: " + this.contents)
+        },
+        error => {
+          console.log(error);
+        }
+      );
     });
- 
-    this.hasBaseDropZoneOver = false;
-    this.hasAnotherDropZoneOver = false;
- 
-    this.response = '';
- 
-    this.uploader.response.subscribe( res => this.response = res );
   }
- 
-  public fileOverBase(e:any):void {
-    this.hasBaseDropZoneOver = e;
-  }
- 
-  public fileOverAnother(e:any):void {
-    this.hasAnotherDropZoneOver = e;
-  }
+
 
   onAddCourseContent() {
     this.modalRef = this.modalService.show(AddContentComponent,  {

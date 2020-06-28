@@ -16,6 +16,7 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { SortableModule } from 'ngx-bootstrap/sortable';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { SortableModule } from 'ngx-bootstrap/sortable';
     CdkStepperModule,
     FileUploadModule,
     SortableModule.forRoot(),
+    TabsModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true
@@ -56,7 +58,8 @@ import { SortableModule } from 'ngx-bootstrap/sortable';
     CdkStepperModule,
     StepperComponent,
     FileUploadModule,
-    SortableModule
+    SortableModule,
+    TabsModule
   ]
 })
 export class SharedModule { }
