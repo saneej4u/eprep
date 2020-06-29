@@ -1,44 +1,48 @@
-<div class="modal-header">
-    <h4 class="modal-title pull-left"> {{ title }} </h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-    </button>
+<div class="modal-header bg-dark text-white">
+  <h4 class="modal-title pull-left"> {{ title }} </h4>
+  <button style="outline: none" type="button" class="close pull-right btn-outline" aria-label="Close"
+    (click)="modalRef.hide()">
+    <i class="fa fa-times-circle-o" style="color: white" aria-hidden="true"></i>
+  </button>
 </div>
 <div class="modal-body">
-    <div class="card" style="width:25rem">
-        <div class="card-body">
-          <form [formGroup]="formTemplate" (submit)="onSubmit(formTemplate.value)">
-            <div class="text-center">
-              <img [src]="imgSrc" width="350px" height="250px" (click)="fileUploader.click()">
-            </div>
-            <div class="form-group">
-              <label>Select file to upload</label>
-              <input type="file" class="form-control" #fileUploader formControlName="imageUrl"
-                (change)="showPreview($event)">
-              <div class="text-danger" *ngIf="isSubmitted && formControls.imageUrl.errors?.required">This field is required.
-              </div>
-            </div>
-            <div class="form-group">
-              <input class="form-control" formControlName="caption" placeholder="Caption">
-              <div class="text-danger" *ngIf="isSubmitted && formControls.caption.errors?.required">This field is required.
-              </div>
-            </div>
-            <div class="form-group">
-              <select formControlName="category" class="form-control">
-                <option value="Animal">Animal</option>
-                <option value="Vehicle">Vehicle</option>
-                <option value="Bird">Bird</option>
-              </select>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <a routerLink="/image/list" class="btn btn-primary btn-block float-right">Go To Gallery</a>
-              </div>
-              <div class="form-group col-md-6">
-                <button type="submit" class="btn btn-success btn-block float-right">Submit</button>
-              </div>
-            </div>
-          </form>
+  <div class="card border-0">
+    <div class="card-body">
+      <form [formGroup]="formTemplate" (submit)="onSubmit(formTemplate.value)">
+
+        <div class="form-group mb-3">
+          <input class="form-control" formControlName="contentTitle" placeholder="Content Title">
+          <div class="text-danger" *ngIf="isSubmitted && formControls.contentTitle.errors?.required">This field is
+            required.
+          </div>
         </div>
-      </div>
+
+        <div class="form-group mb-3">
+          <label>Select file to upload</label>
+          <input type="file" class="form-control" #fileUploader formControlName="contentUrl"
+            (change)="showPreview($event)" style="padding: 2px;">
+          <div class="text-danger" *ngIf="isSubmitted && formControls.contentUrl.errors?.required">This field is
+            required.
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" formControlName="isFree" class="custom-control-input" id="customCheck">
+            <label class="custom-control-label" for="customCheck">Please check this if you want to make this content
+              available for free</label>
+          </div>
+
+        </div>
+        <div class="form-row mt-5">
+          <div class="form-group col-md-6">
+            <button (click)='onCancel()' class="btn btn-secondary btn-lg btn-block float-right">Cancel</button>
+          </div>
+          <div class="form-group col-md-6">
+            <button type="submit" class="btn btn-dark btn-block btn-lg float-right">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

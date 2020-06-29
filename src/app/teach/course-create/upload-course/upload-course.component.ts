@@ -34,27 +34,27 @@ export class UploadCourseComponent implements OnInit {
  
   constructor(private modalService: BsModalService, private teachService: TeachService, private activatedRoute: ActivatedRoute)
   {
-    this.activatedRoute.paramMap.subscribe(params => {
-      console.log("kkkk: " + params.get('id'));
+    // this.activatedRoute.paramMap.subscribe(params => {
+    //   console.log("kkkk: " + params.get('id'));
       
-      this.teachService.getContentByCourseId(params.get('id')).subscribe(
-        contents => {
-          this.contents = contents;
+    //   this.teachService.getContentByCourseId(params.get('id')).subscribe(
+    //     contents => {
+    //       this.contents = contents;
 
-          console.log("Contents: " + this.contents)
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    });
+    //       console.log("Contents: " + this.contents)
+    //     },
+    //     error => {
+    //       console.log(error);
+    //     }
+    //   );
+    // });
   }
 
 
   onAddCourseContent() {
     this.modalRef = this.modalService.show(AddContentComponent,  {
       initialState: {
-        title: 'Add',
+        title: 'Add Content',
         data: {}
       },
       class: 'modal-lg'

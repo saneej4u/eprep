@@ -27,17 +27,15 @@ export class CourseInfoComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.activatedRoute.paramMap.subscribe(params => {
       this.accountService.currentUser$.subscribe(
         user => {
           this.currentUser = user;
-          this.courseId = params.get('id');
         },
         error => {
           console.log(error);
         }
       );
-    });
+
   }
 
   onSaveCourseInfo() {

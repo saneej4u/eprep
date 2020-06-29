@@ -4,7 +4,6 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { TeachService } from '../../teach.service';
-import { ShopService } from 'src/app/shop/shop.service';
 
 @Component({
   selector: 'app-add-content',
@@ -20,10 +19,10 @@ export class AddContentComponent implements OnInit {
   currentCourseId: string;
 
   formTemplate = new FormGroup({
-    caption: new FormControl('', Validators.required),
-    category: new FormControl(''),
-    imageUrl: new FormControl('', Validators.required)
-  })
+    contentTitle: new FormControl('', Validators.required),
+    isFree: new FormControl(''),
+    contentUrl: new FormControl('', Validators.required)
+  });
 
 
  constructor(public modalRef: BsModalRef, private storage: AngularFireStorage, private teachService: TeachService) {}
@@ -58,18 +57,25 @@ export class AddContentComponent implements OnInit {
   onSubmit(formValue) {
     this.isSubmitted = true;
     if (this.formTemplate.valid) {
-      var filePath = `${formValue.category}/${this.selectedImage.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+      var filePath = `course/${this.selectedImage.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
       const fileRef = this.storage.ref(filePath);
       this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
-            formValue['imageUrl'] = url;
+            formValue['contentUrl'] = url;
             this.teachService.addContentToCourse(this.currentCourseId,formValue);
             this.resetForm();
+            this.modalRef.hide();
           })
         })
       ).subscribe();
     }
+  }
+
+  onCancel()
+  {
+    this.resetForm();
+    this.modalRef.hide();
   }
 
   get formControls() {
@@ -79,9 +85,9 @@ export class AddContentComponent implements OnInit {
   resetForm() {
     this.formTemplate.reset();
     this.formTemplate.setValue({
-      caption: '',
-      imageUrl: '',
-      category: 'Animal'
+      contentTitle: '',
+      isFree: '',
+      contentUrl: ''
     });
     this.imgSrc = '/assets/img/image_placeholder.jpg';
     this.selectedImage = null;

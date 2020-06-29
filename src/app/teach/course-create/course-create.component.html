@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <app-stepper [linearModeDelected]='false' #appStepper>
+            <app-stepper [linear]='true' [linearModeDelected]='true' #appStepper>
                 <cdk-step [label]="'Course Info'">
                         <app-course-info [courseForm]="courseForm" [appStepper]='appStepper'></app-course-info>
                 </cdk-step>
