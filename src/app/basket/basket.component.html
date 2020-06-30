@@ -1,10 +1,12 @@
 <div class="container mt-5">
     <div class="row my-1" *ngIf="basketItems?.length > 0; else basketEmpty">
-        <div class="col-md-8 shadow-lg py-1">
+        <div class="col-md-8 py-1">
             <div class="my-3">
                 <ng-container>
                     <div id="basket-id">
-
+<div>
+    <h4 class="text-dark">Courses you bought</h4>
+</div>
                         <div class="row p-1 border-bottom border-left border-right" *ngFor="let item of basketItems">
                             <div class="col-md-12">
                                 <div class="card">
