@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
 
   onCourseEdit(courseId: string)
   {
-    this.router.navigate(['/teach/' + courseId]);
+    this.router.navigate(['course/' + courseId]);
 
     //  this.router.navigate(['/heroes', { id: itemId }]);
   }

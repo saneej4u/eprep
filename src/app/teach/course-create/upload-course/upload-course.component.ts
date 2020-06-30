@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, EventEmitter } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { CdkStepper } from '@angular/cdk/stepper';
 import { FileUploader } from 'ng2-file-upload';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -19,7 +18,6 @@ const URL = 'http://localhost:4200/fileupload/';
 export class UploadCourseComponent implements OnInit {
 
   @Input() appStepper: CdkStepper;
-  @Input() courseForm: FormGroup;
   uploader: FileUploader;
   hasBaseDropZoneOver: boolean;
   hasAnotherDropZoneOver: boolean;
@@ -32,7 +30,9 @@ export class UploadCourseComponent implements OnInit {
   }
 
  
-  constructor(private modalService: BsModalService, private teachService: TeachService, private activatedRoute: ActivatedRoute)
+  constructor(private modalService: BsModalService, 
+    private teachService: TeachService, 
+    private activatedRoute: ActivatedRoute)
   {
     // this.activatedRoute.paramMap.subscribe(params => {
     //   console.log("kkkk: " + params.get('id'));
@@ -60,5 +60,14 @@ export class UploadCourseComponent implements OnInit {
       class: 'modal-lg'
     });
   }
+
+  // createContentForm() 
+  // {
+  //   this.contentForm = this.fb.group({
+  //       contentTitle: [null, Validators.required],
+  //       contentUrl:[null, Validators.required],
+  //       isFree:[null]
+  //     });
+  // }
 
 }

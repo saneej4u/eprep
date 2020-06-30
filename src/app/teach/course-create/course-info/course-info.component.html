@@ -1,5 +1,6 @@
-<form class="mt-4" [formGroup]="courseForm">
-    <div formGroupName="courseInfoForm">
+<ng-container *ngIf="currentUser">
+<form class="mt-4" [formGroup]="courseInfoForm">
+    <div>
         <div class="mb-3">
             <label for="email">Course Title</label>
             <input type="email" formControlName="courseTitle" class="form-control" id="email"
@@ -15,7 +16,7 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="country">Category</label>
-                <select formControlName="category" class="custom-select d-block w-100" id="country" required="">
+                <select formControlName="category" class="custom-select d-block w-100" required="">
                     <option value="">Choose...</option>
                     <option>Dental</option>
                     <option>Medicine</option>
@@ -24,7 +25,7 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="state">Sub Category</label>
-                <select formControlName="subCategory" class="custom-select d-block w-100" id="state" required="">
+                <select formControlName="subCategory" class="custom-select d-block w-100" required="">
                     <option value="">Choose...</option>
                     <option>ORE Part 1</option>
                     <option>ORE Part 2</option>
@@ -57,7 +58,8 @@
     <button class="btn btn-outline-dark" routerLink="/basket">
         <i class="fa fa-angle-left"></i> Cancel
     </button>
-    <button [disabled]="courseForm.get('courseInfoForm').pristine" class="btn btn-dark" (click)='onSaveCourseInfo()'>
+    <button [disabled]="courseInfoForm.pristine" class="btn btn-dark" (click)='onSaveCourseInfo()'>
         Upload Course <i class="fa fa-angle-right"></i>
     </button>
 </div>
+</ng-container>  

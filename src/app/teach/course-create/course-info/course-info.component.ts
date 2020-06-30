@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CdkStepper } from '@angular/cdk/stepper';
 import { TeachService } from '../../teach.service';
 import { ICourse } from 'src/app/shared/models/course';
@@ -14,21 +14,26 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CourseInfoComponent implements OnInit {
   @Input() appStepper: CdkStepper;
-  @Input() courseForm: FormGroup;
   courseId: string;
 
+  courseInfoForm: FormGroup;
   currentUser: IUser;
+  course: ICourse;
 
   constructor(
     private accountService: AccountService,
     private teachService: TeachService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe(
       user => {
         this.currentUser = user;
+        this.populateQS();
+
+        this.createCourseForm();
       },
       error => {
         console.log(error);
@@ -36,8 +41,42 @@ export class CourseInfoComponent implements OnInit {
     );
   }
 
+
+  createCourseForm() {
+      this.courseInfoForm = this.fb.group({
+        courseTitle: [null, Validators.required],
+        courseDescription: [null, Validators.required],
+        category: [null],
+        subCategory: [null],
+        price: [null, Validators.required],
+        duration: [null, Validators.required]
+      })
+  }
+
+  populateQS()
+  {
+    this.activatedRoute.paramMap.subscribe(params => {
+      console.log('Course ID from Query string : ' + params.get('id'));
+      const courseId = params.get('id');
+
+      if(courseId != null)
+      {
+        this.teachService.getCourseById(courseId).subscribe(
+        course => {
+          this.course = course;
+          console.log('Content retrieved from QS : ' + JSON.stringify(this.course));
+        },
+        error => {
+          console.log(error);
+        }
+      );
+      }
+
+    });
+  }
+
   onSaveCourseInfo() {
-    const course = this.courseForm.get('courseInfoForm').value;
+    const course = this.courseInfoForm.value;
 
     const courseInfo: ICourse = {
       Title: course.courseTitle,

@@ -4,10 +4,10 @@
             <div class="col-md-12">
                 <app-stepper [linear]='true' [linearModeDelected]='true' #appStepper>
                     <cdk-step [label]="'Course Info'">
-                        <app-course-info [courseForm]="courseForm" [appStepper]='appStepper'></app-course-info>
+                        <app-course-info  [appStepper]='appStepper'></app-course-info>
                     </cdk-step>
                     <cdk-step [label]="'Upload Course'">
-                        <app-upload-course [courseForm]="courseForm"></app-upload-course>
+                        <app-upload-course></app-upload-course>
                     </cdk-step>
                     <cdk-step [label]="'Review & Submit'">
                         <app-preview-course></app-preview-course>
