@@ -1,22 +1,19 @@
 <div class="main">
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <app-stepper [linear]='true' [linearModeDelected]='true' #appStepper>
-                <cdk-step [label]="'Course Info'">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <app-stepper [linear]='true' [linearModeDelected]='true' #appStepper>
+                    <cdk-step [label]="'Course Info'">
                         <app-course-info [courseForm]="courseForm" [appStepper]='appStepper'></app-course-info>
-                </cdk-step>
-                <cdk-step [label]="'Upload Course'">
-                   <app-upload-course [courseForm]="courseForm"></app-upload-course>
-                </cdk-step>
-                <cdk-step [label]="'Review & Submit'">
-                  <app-preview-course></app-preview-course>
-
-                </cdk-step>
-            </app-stepper>
+                    </cdk-step>
+                    <cdk-step [label]="'Upload Course'">
+                        <app-upload-course [courseForm]="courseForm"></app-upload-course>
+                    </cdk-step>
+                    <cdk-step [label]="'Review & Submit'">
+                        <app-preview-course></app-preview-course>
+                    </cdk-step>
+                </app-stepper>
+            </div>
         </div>
     </div>
-
-</div>
-
 </div>

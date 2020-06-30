@@ -1,11 +1,11 @@
 export interface ICourse
 {
     Id?: string;
-    Title: string;
-    Description: string;
+    Title?: string;
+    Description?: string;
     Thumbnail?: string;
-    Price: number;
-    CategoryId: string;
+    Price?: number;
+    CategoryId?: string;
     SubCategoryId?: string;
     InstructorId?: string;
     InstructorName?: string;

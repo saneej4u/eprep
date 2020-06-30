@@ -46,6 +46,14 @@ export class TeachService {
     .valueChanges({ idField: 'Id' });
   }
 
+  getCourseById(courseId: string): Observable<ICourse>
+  {
+    return this.firestore
+    .collection('courses')
+    .doc<ICourse>(courseId)
+    .valueChanges();
+  }
+
   addContentToCourse(courseId: string, courseContent: ICourseContent)
   { 
     this.firestore

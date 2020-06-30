@@ -16,6 +16,7 @@ export class AddContentComponent implements OnInit {
   imgSrc: string;
   selectedImage: any = null;
   isSubmitted: boolean;
+  submitButtonValue: string = 'Submit';
   currentCourseId: string;
 
   formTemplate = new FormGroup({
@@ -56,6 +57,7 @@ export class AddContentComponent implements OnInit {
 
   onSubmit(formValue) {
     this.isSubmitted = true;
+    this.submitButtonValue = 'Please wait...';
     if (this.formTemplate.valid) {
       var filePath = `course/${this.selectedImage.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
       const fileRef = this.storage.ref(filePath);
@@ -65,7 +67,9 @@ export class AddContentComponent implements OnInit {
             formValue['contentUrl'] = url;
             this.teachService.addContentToCourse(this.currentCourseId,formValue);
             this.resetForm();
+            this.isSubmitted = false;
             this.modalRef.hide();
+
           })
         })
       ).subscribe();

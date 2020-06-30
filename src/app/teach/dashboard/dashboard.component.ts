@@ -28,10 +28,8 @@ export class DashboardComponent implements OnInit {
     
           this.myCourses = courses;
         }, error => {
-          console.log(error);
-          
+          console.log(error);      
         });
-
       },
       error => {
         console.log(error);
@@ -41,7 +39,7 @@ export class DashboardComponent implements OnInit {
 
   onCourseEdit(courseId: string)
   {
-    this.router.navigate(['/teach/course/' + courseId]);
+    this.router.navigate(['/teach/' + courseId]);
 
     //  this.router.navigate(['/heroes', { id: itemId }]);
   }

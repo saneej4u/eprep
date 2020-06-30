@@ -26,16 +26,14 @@ export class CourseInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-      this.accountService.currentUser$.subscribe(
-        user => {
-          this.currentUser = user;
-        },
-        error => {
-          console.log(error);
-        }
-      );
-
+    this.accountService.currentUser$.subscribe(
+      user => {
+        this.currentUser = user;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   onSaveCourseInfo() {
