@@ -4,15 +4,15 @@
             <thead class="thead-dark">
                 <tr>
                     <th>Title</th>
-                    <th>Video Url</th>
                     <th style="width:20px;">Free</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let content of contents">
                     <td>{{content.Title}}</td>
-                    <td>{{content?.ContentUrl}}</td>
-                    <td style="text-align: right"><i class="fa fa-check" aria-hidden="true"></i></td>
+                    <td style="text-align: right; width: 50px;"><i class="fa fa-check" aria-hidden="true"></i></td>
+                    <td style="width:20px; cursor:pointer"><a><i class="fa fa-trash" style="color: red" aria-hidden="true"></i></a> </td>
                 </tr>
             </tbody>
         </table>

@@ -60,12 +60,13 @@ export class CourseInfoComponent implements OnInit {
       if (courseId) {
         this.teachService.getCourseById(courseId).subscribe(
           course => {
-            this.course = course;
-            this.courseId = courseId;
-            this.populateEditCourse(course);
             console.log(
               'Content retrieved from QS : ' + JSON.stringify(this.course)
             );
+
+            this.course = course;
+            this.courseId = courseId;
+            this.populateEditCourse(course);
           },
           error => {
             console.log(error);

@@ -7,7 +7,6 @@ import { TeachService } from '../../teach.service';
 import { ICourseContent } from 'src/app/shared/models/course-content';
 import { ActivatedRoute } from '@angular/router';
 
-
 const URL = 'http://localhost:4200/fileupload/';
 
 @Component({
@@ -16,7 +15,6 @@ const URL = 'http://localhost:4200/fileupload/';
   styleUrls: ['./upload-course.component.scss']
 })
 export class UploadCourseComponent implements OnInit {
-
   @Input() appStepper: CdkStepper;
   uploader: FileUploader;
   hasBaseDropZoneOver: boolean;
@@ -26,33 +24,31 @@ export class UploadCourseComponent implements OnInit {
   modalRef: BsModalRef;
   contents: ICourseContent[];
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
- 
-  constructor(private modalService: BsModalService, 
-    private teachService: TeachService, 
-    private activatedRoute: ActivatedRoute)
-  {
-    this.activatedRoute.paramMap.subscribe(params => {
-      console.log("kkkk: " + params.get('id'));
-      
-      this.teachService.getContentByCourseId(params.get('id')).subscribe(
+  constructor(
+    private modalService: BsModalService,
+    private teachService: TeachService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.teachService.currentCourseIdDuringCreation$.subscribe(courseId => {
+      if(courseId)
+      {
+              this.teachService.getContentByCourseId(courseId).subscribe(
         contents => {
           this.contents = contents;
-
-          console.log("Contents: " + this.contents)
         },
         error => {
           console.log(error);
         }
       );
+      }
+
     });
   }
 
-
   onAddCourseContent() {
-    this.modalRef = this.modalService.show(AddContentComponent,  {
+    this.modalRef = this.modalService.show(AddContentComponent, {
       initialState: {
         title: 'Add Content',
         data: {}
@@ -61,7 +57,7 @@ export class UploadCourseComponent implements OnInit {
     });
   }
 
-  // createContentForm() 
+  // createContentForm()
   // {
   //   this.contentForm = this.fb.group({
   //       contentTitle: [null, Validators.required],
@@ -69,5 +65,4 @@ export class UploadCourseComponent implements OnInit {
   //       isFree:[null]
   //     });
   // }
-
 }

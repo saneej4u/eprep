@@ -13,7 +13,8 @@
 
           <div class="p-3 " style="min-height: 180px;">
 
-              <table class="table table-striped">
+            <div *ngIf="myCourses?.length > 0; else progressempty">
+              <table class="table table-striped" >
                   <thead class="thead-dark">
                     <tr>
                       <th>Title</th>
@@ -32,6 +33,12 @@
   
                   </tbody>
                 </table>
+            </div>
+
+
+                <ng-template #progressempty>
+                  <h4>No course</h4>
+                </ng-template>
           </div>
 
         </tab>
