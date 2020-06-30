@@ -28,12 +28,12 @@ export class CourseInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.createCourseForm();
+
     this.accountService.currentUser$.subscribe(
       user => {
         this.currentUser = user;
         this.populateQS();
-
-        this.createCourseForm();
       },
       error => {
         console.log(error);
@@ -41,37 +41,47 @@ export class CourseInfoComponent implements OnInit {
     );
   }
 
-
   createCourseForm() {
-      this.courseInfoForm = this.fb.group({
-        courseTitle: [null, Validators.required],
-        courseDescription: [null, Validators.required],
-        category: [null],
-        subCategory: [null],
-        price: [null, Validators.required],
-        duration: [null, Validators.required]
-      })
+    this.courseInfoForm = this.fb.group({
+      courseTitle: [null, Validators.required],
+      courseDescription: [null, Validators.required],
+      category: [null],
+      subCategory: [null],
+      price: [null, Validators.required],
+      duration: [null, Validators.required]
+    });
   }
 
-  populateQS()
-  {
+  populateQS() {
     this.activatedRoute.paramMap.subscribe(params => {
       console.log('Course ID from Query string : ' + params.get('id'));
       const courseId = params.get('id');
 
-      if(courseId != null)
-      {
+      if (courseId) {
         this.teachService.getCourseById(courseId).subscribe(
-        course => {
-          this.course = course;
-          console.log('Content retrieved from QS : ' + JSON.stringify(this.course));
-        },
-        error => {
-          console.log(error);
-        }
-      );
+          course => {
+            this.course = course;
+            this.editCourse(course);
+            console.log(
+              'Content retrieved from QS : ' + JSON.stringify(this.course)
+            );
+          },
+          error => {
+            console.log(error);
+          }
+        );
       }
+    });
+  }
 
+  editCourse(course: ICourse) {
+    this.courseInfoForm.patchValue({
+      courseTitle: course.Title,
+      courseDescription: course.Description,
+      category: course.CategoryId,
+      subCategory: course.SubCategoryId,
+      price: course.Price,
+      duration: course.RentInDays
     });
   }
 
