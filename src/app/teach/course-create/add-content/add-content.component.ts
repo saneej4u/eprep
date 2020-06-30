@@ -4,6 +4,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { TeachService } from '../../teach.service';
+import { ICourseContent } from 'src/app/shared/models/course-content';
 
 @Component({
   selector: 'app-add-content',
@@ -65,15 +66,23 @@ export class AddContentComponent implements OnInit {
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
             formValue['contentUrl'] = url;
-            this.teachService.addContentToCourse(this.currentCourseId,formValue);
+            this.teachService.addContentToCourse(this.currentCourseId,this.mapCourseContent(formValue));
             this.resetForm();
             this.isSubmitted = false;
             this.modalRef.hide();
-
           })
         })
       ).subscribe();
     }
+  }
+
+  mapCourseContent(formValue) : ICourseContent
+  {
+   return {
+    Title : formValue.contentTitle,
+    ContentUrl: formValue.contentUrl,
+    IsPreview: formValue.isFree
+   }
   }
 
   onCancel()

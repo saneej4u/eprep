@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CourseInfoComponent implements OnInit {
   @Input() appStepper: CdkStepper;
-  courseId: string;
+  courseId: string = null;
 
   courseInfoForm: FormGroup;
   currentUser: IUser;
@@ -61,7 +61,8 @@ export class CourseInfoComponent implements OnInit {
         this.teachService.getCourseById(courseId).subscribe(
           course => {
             this.course = course;
-            this.editCourse(course);
+            this.courseId = courseId;
+            this.populateEditCourse(course);
             console.log(
               'Content retrieved from QS : ' + JSON.stringify(this.course)
             );
@@ -74,7 +75,7 @@ export class CourseInfoComponent implements OnInit {
     });
   }
 
-  editCourse(course: ICourse) {
+  populateEditCourse(course: ICourse) {
     this.courseInfoForm.patchValue({
       courseTitle: course.Title,
       courseDescription: course.Description,
@@ -99,7 +100,7 @@ export class CourseInfoComponent implements OnInit {
       InstructorName: this.currentUser.displayName
     };
 
-    this.teachService.createCourse(courseInfo);
+    this.teachService.creatOrUpdateCourse(this.courseId,courseInfo);
 
     this.appStepper.next();
   }

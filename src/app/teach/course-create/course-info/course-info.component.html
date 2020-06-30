@@ -57,7 +57,7 @@
     <button class="btn btn-outline-dark" routerLink="/basket">
         <i class="fa fa-angle-left"></i> Cancel
     </button>
-    <button [disabled]="courseInfoForm.pristine" class="btn btn-dark" (click)='onSaveCourseInfo()'>
+    <button [disabled]="courseInfoForm.invalid" class="btn btn-dark" (click)='onSaveCourseInfo()'>
         Upload Course <i class="fa fa-angle-right"></i>
     </button>
 </div>
