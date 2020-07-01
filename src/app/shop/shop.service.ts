@@ -22,28 +22,28 @@ export class ShopService {
   constructor(private firestore: AngularFirestore) {}
 
   getCourses(): Observable<ICourse[]> {
-    this.courseCollection = this.firestore.collection<ICourse>('Courses');
+    this.courseCollection = this.firestore.collection<ICourse>('courses');
 
     return this.courseCollection.valueChanges({ idField: 'Id' });
   }
 
   getCourseById(id: string): Observable<ICourse> {
-    this.courseDocument = this.firestore.doc<ICourse>('Courses/' + id);
+    this.courseDocument = this.firestore.doc<ICourse>('courses/' + id);
     return this.courseDocument.valueChanges();
   }
 
   getCourseSnapById(id: string): Observable<Action<DocumentSnapshot<ICourse>>> {
-    this.courseDocument = this.firestore.doc<ICourse>('Courses/' + id);
+    this.courseDocument = this.firestore.doc<ICourse>('courses/' + id);
     return this.courseDocument.snapshotChanges();
   }
 
   createCourse(course: ICourse) {
-    this.courseCollection = this.firestore.collection<ICourse>('Courses');
+    this.courseCollection = this.firestore.collection<ICourse>('courses');
     this.courseCollection.add(course);
   }
 
   updateCourse(course: ICourse) {
-    this.firestore.doc('Courses/' + course.Id).update(course);
+    this.firestore.doc('courses/' + course.Id).update(course);
   }
 
   getCourseSectionsByCourseId(courseId: string): Observable<ICourseSection[]> {

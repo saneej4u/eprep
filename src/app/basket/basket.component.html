@@ -4,8 +4,8 @@
             <div class="my-3">
                 <ng-container>
                     <div id="basket-id">
-                        <div>
-                            <h6 class="text-dark">Courses you bought</h6>
+                        <div class="border-bottom">
+                            <h6 class="text-muted">2 Courses in Cart</h6>
                         </div>
                         <div class="row p-1 border-bottom border-left border-right" *ngFor="let item of basketItems">
                             <div class="col-md-12">
@@ -25,7 +25,7 @@
 
                                         </div>
                                         <div class="ml-5 d-flex align-items-start justify-content-center ">
-                                            <h5 class="text-dark">{{item.price | currency}}</h5>
+                                            <h5 class="text-dark">{{item.price | currency: 'GBP'}}</h5>
                                         </div>
                                     </div>
                                 </div>

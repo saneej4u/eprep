@@ -92,6 +92,9 @@ export class CourseInfoComponent implements OnInit {
   }
 
   populateEditCourse(course: ICourse) {
+
+    console.log("Course Edit: " + JSON.stringify(course.Thumbnail));
+    
     this.courseInfoForm.patchValue({
       courseTitle: course.Title,
       courseDescription: course.Description,
@@ -99,7 +102,7 @@ export class CourseInfoComponent implements OnInit {
       subCategory: course.SubCategoryId,
       price: course.Price,
       duration: course.RentInDays,
-      imageUrl: course.Thumbnail
+      //imageUrl: course.Thumbnail
     });
   }
 

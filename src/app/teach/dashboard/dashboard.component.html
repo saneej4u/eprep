@@ -17,6 +17,7 @@
               <table class="table table-striped" >
                   <thead class="thead-dark">
                     <tr>
+                      <th></th>
                       <th>Title</th>
                       <th class="text-right">Price</th>
                       <th class="text-right">Created On</th>
@@ -25,6 +26,9 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let course of myCourses">
+                      <td style="width:60px">
+                      <img src="{{course?.Thumbnail}}" alt="{{course?.Title}}" class="img-fluid" >
+                      </td>
                       <td>{{course.Title}}</td>
                       <td style="width:50px" class="text-right">{{course.Price | currency}}</td>
                       <td style="width: 150px" class="text-right">12/12/2020</td>
