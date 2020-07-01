@@ -1,64 +1,83 @@
 <ng-container *ngIf="currentUser">
-<form class="mt-4" [formGroup]="courseInfoForm">
-    <div>
-        <div class="mb-3">
-            <label for="email">Course Title</label>
-            <input type="email" formControlName="courseTitle" class="form-control" id="email"
-                placeholder="you@example.com">
-
-        </div>
-
-        <div class="mb-3">
-            <label for="address2">Description</label>
-            <textarea class="form-control" rows="5" formControlName="courseDescription"  placeholder="course description..."></textarea>
-        </div>
-
+    <form class="mt-4" [formGroup]="courseInfoForm">
         <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="country">Category</label>
-                <select formControlName="category" class="custom-select d-block w-100" required="">
-                    <option value="">Choose...</option>
-                    <option>Dental</option>
-                    <option>Medicine</option>
-                </select>
-      
+            <div class="col-md-3">
+                <div class="text-center mb-3" style="border: 1px solid lightgrey">
+                    <img [src]="imgSrc" class="img-fluid" height="250px" style="min-height: 250px;"
+                        (click)="fileUploader.click()">
+                </div>
+                <div class="form-group">
+
+                    <input type="file" accept="image/*" class="form-control" #fileUploader formControlName="imageUrl"
+                        (change)="showPreview($event)" style="padding: 2px;">
+                </div>
+
             </div>
-            <div class="col-md-6 mb-3">
-                <label for="state">Sub Category</label>
-                <select formControlName="subCategory" class="custom-select d-block w-100" required="">
-                    <option value="">Choose...</option>
-                    <option>ORE Part 1</option>
-                    <option>ORE Part 2</option>
-                    <option>LDS Part 1</option>
-                    <option>LDS Part 2</option>
-                    <option>MJDF Part 1</option>
-                </select>
+            <div class="col-md-9">
+                <div>
+                    <div class="mb-3">
+                        <label for="email">Course Title</label>
+                        <input type="email" formControlName="courseTitle" class="form-control" id="email"
+                            placeholder="you@example.com">
+
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address2">Description</label>
+                        <textarea class="form-control" rows="5" formControlName="courseDescription"
+                            placeholder="course description..."></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="country">Category</label>
+                            <select formControlName="category" class="custom-select d-block w-100" required="">
+                                <option value="">Choose...</option>
+                                <option>Dental</option>
+                                <option>Medicine</option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="state">Sub Category</label>
+                            <select formControlName="subCategory" class="custom-select d-block w-100" required="">
+                                <option value="">Choose...</option>
+                                <option>ORE Part 1</option>
+                                <option>ORE Part 2</option>
+                                <option>LDS Part 1</option>
+                                <option>LDS Part 2</option>
+                                <option>MJDF Part 1</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="address2">Price<span class="text-muted"> (in GBP)</span></label>
+                            <input formControlName="price" type="number" class="form-control" id="price"
+                                placeholder="Apartment or suite">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="address2">Course Duration <span class="text-muted"> (in number of
+                                    days)</span></label>
+                            <input formControlName="duration" type="number" class="form-control" id="duration"
+                                placeholder="Apartment or suite">
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+                </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="address2">Price<span class="text-muted"> (in GBP)</span></label>
-                <input formControlName="price" type="number" class="form-control" id="price"
-                    placeholder="Apartment or suite">
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="address2">Course Duration <span class="text-muted"> (in number of days)</span></label>
-                <input formControlName="duration" type="number" class="form-control" id="duration"
-                    placeholder="Apartment or suite">
-            </div>
-        </div>
-        <hr class="mb-4">
-    </div>   
-</form>
+    </form>
 
 
-<div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
-    <button class="btn btn-outline-dark" routerLink="/basket">
-        <i class="fa fa-angle-left"></i> Cancel
-    </button>
-    <button [disabled]="courseInfoForm.invalid" class="btn btn-dark" (click)='onSaveCourseInfo()'>
-        Upload Course <i class="fa fa-angle-right"></i>
-    </button>
-</div>
-</ng-container>  
+    <div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
+        <button class="btn btn-outline-dark" routerLink="/basket">
+            <i class="fa fa-angle-left"></i> Cancel
+        </button>
+        <button [disabled]="courseInfoForm.invalid" class="btn btn-dark" (click)='onSaveCourseInfo()'>
+            Upload Course <i class="fa fa-angle-right"></i>
+        </button>
+    </div>
+</ng-container>

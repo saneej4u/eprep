@@ -26,8 +26,8 @@
         
         <div class="card-body d-flex flex-column">
             <a routerLink="/shop/{{course?.Id}}">
-                <h6 class="text-uppercase">{{course?.Title}}</h6>
+                <h6 class="text-uppercase" style="color: black">{{course?.Title}}</h6>
             </a>
-            <span class="mb-2">{{course?.Price | currency}}</span>
+            <span class="mb-2 mt-1 text-dark"> <h5> <strong> {{course?.Price | currency}}</strong> </h5> </span>
         </div>
     </div>

@@ -2,23 +2,13 @@
 
     <div class="row">
         <div class="col-md-12 mb-5">
-            <span class="badge badge-dark mr-3 p-2">ORE Part 1 <i class="fa fa-times-circle fa-1x text-white ml-2" aria-hidden="true"></i> </span>
-            <span class="badge badge-dark mr-3 p-2">LDS Part 2 <i class="fa fa-times-circle fa-1x text-white ml-2" aria-hidden="true"></i> </span>
-            <span class="badge badge-dark mr-2 p-2">MJDF <i class="fa fa-times-circle fa-1x text-white ml-2" aria-hidden="true"></i> </span>
-            <span class="badge badge-dark mr-3 p-2">LDS Part 2 <i class="fa fa-times-circle fa-1x text-white ml-2" aria-hidden="true"></i> </span>
+            <span class="badge badge-pill badge-dark mr-3 px-4 py-3">Sort by </span>
+            <span class="badge badge-pill badge-secondary mr-3 px-4 py-3">Filters </span>
         </div>
     </div>
     <div class="row">
-        <section class="col-md-2">
+        <!-- <section class="col-md-2">
             <ng-container *ngIf="true">
-                <!-- <h5 class="text-black ml-3 mt-4 mb-3">Sort</h5>
-                <select class="custom-select mb-4" (change)="onSortSelected($event.target.value)">
-                                <option *ngFor="let sort of sortOptions" 
-                                    [selected]="shopParams.sort === sort.value"
-                                    [value]="sort.value">
-                                    {{sort.name}}
-                                </option>
-                            </select> -->
 
                 <h5 class="text-dark">Category</h5>
                 <div class="list-group my-3">
@@ -58,17 +48,10 @@
 
                 </div>
             </ng-container>
-        </section>
-        <section class="col-md-10">
-            <!-- <div class="d-flex justify-content-between align-items-center pb-2">
-                        <div class="form-inline" *ngIf="true">
-                            <input class="form-control mr-2" #search style="width: 300px" placeholder="Search" type="text">
-                            <button class="btn btn-outline-primary my-2">Search</button>
-                            <button class="btn btn-outline-success ml-2 my-2">Reset</button>
-                        </div>
-                    </div> -->
+        </section> -->
+        <section class="col-md-12">
             <div class="row">
-                <div class="col-md-4 mb-4" *ngFor="let course of courses;let index=index">
+                <div class="col-md-3 mb-4" *ngFor="let course of courses;let index=index">
                     <app-course-item [course]="course"></app-course-item>
                 </div>
             </div>

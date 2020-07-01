@@ -6,6 +6,8 @@ import { ICourse } from 'src/app/shared/models/course';
 import { AccountService } from 'src/app/account/account.service';
 import { IUser } from 'src/app/shared/models/user';
 import { ActivatedRoute } from '@angular/router';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from "rxjs/operators";
 
 @Component({
   selector: 'app-course-info',
@@ -19,12 +21,16 @@ export class CourseInfoComponent implements OnInit {
   courseInfoForm: FormGroup;
   currentUser: IUser;
   course: ICourse;
+  imgSrc: string;
+  selectedImage: any = null;
+  isSubmitted: boolean;
 
   constructor(
     private accountService: AccountService,
     private teachService: TeachService,
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private storage: AngularFireStorage
   ) {}
 
   ngOnInit(): void {
@@ -48,15 +54,24 @@ export class CourseInfoComponent implements OnInit {
       category: [null],
       subCategory: [null],
       price: [null, Validators.required],
-      duration: [null, Validators.required]
+      duration: [null, Validators.required],
+      imageUrl: [null, Validators.required]
     });
   }
 
   populateQS() {
     this.activatedRoute.paramMap.subscribe(params => {
-      console.log('Course ID from Query string : ' + params.get('id'));
-      const courseId = params.get('id');
+      let courseId = params.get('id');
 
+      // if (courseId == null) {
+      //     this.teachService.currentCourseIdDuringCreation$
+      //     .subscribe(result => {
+      //       courseId = result;
+      //       console.log("Result: " + result); 
+      //     }
+      //   );
+      // }
+      console.log('Course ID from Query string/observable : ' + courseId);
       if (courseId) {
         this.teachService.getCourseById(courseId).subscribe(
           course => {
@@ -83,26 +98,70 @@ export class CourseInfoComponent implements OnInit {
       category: course.CategoryId,
       subCategory: course.SubCategoryId,
       price: course.Price,
-      duration: course.RentInDays
+      duration: course.RentInDays,
+      imageUrl: course.Thumbnail
     });
   }
 
   onSaveCourseInfo() {
-    const course = this.courseInfoForm.value;
 
-    const courseInfo: ICourse = {
-      Title: course.courseTitle,
-      Description: course.courseDescription,
-      CategoryId: course.category,
-      SubCategoryId: course.subCategory,
-      Price: course.price,
-      RentInDays: course.duration,
-      InstructorId: this.currentUser.uid,
-      InstructorName: this.currentUser.displayName
-    };
+    this.isSubmitted = true;
+    //const course = this.courseInfoForm.value;
 
-    this.teachService.creatOrUpdateCourse(this.courseId,courseInfo);
+    // const courseInfo: ICourse = {
+    //   Title: course.courseTitle,
+    //   Description: course.courseDescription,
+    //   CategoryId: course.category,
+    //   SubCategoryId: course.subCategory,
+    //   Price: course.price,
+    //   RentInDays: course.duration,
+    //   InstructorId: this.currentUser.uid,
+    //   InstructorName: this.currentUser.displayName,
+    //   Thumbnail: course.imageUrl
+    // };
+
+    // this.teachService.creatOrUpdateCourse(this.courseId, courseInfo);
+
+
+    var filePath = `course/${this.selectedImage.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+    const fileRef = this.storage.ref(filePath);
+    this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe((url) => {
+          const course = this.courseInfoForm.value;
+
+          const courseInfo: ICourse = {
+            Title: course.courseTitle,
+            Description: course.courseDescription,
+            CategoryId: course.category,
+            SubCategoryId: course.subCategory,
+            Price: course.price,
+            RentInDays: course.duration,
+            InstructorId: this.currentUser.uid,
+            InstructorName: this.currentUser.displayName,
+            Thumbnail: url
+          };
+
+          this.teachService.creatOrUpdateCourse(this.courseId, courseInfo);
+        })
+      })
+    ).subscribe();
 
     this.appStepper.next();
+  }
+
+
+
+  showPreview(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => this.imgSrc = e.target.result;
+      reader.readAsDataURL(event.target.files[0]);
+      this.selectedImage = event.target.files[0];
+    }
+    else {
+      this.imgSrc = '/assets/img/image_placeholder.jpg';
+      this.selectedImage = null;
+    }
   }
 }

@@ -11,6 +11,7 @@
       <form [formGroup]="formTemplate" (submit)="onSubmit(formTemplate.value)">
 
         <div class="form-group mb-3">
+         <label>Title</label>
           <input class="form-control" formControlName="contentTitle" placeholder="Content Title">
           <div class="text-danger" *ngIf="isSubmitted && formControls.contentTitle.errors?.required">This field is
             required.
