@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IBasketItem } from '../../models/basket';
+import { IBasketItem, IBasket } from '../../models/basket';
 
 @Component({
   selector: 'app-basket-summary',
@@ -9,6 +9,7 @@ import { IBasketItem } from '../../models/basket';
 export class BasketSummaryComponent implements OnInit {
 
   @Input() basketItems: IBasketItem[];
+  @Input() basket: IBasket;
 
   constructor() { }
 

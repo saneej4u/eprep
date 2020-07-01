@@ -1,7 +1,7 @@
 <div class="container my-5 py-5">
     <div class="row">
         <div class="col-md-4 order-md-2 mb-4" >    
-          <app-basket-summary [basketItems]='basketItems'></app-basket-summary>
+          <app-basket-summary [basket]='basket' [basketItems]='basketItems'></app-basket-summary>
           <button class="btn btn-dark btn-lg btn-block text-uppercase" type="submit" (click)='submitOrder()'>Process payment</button>
         </div>
         <div class="col-md-8 order-md-1">

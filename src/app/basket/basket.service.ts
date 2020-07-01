@@ -21,18 +21,6 @@ export class BasketService {
 
   constructor(private firestore: AngularFirestore) {}
 
-  // getBasket(id: string) {
-  //   return this.firestore
-  //     .collection('basket')
-  //     .doc(id)
-  //     .valueChanges()
-  //     .pipe(
-  //       map((basket: IBasket) => {
-  //         this.basketSource.next(basket);
-  //       })
-  //     );
-  // }
-
   setBasket(basket: IBasket) {
     return this.firestore
       .collection('basket')
@@ -53,7 +41,6 @@ export class BasketService {
 
   deleteCurrentBasket(basketItemId: string) {
     const basketId = localStorage.getItem('basket_id');
-    
   }
 
   getCurrentBasket(): Observable<any> {
@@ -87,7 +74,7 @@ export class BasketService {
         if (this.currentBasket == null) {
           this.currentBasket = this.createBasket();
         }
-
+ 
         const itemsToAdd: IBasketItem = this.mapCourseItemToBasketItem(course);
         const basketId = localStorage.getItem('basket_id');
         this.firestore
@@ -95,6 +82,7 @@ export class BasketService {
           .doc(basketId)
           .collection('basketItems')
           .add(itemsToAdd);
+
       },
       error => {
         console.log('Error');
@@ -107,7 +95,8 @@ export class BasketService {
 
     var basket = {
       createdOn: 'created On',
-      expiresAt: 'expires at'
+      expiresAt: 'expires at',
+      totalPrice: 0
     };
 
     this.firestore
@@ -120,8 +109,20 @@ export class BasketService {
     return {
       id: basketId,
       createdOn: basket.createdOn,
-      expiresAt: basket.expiresAt
+      expiresAt: basket.expiresAt,
+      totalPrice: basket.totalPrice
     };
+  }
+
+  findTotalPrice(basketItems: IBasketItem[]): number
+  {
+    let totalPrice = 0;
+
+    basketItems.forEach(x => {
+        totalPrice = totalPrice + x.price;
+    })
+
+    return totalPrice;
   }
 
   mapCourseItemToBasketItem(course: ICourse): IBasketItem {

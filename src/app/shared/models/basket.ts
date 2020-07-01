@@ -8,6 +8,8 @@ export interface IBasket {
   clientSecret?: string;
   isPaymentIntent?: boolean;
   paymentIntentId?: string;
+
+  totalPrice?: number;
 }
 
 export interface IBasketItem {
