@@ -26,23 +26,32 @@ export class NavBarComponent implements OnInit {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.currentUser = user;
-       // console.log('Display Name: ' + JSON.stringify(this.currentUser.displayName));
+        // console.log('Display Name: ' + JSON.stringify(this.currentUser.displayName));
         localStorage.setItem('user', JSON.stringify(this.currentUser));
       } else {
         this.currentUser = null;
         localStorage.setItem('user', null);
-        //console.log('user: null');
       }
     });
 
     this.basketService.getBasketItems().subscribe(
       result => {
-        this.basketItemsCount = result.length;
+        if (result) {
+          this.basketItemsCount = result.length;
+        } else {
+          this.basketItemsCount = 0;
+        }
+        console.log("Basket Count: " + this.basketItemsCount);
+        
       },
       error => {
         console.log('error');
       }
     );
+
+    this.basketService.basketCountSource$.subscribe(x=> {
+      this.basketItemsCount = x;
+    });
   }
 
   items: string[] = ['Medical', 'Dental', 'Pharamacy'];

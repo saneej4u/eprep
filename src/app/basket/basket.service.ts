@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, merge } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import {
   AngularFirestore,
@@ -16,8 +16,17 @@ import { Timestamp } from 'rxjs/internal/operators/timestamp';
 export class BasketService {
   private basketSource = new BehaviorSubject<IBasket>(null);
 
+  basketItemsSource$ = new BehaviorSubject<IBasketItem[]>(null);
+
+  basketCountSource$ = new BehaviorSubject<number>(0);
+
+  private basketTotalSourse = new BehaviorSubject<number>(0);
+  basketTotal$ = this.basketTotalSourse.asObservable();
+
   basket$ = this.basketSource.asObservable();
   currentBasket: IBasket;
+
+  tBasket: number;
 
   constructor(private firestore: AngularFirestore) {}
 
@@ -35,8 +44,23 @@ export class BasketService {
 
   deleteBasketItem(basketItemId: string) {
     const basketId = localStorage.getItem('basket_id');
-    this.firestore.collection('basket').doc(basketId).collection('basketItems').doc(basketItemId).delete();
-    
+    this.firestore
+      .collection('basket')
+      .doc(basketId)
+      .collection('basketItems')
+      .doc(basketItemId)
+      .delete();
+
+      this.firestore
+      .collection('basket')
+      .doc(basketId)
+      .collection<IBasketItem>('basketItems')
+      .valueChanges()
+      .subscribe(basketItems => {
+        this.basketItemsSource$.next(basketItems);
+        this.basketCountSource$.next(basketItems.length);
+        this.updaateTotalPricev2();
+      });
   }
 
   deleteCurrentBasket(basketItemId: string) {
@@ -56,17 +80,20 @@ export class BasketService {
     return of(null);
   }
 
-  getBasketItems(): Observable<IBasketItem[]>
-  {
+  getBasketItems(): Observable<IBasketItem[]> {
     const basketId = localStorage.getItem('basket_id');
-    return this.firestore
-    .collection<IBasket>('basket')
-    .doc(basketId)
-    .collection<IBasketItem>('basketItems')
-    .valueChanges({ idField: 'id' });
+
+    if (basketId) {
+      return this.firestore
+        .collection<IBasket>('basket')
+        .doc(basketId)
+        .collection<IBasketItem>('basketItems')
+        .valueChanges({ idField: 'id' });
+    }
+    return of(null);
   }
 
-  addItemToBasket(course: ICourse, quantity = 1) {
+  addItemToBasketV2(course: ICourse, quantity = 1) {
     this.getCurrentBasket().subscribe(
       result => {
         this.currentBasket = result;
@@ -74,7 +101,7 @@ export class BasketService {
         if (this.currentBasket == null) {
           this.currentBasket = this.createBasket();
         }
- 
+
         const itemsToAdd: IBasketItem = this.mapCourseItemToBasketItem(course);
         const basketId = localStorage.getItem('basket_id');
         this.firestore
@@ -83,9 +110,18 @@ export class BasketService {
           .collection('basketItems')
           .add(itemsToAdd);
 
+        const totalprice = this.currentBasket.totalPrice + course.Price;
+        this.tBasket = totalprice;
+
+        console.log('Total Price: ' + totalprice);
+
+        this.basketTotalSourse.next(totalprice);
       },
       error => {
         console.log('Error');
+      },
+      () => {
+        console.log('Update Basket - product');
       }
     );
   }
@@ -114,15 +150,26 @@ export class BasketService {
     };
   }
 
-  findTotalPrice(basketItems: IBasketItem[]): number
-  {
+  findTotalPrice(basketItems: IBasketItem[]): number {
     let totalPrice = 0;
 
     basketItems.forEach(x => {
-        totalPrice = totalPrice + x.price;
-    })
+      totalPrice = totalPrice + x.price;
+    });
 
     return totalPrice;
+  }
+
+  updateBasketTotal(amout: number) {
+    const basketId = localStorage.getItem('basket_id');
+    if (basketId) {
+      this.firestore
+        .collection('basket')
+        .doc(basketId)
+        .update({ totalPrice: amout });
+
+      //.set({ totalPrice: amout }, { merge: true });
+    }
   }
 
   mapCourseItemToBasketItem(course: ICourse): IBasketItem {
@@ -132,5 +179,60 @@ export class BasketService {
       pictureUrl: course.Thumbnail,
       instructorName: course.InstructorName
     };
+  }
+
+  addItemToBasket(course: ICourse, quantity = 1) {
+    let basketId = localStorage.getItem('basket_id');
+
+    if (basketId == null) {
+      basketId = this.firestore.createId();
+
+      this.firestore
+        .collection('basket')
+        .doc(basketId)
+        .set({ totalPrice: course.Price }, { merge: true });
+
+      localStorage.setItem('basket_id', basketId);
+    }
+
+    const itemsToAdd: IBasketItem = this.mapCourseItemToBasketItem(course);
+
+    this.firestore
+      .collection('basket')
+      .doc(basketId)
+      .collection('basketItems')
+      .add(itemsToAdd);
+
+    this.firestore
+      .collection('basket')
+      .doc(basketId)
+      .collection<IBasketItem>('basketItems')
+      .valueChanges()
+      .subscribe(basketItems => {
+        this.basketItemsSource$.next(basketItems);
+        this.basketCountSource$.next(basketItems.length);
+        this.updaateTotalPricev2();
+      });
+  }
+
+  updaateTotalPricev2() {
+    const basketItems = this.basketItemsSource$.value;
+    if (basketItems) {
+      const subtotal = basketItems.reduce((a, b) => b.price * 1 + a, 0);
+
+      const basketId = localStorage.getItem('basket_id');
+      this.firestore
+        .collection('basket')
+        .doc(basketId)
+        .set({ totalPrice: subtotal }, { merge: true });
+    }
+  }
+
+  private calculateTotals() {
+    const basketItems = this.basketItemsSource$.value;
+
+    const subtotal = basketItems.reduce((a, b) => b.price * 1 + a, 0);
+
+    this.basketTotalSourse.next(subtotal);
   }
 }

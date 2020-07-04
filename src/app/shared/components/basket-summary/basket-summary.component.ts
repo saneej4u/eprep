@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IBasketItem, IBasket } from '../../models/basket';
+import { BasketService } from 'src/app/basket/basket.service';
 
 @Component({
   selector: 'app-basket-summary',
@@ -7,16 +8,19 @@ import { IBasketItem, IBasket } from '../../models/basket';
   styleUrls: ['./basket-summary.component.scss']
 })
 export class BasketSummaryComponent implements OnInit {
-
   @Input() basketItems: IBasketItem[];
   @Input() basket: IBasket;
 
-  constructor() { }
+  subTotal: number;
+
+  constructor(private basketService: BasketService) {}
 
   ngOnInit(): void {
 
-    console.log("Basket Summary :" + JSON.stringify(this.basketItems));
-    
-  }
 
+    // this.basketService.basketTotal$.subscribe(x => {
+    //   this.subTotal = x;
+    // });
+
+  }
 }
