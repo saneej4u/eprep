@@ -14,6 +14,7 @@ export interface IBasket {
 
 export interface IBasketItem {
   id?: string;
+  courseId?: string,
   courseName: string;
   courseDescription?: string;
   price: number;

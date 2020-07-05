@@ -58,7 +58,7 @@ const routes: Routes = [
     path: 'learn',
     component: HomeComponent,
     children: [
-      { path: 'my-courses', loadChildren: () => import('./my-courses/my-courses.module').then(mode => mode.MyCoursesModule)}
+      { path: '', loadChildren: () => import('./my-courses/my-courses.module').then(mode => mode.MyCoursesModule)}
     ]
   }
   ,

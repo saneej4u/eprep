@@ -174,6 +174,7 @@ export class BasketService {
 
   mapCourseItemToBasketItem(course: ICourse): IBasketItem {
     return {
+      courseId: course.Id,
       courseName: course.Title,
       price: course.Price,
       pictureUrl: course.Thumbnail,

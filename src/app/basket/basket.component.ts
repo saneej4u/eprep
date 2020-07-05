@@ -36,7 +36,7 @@ export class BasketComponent implements OnInit {
   onCheckout()
   {
     let basket = this.basket;
-    basket.isPaymentIntent = true;
+    basket.isPaymentIntent = false; //TODO: revert to true;
     basket.amount = 7000;
     basket.currency = 'usd';
     

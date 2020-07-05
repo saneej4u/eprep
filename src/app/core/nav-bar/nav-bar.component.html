@@ -47,7 +47,7 @@
       </div> -->
 
       <a *ngIf="currentUser" class="px-3" [routerLink]="['/teach/dashboard']" routerLinkActive="router-link-active" >Instructor</a>
-      <a *ngIf="!currentUser" class="px-3" [routerLink]="['teach/instructor']" routerLinkActive="router-link-active" >Teach</a>
+      <a *ngIf="!currentUser" class="px-3" [routerLink]="['/teach/instructor']" routerLinkActive="router-link-active" >Teach</a>
       <a *ngIf="currentUser"  class="px-3" [routerLink]="['/learn/my-courses']" routerLinkActive="router-link-active" >My courses</a>
     </div>
   </nav>

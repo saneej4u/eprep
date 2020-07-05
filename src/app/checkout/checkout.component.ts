@@ -13,6 +13,7 @@ import { AccountService } from '../account/account.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
+import { OrderService } from '../shared/services/order.service';
 
 declare var Stripe;
 
@@ -44,31 +45,37 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
     private basketService: BasketService,
     private toastr: ToastrService,
     private accountService: AccountService,
-    private router: Router
+    private router: Router,
+    private orderService: OrderService
   ) {}
 
   ngOnInit(): void {
+    this.basketService
+      .getCurrentBasket()
+      .pipe(
+        map(basket => {
+          console.log(
+            'basket.payment.client_seceret: ' +
+              JSON.stringify(basket.payment.client_secret)
+          );
 
-    this.basketService.getCurrentBasket().pipe(
-      map((basket) => {
-        console.log("basket.payment.client_seceret: " + JSON.stringify(basket.payment.client_secret));
-        
-        return {
-          amount: basket.amount,
-          currency: basket.currency,
-          clientSecret: basket.payment.client_secret
-        };
-      })
-    ).subscribe((result) => {
-       this.basket = result;
-      
-    }, (error) => {
-
-    });
+          return {
+            amount: basket.amount,
+            currency: basket.currency,
+            clientSecret: basket.payment.client_secret
+          };
+        })
+      )
+      .subscribe(
+        result => {
+          this.basket = result;
+        },
+        error => {}
+      );
 
     // this.basketService.getCurrentBasket().subscribe(
     //   (basket) => {
-        
+
     //     this.basket = basket;
     //     console.log("Current Basket: " + JSON.stringify(basket));
     //     console.log("This Current Basket: " + JSON.stringify(this.basket));
@@ -131,18 +138,22 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async submitOrder() {
-    try {
-      const paymentResult = await this.confirmPaymentWithStripe(this.basket);
-      if (paymentResult.paymentIntent) {
-        this.router.navigate(['checkout/success']);
-      } else {
-        this.toastr.error(paymentResult.error.message);
-      }
-      this.loading = false;
-    } catch (error) {
-      console.log(error);
-      this.loading = false;
-    }
+
+    //TODO: Revert below chnages
+    // try {
+    //   const paymentResult = await this.confirmPaymentWithStripe(this.basket);
+    //   if (paymentResult.paymentIntent) {
+    //     this.router.navigate(['checkout/success']);
+    //   } else {
+    //     this.toastr.error(paymentResult.error.message);
+    //   }
+    //   this.loading = false;
+    // } catch (error) {
+    //   console.log(error);
+    //   this.loading = false;
+    // }
+
+    this.orderService.createOrder();
   }
 
   private async confirmPaymentWithStripe(basket: IBasket) {
