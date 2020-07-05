@@ -5,11 +5,12 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { CoreModule } from '../core/core.module';
 import { HomeContentComponent } from './home-content/home-content.component';
+import { BecomeInstructorComponent } from './become-instructor/become-instructor.component';
 
 
 
 @NgModule({
-  declarations: [HomeComponent, HomeContentComponent],
+  declarations: [HomeComponent, HomeContentComponent, BecomeInstructorComponent],
   imports: [
     CommonModule,
     SharedModule,

@@ -7,6 +7,8 @@ import { ShopModule } from './shop/shop.module';
 import { HomeContentComponent } from './home/home-content/home-content.component';
 import { TeachModule } from './teach/teach.module';
 import { TeachComponent } from './teach/teach.component';
+import { MyCoursesComponent } from './my-courses/my-courses.component';
+import { BecomeInstructorComponent } from './home/become-instructor/become-instructor.component';
 
 const routes: Routes = [
   {
@@ -14,6 +16,7 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       { path: '', component: HomeContentComponent },
+      { path: 'teach/instructor', component: BecomeInstructorComponent},
       {
         path: 'basket',
         loadChildren: () =>
@@ -45,11 +48,20 @@ const routes: Routes = [
   },
   {
     path: 'teach',
+    canActivate: [AuthGuard],
     component: TeachComponent,
     children: [
-      {path: '', loadChildren: () => import('./teach/teach.module').then(mod => mod.TeachModule)}
+      { path: '', loadChildren: () => import('./teach/teach.module').then(mod => mod.TeachModule)}
     ]
   },
+  {
+    path: 'learn',
+    component: HomeComponent,
+    children: [
+      { path: 'my-courses', loadChildren: () => import('./my-courses/my-courses.module').then(mode => mode.MyCoursesModule)}
+    ]
+  }
+  ,
   { path: '*', redirectTo: 'home', pathMatch: 'full' }
 ];
 
