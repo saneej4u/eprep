@@ -59,7 +59,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     StepperComponent,
     FileUploadModule,
     SortableModule,
-    TabsModule
+    TabsModule,
+    VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule,
   ]
 })
 export class SharedModule { }

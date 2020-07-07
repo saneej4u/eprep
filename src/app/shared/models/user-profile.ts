@@ -1,7 +1,7 @@
-import { IUser } from './user';
-
 export interface IUserProfile
 {
-    user: IUser;
-    dob: string;
+    id?: string;
+    firstName?: string;
+    lastName?: string;
+    dob?: string;
 }

@@ -7,9 +7,9 @@
                         <div class="border-bottom">
                             <h6 class="text-muted">2 Courses in Cart</h6>
                         </div>
-                        <div class="row p-1 border-bottom border-left border-right" *ngFor="let item of basketItems">
+                        <div class="row" *ngFor="let item of basketItems">
                             <div class="col-md-12">
-                                <div class="card">
+                                <div class="card p-1 border-bottom border-left border-right">
                                     <div class="card-horizontal d-flex justify-content-start align-items-center p-2">
                                         <div class="img-square-wrapper">
                                             <img class="img-fluid" src="{{item.pictureUrl}}" alt="{{item.courseName}}">

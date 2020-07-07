@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AccountService } from '../account.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { IUserProfile } from 'src/app/shared/models/user-profile';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +28,8 @@ export class RegisterComponent implements OnInit {
 
   createLoginForm() {
     this.signupForm = new FormGroup({
-      fullname: new FormControl('', [Validators.required]),
+      firstname: new FormControl('', [Validators.required]),
+      lastname: new FormControl('', [Validators.required]),
       email: new FormControl('', [
         Validators.required,
         Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')
@@ -41,8 +43,17 @@ export class RegisterComponent implements OnInit {
       .register(this.signupForm.value)
       .then(result => {
         result.user.updateProfile({
-          displayName: this.signupForm.value.fullname
+          displayName: this.signupForm.value.firstname
         });
+        console.log("User result: " + result.user);
+        
+        const userProfile: IUserProfile = {
+          id: result.user.uid,
+          firstName: this.signupForm.value.firstname,
+          lastName: this.signupForm.value.lastname
+        };
+
+        this.accountService.createUserProfile(userProfile);
         this.router.navigate([this.returnUrl]);
       })
       .catch(err => {
