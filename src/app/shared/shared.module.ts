@@ -17,6 +17,7 @@ import { StepperComponent } from './components/stepper/stepper.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { SortableModule } from 'ngx-bootstrap/sortable';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
     ModalModule.forRoot(),
+    TooltipModule.forRoot(),
     VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule,
     CdkStepperModule,
     FileUploadModule,
@@ -61,6 +63,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     SortableModule,
     TabsModule,
     VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule,
+    TooltipModule
   ]
 })
 export class SharedModule { }

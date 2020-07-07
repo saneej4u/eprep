@@ -43,7 +43,7 @@
 
                     <a *ngFor="let item of playlist; let $index = index" (click)="onClickPlaylistItem(item, $index)"
                         [class.active]="item === currentItem"
-                class="list-group-item list-group-item-action">{{$index + 1}} - {{ item.title }}</a>
+                class="list-group-item list-group-item-action" style="cursor: pointer">{{$index + 1}} - {{ item.title }}</a>
                 </div>
             </div>
         </div>

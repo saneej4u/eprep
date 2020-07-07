@@ -50,6 +50,7 @@ export class VideoModalComponent implements OnInit {
     this.api
       .getDefaultMedia()
       .subscriptions.loadedMetadata.subscribe(this.playVideo.bind(this));
+      
     this.api
       .getDefaultMedia()
       .subscriptions.ended.subscribe(this.nextVideo.bind(this));
