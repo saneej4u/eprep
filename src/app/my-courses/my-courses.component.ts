@@ -3,6 +3,7 @@ import { MyCoursesService } from './my-courses.service';
 import { IMycourses } from '../shared/models/order-items';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-my-courses',
   templateUrl: './my-courses.component.html',
@@ -26,7 +27,9 @@ export class MyCoursesComponent implements OnInit {
     );
   }
 
-  onCourseView() {
+  onCourseView(courseId: string) {
+
+    this.myCourseService.startCourse(courseId, 2);
     this.router.navigate(['learn/my-courses/details/1']);
   }
 }

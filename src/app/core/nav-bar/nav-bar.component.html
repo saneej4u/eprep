@@ -66,7 +66,7 @@
     <ng-container *ngIf="currentUser" >
 
       <div class="btn-group" dropdown placement="bottom lefts">
-        <a id="button-basic" dropdownToggle class="dropdown-toggle mr-3" aria-controls="dropdown-basic"> <strong class="mr-2">Hello, {{currentUser?.displayName}}</strong>
+        <a id="button-basic" style="cursor: pointer" dropdownToggle class="dropdown-toggle mr-3" aria-controls="dropdown-basic"> <strong class="mr-2">Hello, {{currentUser?.displayName}}</strong>
       </a>
         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-lefts dropdown-menu-center-log-out" style="cursor: pointer"
             role="menu" aria-labelledby="button-basic">
