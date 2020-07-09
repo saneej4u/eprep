@@ -10,6 +10,9 @@ export interface ICourse
     InstructorId?: string;
     InstructorName?: string;
     RentInDays?: number;
+    Status?: string;
+    CreatedOn?: any;
+    UpdatedOn?: any;
 
 
     BasicInfo?: string;

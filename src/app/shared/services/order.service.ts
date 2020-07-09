@@ -5,6 +5,8 @@ import { IBasket, IBasketItem } from '../models/basket';
 import { switchMap, map } from 'rxjs/operators';
 import { forkJoin, Observable, combineLatest } from 'rxjs';
 import { IOrderItem, IMycourses } from '../models/order-items';
+import { IOrder } from '../models/order';
+import { HelperService } from './helper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +17,12 @@ export class OrderService {
 
   constructor(
     private basketService: BasketService,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private helperService: HelperService
   ) {}
 
   createOrder() {
+    const token = localStorage.getItem('token');
     const basketId = localStorage.getItem('basket_id');
 
     const basket = this.firestore
@@ -37,19 +41,27 @@ export class OrderService {
     combineItems.subscribe(([basket, basketItems]) => {
       const orderId = this.firestore.createId();
 
+      const order: IOrder = {
+        userId: token,
+        createdOn: this.helperService.getCurrentTime(),
+        paymentIntentId: basket.paymentIntentId,
+        totalPrice: basket.totalPrice,
+        currency: basket.currency
+      };
+
       this.firestore
         .collection('order')
         .doc(orderId)
-        .set(basket);
+        .set(order);
 
       basketItems.forEach((item: IBasketItem) => {
-        const token = localStorage.getItem('token');
+       
 
         const orderItem: IOrderItem = {
           courseId: item.courseId,
           userId: token,
-          courseName: item.courseName,
-          //courseDescription: item.courseDescription,
+          courseTitle: item.courseTitle,
+          courseDescription: item.courseDescription,
           price: item.price,
           pictureUrl: item.pictureUrl,
           instructorName: item.instructorName
@@ -63,7 +75,7 @@ export class OrderService {
 
         const myCourses: IMycourses = {
           courseId: orderItem.courseId,
-          courseName: orderItem.courseName,
+          courseName: orderItem.courseTitle,
           pictureUrl: item.pictureUrl,
           instructorName: item.instructorName
         };

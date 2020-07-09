@@ -1,23 +1,21 @@
 export interface IBasket {
   id?: string;
-  createdOn?: string;
-  expiresAt?: string;
-  amount?: number;
+  createdOn?: any;
+  totalPrice?: number;
   currency?: string;
-
   clientSecret?: string;
   isPaymentIntent?: boolean;
   paymentIntentId?: string;
-
-  totalPrice?: number;
 }
 
 export interface IBasketItem {
   id?: string;
   courseId?: string,
-  courseName: string;
+  courseTitle: string;
   courseDescription?: string;
-  price: number;
-  instructorName: string;
-  pictureUrl: string;
+  price?: number;
+  instructorId?: string;
+  instructorName?: string;
+  pictureUrl?: string;
+  courseAvailableFor?: number;
 }

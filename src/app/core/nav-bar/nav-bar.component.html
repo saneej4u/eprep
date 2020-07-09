@@ -3,7 +3,7 @@
   <img src="/assets/images/logo.png" class="logo" alt="E-Prep" [routerLink]="['/']"
     routerLinkActive="router-link-active" />
 
-  <nav class="my-2 my-md-0 mr-md-3 text-uppercase" style="font-size: larger">
+  <nav class="my-2 my-md-0 mr-md-3 text-uppercase d-none d-sm-block" style="font-size: larger">
     <div class="btn-group">
       <a class="px-3" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]='{exact:true}'>Home</a>
       <a class="px-3" [routerLink]="['/shop']" routerLinkActive="active">Courses</a>
@@ -52,7 +52,8 @@
     </div>
   </nav>
 
-  <div class="d-flex align-items-center">
+  <div class="d-none d-sm-block">
+  <div class="d-flex align-items-center ">
     <a class="position-relative" routerLink='/basket'>
       <i class="fa fa-shopping-cart fa-2x mr-4 text-dark"></i>
     <div *ngIf="basketItemsCount" class="cart-no">{{basketItemsCount}}</div>
@@ -84,4 +85,6 @@
 
     </ng-container>
   </div>
+  </div>
+
 </div>

@@ -2,11 +2,13 @@ export interface IOrderItem {
   id?: string;
   userId?: string;
   courseId?: string;
-  courseName?: string;
+  courseTitle?: string;
   courseDescription?: string;
   price?: number;
+  status?: string;
   instructorName?: string;
   pictureUrl?: string;
+  availableFor?: number;
 }
 
 export interface IMycourses {
@@ -14,6 +16,7 @@ export interface IMycourses {
   courseId?: string;
   courseName?: string;
   courseDescription?: string;
+  status?: string;
   instructorName?: string;
   pictureUrl?: string;
   startedOn?: string;

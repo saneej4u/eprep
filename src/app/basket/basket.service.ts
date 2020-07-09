@@ -8,7 +8,7 @@ import {
 } from '@angular/fire/firestore';
 import { IBasketItem, IBasket } from '../shared/models/basket';
 import { ICourse } from '../shared/models/course';
-import { Timestamp } from 'rxjs/internal/operators/timestamp';
+import { HelperService } from '../shared/services/helper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class BasketService {
 
   tBasket: number;
 
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore, private helperService: HelperService) {}
 
   setBasket(basket: IBasket) {
     return this.firestore
@@ -130,8 +130,7 @@ export class BasketService {
     const basketId = this.firestore.createId();
 
     var basket = {
-      createdOn: 'created On',
-      expiresAt: 'expires at',
+      createdOn: this.helperService.getCurrentTime(),
       totalPrice: 0
     };
 
@@ -145,7 +144,6 @@ export class BasketService {
     return {
       id: basketId,
       createdOn: basket.createdOn,
-      expiresAt: basket.expiresAt,
       totalPrice: basket.totalPrice
     };
   }
@@ -175,7 +173,7 @@ export class BasketService {
   mapCourseItemToBasketItem(course: ICourse): IBasketItem {
     return {
       courseId: course.Id,
-      courseName: course.Title,
+      courseTitle: course.Title,
       price: course.Price,
       pictureUrl: course.Thumbnail,
       instructorName: course.InstructorName
