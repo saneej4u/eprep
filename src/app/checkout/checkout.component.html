@@ -2,7 +2,6 @@
     <div class="row">
         <div class="col-md-4 order-md-2 mb-4" >    
           <app-basket-summary [basket]='basket' [basketItems]='basketItems'></app-basket-summary>
-          <button class="btn btn-dark btn-lg btn-block text-uppercase" type="submit" (click)='submitOrder()'>Process payment</button>
         </div>
         <div class="col-md-8 order-md-1">
           <div>
@@ -34,9 +33,17 @@
             </div>
 
             <hr class="mb-4">
+
+            <div class="row">
+              <div class="col-md-12 clearfix">
+                  <button class="btn btn-secondary btn-md text-uppercase float-left" (click)='onDeleteOrder()' ><i class="fa fa-shopping-cart mr-3" aria-hidden="true"></i> Continue shopping</button>
+                  <button class="btn btn-dark btn-md text-uppercase float-right" type="submit" (click)='submitOrder()'><i class="fa fa-cc-stripe mr-3" aria-hidden="true"></i> Process payment</button>
+
+              </div>
+            </div>
           
           </div>
-          <button class="btn btn-secondary btn-lg text-uppercase px-5" (click)='onDeleteOrder()' >Cancel</button>
+        
         </div>
       </div>
 </div>

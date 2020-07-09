@@ -20,8 +20,14 @@
                                             <small class="text-muted">{{item.instructorName}}</small>
                                         </div>
                                         <div class="d-flex align-items-start justify-content-start">
-                                            <button class="btn btn-link btn-sm text-secondary" (click)='onRemoveBasketItem(item.id)'>
-                                                Remove</button>
+                                                <span class="badge badge-pill badge-info text-wrap mr-4">This course is valid for {{item?.courseAvailableFor}} days after you start.</span>
+                                         
+
+                                        </div>
+                                        <div class="d-flex align-items-start justify-content-start">
+                                               
+                                            <button class="btn btn-link btn-sm text-secondary" (click)='onRemoveBasketItem(item.id)' tooltip="Remove.">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i></button>
 
                                         </div>
                                         <div class="ml-5 d-flex align-items-start justify-content-center ">
@@ -31,6 +37,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                                <div class="col-md-12 mt-4 clearfix">
+                                        <a class="btn btn-secondary btn-md text-uppercase text-white float-left text-center"
+                                        [routerLink]="['/shop']" routerLinkActive="router-link-active" > <i class="fa fa-shopping-cart mr-3" aria-hidden="true"></i> Continue shopping</a>
+
+                                    <a class="btn btn-dark btn-md text-uppercase text-white float-right text-center w-25"
+                                        (click)='onCheckout()'><i class="fa fa-credit-card-alt mr-3" aria-hidden="true"></i> Checkout</a>
+                                </div>
+                            </div>
                     </div>
                 </ng-container>
             </div>
@@ -39,12 +54,6 @@
             <div>
                 <div>
                     <app-basket-summary [basket]='basket' [basketItems]='basketItems'></app-basket-summary>
-                    <div class="row">
-                        <div class="col-md-12 mt-4">
-                            <a class="btn btn-dark btn-lg btn-block text-uppercase text-white"
-                                (click)='onCheckout()'>Checkout</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

@@ -185,7 +185,8 @@ export class BasketService {
       courseTitle: course.Title,
       price: course.Price,
       pictureUrl: course.Thumbnail,
-      instructorName: course.InstructorName
+      instructorName: course.InstructorName,
+      courseAvailableFor: course.RentInDays
     };
   }
 
