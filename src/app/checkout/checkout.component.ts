@@ -10,10 +10,11 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { IBasketItem, IBasket } from '../shared/models/basket';
 import { BasketService } from '../basket/basket.service';
 import { AccountService } from '../account/account.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 import { OrderService } from '../shared/services/order.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 declare var Stripe;
 
@@ -40,6 +41,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
   cardNumberValid = false;
   cardExpiryValid = false;
   cardCvcValid = false;
+  paymentForm: FormGroup;
 
   constructor(
     private basketService: BasketService,
@@ -50,19 +52,17 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.createLoginForm();
     this.basketService
       .getCurrentBasket()
       .pipe(
         map(basket => {
-          console.log(
-            'basket.payment.client_seceret: ' +
-              JSON.stringify(basket.payment.client_secret)
-          );
-
           return {
-            amount: basket.amount,
+            totalPrice: basket.payment.amount,
             currency: basket.currency,
-            clientSecret: basket.payment.client_secret
+            clientSecret: basket.payment.client_secret,
+            paymentIntentId: basket.payment.client_secret,
+            isPaymentIntent: true
           };
         })
       )
@@ -73,17 +73,14 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
         error => {}
       );
 
-    // this.basketService.getCurrentBasket().subscribe(
-    //   (basket) => {
-
-    //     this.basket = basket;
-    //     console.log("Current Basket: " + JSON.stringify(basket));
-    //     console.log("This Current Basket: " + JSON.stringify(this.basket));
-    //   },
-    //   error => {
-    //     console.log('Basket error: ' + error);
-    //   }
-    // );
+    this.basketService.getCurrentBasket().subscribe(
+      basket => {
+        this.basket = basket;
+      },
+      error => {
+        console.log('Basket error: ' + error);
+      }
+    );
 
     this.basketService.getBasketItems().subscribe(
       (items: IBasketItem[]) => {
@@ -137,8 +134,13 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  async submitOrder() {
+  createLoginForm() {
+    this.paymentForm = new FormGroup({
+      nameOnCard: new FormControl('', Validators.required)
+    });
+  }
 
+  async submitOrder1() {
     //TODO: Revert below chnages
     // try {
     //   const paymentResult = await this.confirmPaymentWithStripe(this.basket);
@@ -156,14 +158,51 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
     this.orderService.createOrder();
   }
 
-  private async confirmPaymentWithStripe(basket: IBasket) {
-    return this.stripe.confirmCardPayment(basket.clientSecret, {
+  async submitOrder()
+  {
+    this.loading = true;
+    try {
+
+
+      await this.orderService.createOrder2(this.basket, this.basketItems);
+
+      // const paymentResult = await this.confirmPaymentWithStripe(
+      //   this.basket.clientSecret
+      // );
+
+      // if (paymentResult.paymentIntent)
+      // {
+      //   this.basketService.deleteCurrentBasket();
+      //   //const navigationExtras: NavigationExtras = { state: 'createdOrder'}
+      //   this.router.navigate(['checkout/success']);
+      // }
+      // else
+      // {
+      //   this.toastr.error(paymentResult.error.message);
+      // }
+
+      this.loading = false;
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  private async confirmPaymentWithStripe(clientSecret: string) {
+    return this.stripe.confirmCardPayment(clientSecret, {
       payment_method: {
         card: this.cardNumber,
         billing_details: {
-          name: 'Sunny'
+          name: this.paymentForm.get('nameOnCard').value
         }
       }
     });
+  }
+
+  async onDeleteOrder()
+  {
+    await this.orderService.deleteOrder('ncqSLYYsLYheVvzACSwt');
+    console.log("Completed");
+    
   }
 }

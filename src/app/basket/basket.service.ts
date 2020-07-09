@@ -28,7 +28,10 @@ export class BasketService {
 
   tBasket: number;
 
-  constructor(private firestore: AngularFirestore, private helperService: HelperService) {}
+  constructor(
+    private firestore: AngularFirestore,
+    private helperService: HelperService
+  ) {}
 
   setBasket(basket: IBasket) {
     return this.firestore
@@ -51,7 +54,7 @@ export class BasketService {
       .doc(basketItemId)
       .delete();
 
-      this.firestore
+    this.firestore
       .collection('basket')
       .doc(basketId)
       .collection<IBasketItem>('basketItems')
@@ -63,7 +66,7 @@ export class BasketService {
       });
   }
 
-  deleteCurrentBasket(basketItemId: string) {
+  deleteCurrentBasket() {
     const basketId = localStorage.getItem('basket_id');
   }
 
@@ -93,46 +96,52 @@ export class BasketService {
     return of(null);
   }
 
-  addItemToBasketV2(course: ICourse, quantity = 1) {
-    this.getCurrentBasket().subscribe(
-      result => {
-        this.currentBasket = result;
+  // addItemToBasketV2(course: ICourse, quantity = 1) {
+  //   this.getCurrentBasket().subscribe(
+  //     result => {
+  //       this.currentBasket = result;
 
-        if (this.currentBasket == null) {
-          this.currentBasket = this.createBasket();
-        }
+  //       if (this.currentBasket == null) {
+  //         this.currentBasket = this.createBasket();
+  //       }
 
-        const itemsToAdd: IBasketItem = this.mapCourseItemToBasketItem(course);
-        const basketId = localStorage.getItem('basket_id');
-        this.firestore
-          .collection('basket')
-          .doc(basketId)
-          .collection('basketItems')
-          .add(itemsToAdd);
+  //       const itemsToAdd: IBasketItem = this.mapCourseItemToBasketItem(course);
+  //       const basketId = localStorage.getItem('basket_id');
+  //       this.firestore
+  //         .collection('basket')
+  //         .doc(basketId)
+  //         .collection('basketItems')
+  //         .add(itemsToAdd);
 
-        const totalprice = this.currentBasket.totalPrice + course.Price;
-        this.tBasket = totalprice;
+  //       const totalprice = this.currentBasket.totalPrice + course.Price;
+  //       this.tBasket = totalprice;
 
-        console.log('Total Price: ' + totalprice);
+  //       console.log('Total Price: ' + totalprice);
 
-        this.basketTotalSourse.next(totalprice);
-      },
-      error => {
-        console.log('Error');
-      },
-      () => {
-        console.log('Update Basket - product');
-      }
-    );
-  }
+  //       this.basketTotalSourse.next(totalprice);
+  //     },
+  //     error => {
+  //       console.log('Error');
+  //     },
+  //     () => {
+  //       console.log('Update Basket - product');
+  //     }
+  //   );
+  // }
 
   createBasket(): IBasket {
     const basketId = this.firestore.createId();
 
-    var basket = {
+    console.log(
+      ' Current time: basket: ' + this.helperService.getCurrentTime()
+    );
+
+    const basket = {
       createdOn: this.helperService.getCurrentTime(),
       totalPrice: 0
     };
+
+    console.log(' Basket ' + basket.totalPrice);
 
     this.firestore
       .collection('basket')
@@ -189,7 +198,7 @@ export class BasketService {
       this.firestore
         .collection('basket')
         .doc(basketId)
-        .set({ totalPrice: course.Price }, { merge: true });
+        .set({ totalPrice: course.Price, createdOn: this.helperService.getCurrentTime() }, { merge: true });
 
       localStorage.setItem('basket_id', basketId);
     }

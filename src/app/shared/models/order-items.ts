@@ -18,6 +18,7 @@ export interface IMycourses {
   courseDescription?: string;
   status?: string;
   instructorName?: string;
+  isPaid?: boolean;
   pictureUrl?: string;
   startedOn?: string;
   expiresOn?: string;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase';
+import { firestore } from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class HelperService {
 
   getCurrentTime(): firebase.firestore.Timestamp
   {
-    return firebase.firestore.Timestamp.now();
+    return firestore.Timestamp.now();
   }
 
   addDays(date, days): Date {
@@ -22,7 +22,7 @@ export class HelperService {
 
  convertToTimestamp(date: Date): firebase.firestore.Timestamp
  {
-   return firebase.firestore.Timestamp.fromDate(date);
+   return firestore.Timestamp.fromDate(date);
  }
 
  convertToDate(times: firebase.firestore.Timestamp): Date

@@ -55,8 +55,6 @@ export class OrderService {
         .set(order);
 
       basketItems.forEach((item: IBasketItem) => {
-       
-
         const orderItem: IOrderItem = {
           courseId: item.courseId,
           userId: token,
@@ -92,4 +90,100 @@ export class OrderService {
       //if payment succeded, then move order to user profile
     });
   }
+
+  getBasketAndItems(): Observable<[IBasket, IBasketItem[]]> {
+    const basketId = localStorage.getItem('basket_id');
+
+    const basket = this.firestore
+      .collection('basket')
+      .doc<IBasket>(basketId)
+      .valueChanges();
+
+    const basketItems = this.firestore
+      .collection('basket')
+      .doc(basketId)
+      .collection<IBasketItem>('basketItems')
+      .valueChanges();
+
+    return combineLatest(basket, basketItems);
+  }
+
+  async createOrder2(basket: IBasket, basketItems: IBasketItem[]) {
+    const token = localStorage.getItem('token');
+    const orderId = basket.paymentIntentId;
+
+    const order: IOrder = {
+      userId: token,
+      createdOn: this.helperService.getCurrentTime(),
+      paymentIntentId: basket.paymentIntentId,
+      totalPrice: basket.totalPrice,
+      currency: 'GBP' // basket.currency
+    };
+
+    this.firestore
+      .collection('order')
+      .doc(orderId)
+      .set(order);
+
+    await this.deleteOrder(orderId);
+
+    basketItems.forEach((item: IBasketItem) => {
+      const orderItem: IOrderItem = {
+        courseId: item.courseId,
+        userId: token,
+        courseTitle: item.courseTitle,
+        price: item.price,
+        pictureUrl: item.pictureUrl,
+        instructorName: item.instructorName
+      };
+
+      this.firestore
+        .collection('order')
+        .doc(orderId)
+        .collection('orderItems')
+        .add(orderItem);
+
+      const myCourses: IMycourses = {
+        courseId: orderItem.courseId,
+        courseName: orderItem.courseTitle,
+        pictureUrl: item.pictureUrl,
+        instructorName: item.instructorName,
+        isPaid: false
+      };
+
+      this.firestore
+        .collection('userProfile')
+        .doc(token)
+        .collection('mycourses')
+        .add(myCourses);
+
+    });
+  }
+
+  async deleteOrder(orderId: string) {
+    const snapshot = await this.firestore
+      .collection('order')
+      .doc(orderId)
+      .collection('orderItems')
+      .get()
+      .toPromise();
+
+    const batchSize = snapshot.size;
+    console.log("Batch Size" + batchSize);
+    
+    if (batchSize === 0) {
+          return;
+    }
+
+    const batch = this.firestore.firestore.batch();
+    snapshot.docs.forEach(doc => {
+      console.log("Doc ref: " + doc.ref);
+      
+      batch.delete(doc.ref);
+    });
+
+    await batch.commit();
+  }
+
+  submitPayment() {}
 }
