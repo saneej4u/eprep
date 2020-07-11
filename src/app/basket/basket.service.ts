@@ -234,7 +234,7 @@ export class BasketService {
       this.firestore
         .collection('basket')
         .doc(basketId)
-        .set({ totalPrice: subtotal }, { merge: true });
+        .set({ totalPrice: subtotal, isPaymentIntent: true }, { merge: true });
     }
   }
 

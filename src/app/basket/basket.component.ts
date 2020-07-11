@@ -34,12 +34,7 @@ export class BasketComponent implements OnInit {
   }
 
   onCheckout()
-  {
-    const basket = this.basket;
-    basket.isPaymentIntent = true; 
-    
-    this.basketService.updateBasket(basket);
-    
+  {    
     this.router.navigate(['/checkout']);
   }
 
