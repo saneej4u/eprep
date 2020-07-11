@@ -38,11 +38,17 @@
                             </div>
                         </div>
                         <div class="row">
-                                <div class="col-md-12 mt-4 clearfix">
-                                        <a class="btn btn-secondary btn-md text-uppercase text-white float-left text-center"
-                                        [routerLink]="['/shop']" routerLinkActive="router-link-active" > <i class="fa fa-shopping-cart mr-3" aria-hidden="true"></i> Continue shopping</a>
+                            <div class="col-md-5 mt-4">
+                                    <a class="btn btn-block btn-secondary btn-lg text-uppercase text-white text-center"
+                                    [routerLink]="['/shop']" routerLinkActive="router-link-active" > <i class="fa fa-shopping-cart mr-3" aria-hidden="true"></i> Continue shopping</a>
 
-                                    <a class="btn btn-dark btn-md text-uppercase text-white float-right text-center w-25"
+                            </div>
+                            <div class="col-md-2">
+
+                            </div>
+                                <div class="col-md-5 mt-4">
+                                       
+                                    <a class="btn btn-block btn-dark btn-lg text-uppercase text-white text-center"
                                         (click)='onCheckout()'><i class="fa fa-credit-card-alt mr-3" aria-hidden="true"></i> Checkout</a>
                                 </div>
                             </div>

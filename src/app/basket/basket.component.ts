@@ -36,7 +36,7 @@ export class BasketComponent implements OnInit {
   onCheckout()
   {
     const basket = this.basket;
-    basket.isPaymentIntent = false; //TODO: revert to true;
+    basket.isPaymentIntent = true; //TODO: revert to true;
     
     this.basketService.updateBasket(basket);
     

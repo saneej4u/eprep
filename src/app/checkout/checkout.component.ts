@@ -61,7 +61,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
             totalPrice: basket.payment.amount,
             currency: basket.currency,
             clientSecret: basket.payment.client_secret,
-            paymentIntentId: basket.payment.client_secret,
+            paymentIntentId: basket.payment.id,
             isPaymentIntent: true
           };
         })
@@ -73,14 +73,14 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
         error => {}
       );
 
-    this.basketService.getCurrentBasket().subscribe(
-      basket => {
-        this.basket = basket;
-      },
-      error => {
-        console.log('Basket error: ' + error);
-      }
-    );
+    // this.basketService.getCurrentBasket().subscribe(
+    //   basket => {
+    //     this.basket = basket;
+    //   },
+    //   error => {
+    //     console.log('Basket error: ' + error);
+    //   }
+    // );
 
     this.basketService.getBasketItems().subscribe(
       (items: IBasketItem[]) => {
@@ -166,20 +166,20 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
 
       await this.orderService.createOrder2(this.basket, this.basketItems);
 
-      // const paymentResult = await this.confirmPaymentWithStripe(
-      //   this.basket.clientSecret
-      // );
+      const paymentResult = await this.confirmPaymentWithStripe(
+        this.basket.clientSecret
+      );
 
-      // if (paymentResult.paymentIntent)
-      // {
-      //   this.basketService.deleteCurrentBasket();
-      //   //const navigationExtras: NavigationExtras = { state: 'createdOrder'}
-      //   this.router.navigate(['checkout/success']);
-      // }
-      // else
-      // {
-      //   this.toastr.error(paymentResult.error.message);
-      // }
+      if (paymentResult.paymentIntent && paymentResult.paymentIntent.status === 'succeeded')
+      {
+        this.basketService.deleteCurrentBasket();
+        //const navigationExtras: NavigationExtras = { state: 'createdOrder'}
+        this.router.navigate(['checkout/success']);
+      }
+      else
+      {
+        this.toastr.error(paymentResult.error.message);
+      }
 
       this.loading = false;
     }
