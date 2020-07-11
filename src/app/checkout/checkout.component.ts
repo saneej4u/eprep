@@ -58,7 +58,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(
         map(basket => {
           return {
-            totalPrice: basket.payment.amount,
+            totalPrice: basket.totalPrice,
             currency: basket.currency,
             clientSecret: basket.payment.client_secret,
             paymentIntentId: basket.payment.id,

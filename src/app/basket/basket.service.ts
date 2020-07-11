@@ -67,7 +67,8 @@ export class BasketService {
   }
 
   deleteCurrentBasket() {
-    const basketId = localStorage.getItem('basket_id');
+    this.basketCountSource$.next(0);
+    localStorage.removeItem('basket_id');
   }
 
   getCurrentBasket(): Observable<any> {
