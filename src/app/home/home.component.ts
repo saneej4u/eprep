@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ShopService } from '../shop/shop.service';
 import { ICourse } from '../shared/models/course';
 import { map } from 'rxjs/operators';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-home',
@@ -78,4 +79,17 @@ export class HomeComponent implements OnInit {
 
     this.shopService.updateCourse(course);
   }
+
+
+
+  @ViewChild('sidenav') sidenav: MatSidenav;
+
+  reason = '';
+
+  close(reason: string) {
+    this.reason = reason;
+    this.sidenav.close();
+  }
+
+  
 }

@@ -18,6 +18,10 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { SortableModule } from 'ngx-bootstrap/sortable';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {LayoutModule} from '@angular/cdk/layout';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -39,6 +43,10 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule,
     CdkStepperModule,
     FileUploadModule,
+    MatSidenavModule,
+    LayoutModule,
+    MatDividerModule,
+    MatListModule,
     SortableModule.forRoot(),
     TabsModule.forRoot(),
     ToastrModule.forRoot({
@@ -63,7 +71,11 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     SortableModule,
     TabsModule,
     VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule,
-    TooltipModule
+    TooltipModule,
+    MatSidenavModule,
+    LayoutModule,
+    MatDividerModule,
+    MatListModule
   ]
 })
 export class SharedModule { }

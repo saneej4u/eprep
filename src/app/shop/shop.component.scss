@@ -40,3 +40,31 @@ width: 50%;
         border-radius: 10px;
     }
 }
+
+
+
+.example-container {
+    position: absolute;
+    top: 80px;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+  }
+  
+  .example-sidenav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:380px;
+  }
+  
+ 
+   .mobile-width
+   {
+       width: 380px;
+   }
+
+   .desktop-width{
+       width: 600px;
+   }
+  

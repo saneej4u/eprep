@@ -1,71 +1,53 @@
-<div class="container mt-5">
 
-    <div class="row">
-        <div class="col-md-12 mb-5">
-            <span class="badge badge-pill badge-dark mr-3 px-4 py-3">Sort by </span>
-            <span class="badge badge-pill badge-secondary mr-3 px-4 py-3">Filters </span>
-        </div>
-    </div>
-    <div class="row">
-        <!-- <section class="col-md-2">
-            <ng-container *ngIf="true">
 
-                <h5 class="text-dark">Category</h5>
-                <div class="list-group my-3">
-                    <div class="custom-control custom-checkbox  mb-2">
-                        <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-                        <label class="custom-control-label" for="customCheck">Dental</label>
-                    </div>
-                    <div class="custom-control custom-checkbox  mb-2">
-                        <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-                        <label class="custom-control-label" for="customCheck">Medicine</label>
+
+<mat-sidenav-container class="example-container">
+<mat-sidenav #sidenav mode="over" [ngClass]="{cssClass: width}" class="example-sidenav bg-dark"
+                     [fixedInViewport]='false' [fixedTopGap]="0"
+                     [fixedBottomGap]="0">
+
+                     <div class="d-flex justify-content-between mb-4 py-3">
+                         <div class=""></div>
+                            <i class="fa fa-times-circle-o fa-2x m-2 p-2 float-right text-white mt-3" aria-hidden="true"
+                                (click)='sidenav.toggle()'></i>
+                                
+                    
+                    
+                        </div>
+                        <mat-list >
+                                <mat-list-item class="text-white">Item 1</mat-list-item>
+                                <mat-divider class="text-white"></mat-divider>
+                                <mat-list-item class="text-white">Item 2</mat-list-item>
+                                <mat-divider class="text-white"></mat-divider>
+                                <mat-list-item class="text-white">Item 3</mat-list-item>
+                              </mat-list>
+
+                  
+        
+    
+        </mat-sidenav>
+    
+        <mat-sidenav-content>
+      
+     
+
+          <div class="container mt-5 pt-3">
+
+                <div class="row">
+                    <div class="col-md-12 mb-5">
+                        <span class="badge badge-pill badge-dark mr-3 px-4 py-3">Sort by </span>
+                        <span class="badge badge-pill badge-secondary mr-3 px-4 py-3" (click)='sidenav.toggle()' >Filters </span>
                     </div>
                 </div>
-                <h5 class="text-dark">Filter</h5>
-                <div class="my-3">
-                    <div>
-                        <div class="custom-control custom-checkbox mb-2">
-                            <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-                            <label class="custom-control-label" for="customCheck">ORE Part 1</label>
+                <div class="row">
+                    <section class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3 mb-4" *ngFor="let course of courses;let index=index">
+                                <app-course-item [course]="course"></app-course-item>
+                            </div>
                         </div>
-                        <div class="custom-control custom-checkbox  mb-2">
-                            <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-                            <label class="custom-control-label" for="customCheck">ORE Part 2</label>
-                        </div>
-                        <div class="custom-control custom-checkbox  mb-2">
-                            <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-                            <label class="custom-control-label" for="customCheck">LDS Part 1</label>
-                        </div>
-                        <div class="custom-control custom-checkbox  mb-2">
-                            <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-                            <label class="custom-control-label" for="customCheck">LDS Part 2</label>
-                        </div>
-                        <div class="custom-control custom-checkbox  mb-2">
-                            <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-                            <label class="custom-control-label" for="customCheck">MJDF 1</label>
-                        </div>
-                    </div>
-
-                </div>
-            </ng-container>
-        </section> -->
-        <section class="col-md-12">
-            <div class="row">
-                <div class="col-md-3 mb-4" *ngFor="let course of courses;let index=index">
-                    <app-course-item [course]="course"></app-course-item>
+                    </section>
                 </div>
             </div>
-        </section>
-    </div>
-</div>
-
-
-<!-- 
-    <div class="row">
-            <carousel *ngIf="courses"  [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]=false [showIndicators]=true [noWrap]=true
-                [interval]="false" [startFromIndex]="1">
-                <slide class="card h-100 shadow-sm ml-3" *ngFor="let course of courses;let index=index">
-                    <app-course-item [course]="course"></app-course-item>
-                </slide>
-            </carousel>
-        </div> -->
+        </mat-sidenav-content>
+      </mat-sidenav-container>

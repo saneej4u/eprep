@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShopService } from './shop.service';
 import {ICourse} from '../shared/models/course';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-shop',
@@ -12,8 +13,24 @@ export class ShopComponent implements OnInit {
   courses: ICourse[];
   itemsPerSlide = 4;
   title = 'Wecome to  Novus';
+  width: string;
 
-  constructor(private shopService: ShopService) { }
+  constructor(private shopService: ShopService, breakpointObserver: BreakpointObserver) {
+
+    breakpointObserver.observe([
+      Breakpoints.HandsetLandscape,
+      Breakpoints.HandsetPortrait
+    ]).subscribe(result => {
+      if (result.matches) {
+        console.log("Mobile");
+      }
+      else
+      {
+        console.log("Desktop");
+      }
+    });
+
+   }
 
   ngOnInit(): void {
     this.shopService.getCourses().subscribe(result => {
