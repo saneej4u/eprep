@@ -194,9 +194,12 @@ export class BasketService {
   addItemToBasket(course: ICourse, quantity = 1) {
     let basketId = localStorage.getItem('basket_id');
 
+    console.log("Local stotrage baket ID: " + basketId);
+
     if (basketId == null) {
       basketId = this.firestore.createId();
-
+     console.log("New baket ID: " + basketId);
+     
       this.firestore
         .collection('basket')
         .doc(basketId)
@@ -207,11 +210,15 @@ export class BasketService {
 
     const itemsToAdd: IBasketItem = this.mapCourseItemToBasketItem(course);
 
+   
+      console.log("itemsToAdd : " + JSON.stringify(itemsToAdd));
+
     this.firestore
       .collection('basket')
       .doc(basketId)
       .collection('basketItems')
       .add(itemsToAdd);
+
 
     this.firestore
       .collection('basket')
