@@ -16,6 +16,7 @@ export class CourseDetailsComponent implements OnInit {
   course: ICourse;
   courseSections: ICourseSection[];
   courseContents: ICourseContent[];
+  courseContentsNew: ICourseContent[];
   curiculam: any;
   modalRef: BsModalRef;
 
@@ -23,12 +24,13 @@ export class CourseDetailsComponent implements OnInit {
     private shopService: ShopService,
     private activateRoute: ActivatedRoute,
     private modalService: BsModalService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadCourse();
-    this.loadCourseSection();
-    this.loadSubCollection();
+    this.loadCourseContentNew();
+    //this.loadCourseSection();
+    //this.loadSubCollection();
   }
 
   loadCourse() {
@@ -59,8 +61,16 @@ export class CourseDetailsComponent implements OnInit {
       );
   }
 
-  loadSubCollection()
-  {
+  loadCourseContentNew() {
+
+    this.shopService.getCourseContentsByCourseId(this.activateRoute.snapshot.paramMap.get('id')).subscribe((contents: ICourseContent[]) => {
+      this.courseContentsNew = contents;
+    }, (error) => {
+
+    });
+  }
+
+  loadSubCollection() {
     this.shopService.loadSubCollectionWithDocument().subscribe(result => {
       this.curiculam = result;
       console.log("curiculam: " + JSON.stringify(this.curiculam));
@@ -71,14 +81,14 @@ export class CourseDetailsComponent implements OnInit {
   //   this.modalRef = this.modalService.show(template);
   // }
 
-  openModal() {
-    this.modalRef = this.modalService.show(VideoModalComponent,  {
+  openModal(content: ICourseContent) {
+    this.modalRef = this.modalService.show(VideoModalComponent, {
       initialState: {
-        title: 'Sample Course by Fathima',
-        data: {}
+        title: this.course.Title,
+        data: {content}
       },
       class: 'modal-lg'
     });
   }
-  
+
 }

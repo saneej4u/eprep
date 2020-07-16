@@ -1,10 +1,21 @@
-<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+<div class="jumbotron my-3 p-md-5 text-white rounded bg-dark">
   <div class="container">
-    <div class="col-md-8 px-0">
-      <h1 class="display-5"> {{course?.Title}} </h1>
-      <h3>{{course?.SubTitle}}</h3>
-      <p class="lead my-3">{{course?.Description}} </p>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="shadow-lg p-3 mb-5 bg-white rounded">
+          <img class="img-fluid" src="{{course?.Thumbnail}}" alt="{{course?.Title}}">
+        </div>
+        
+      </div>
+      <div class="col-md-8">
+        <h1 class="font-bold"> {{course?.Title}} </h1>
+        <h3 class="lead my-3">{{course?.Description}} </h3>
+        <p>Created by <span class="text-warning"> {{course?.InstructorName}}</span></p>
+        <p>Created On <span class="text-warning">{{course?.CreatedOn.toDate()}}</span> </p>
+        <p class="badge badge-success p-2" >Available for {{course?.RentInDays}} days</p>
+      </div>
     </div>
+
   </div>
 
 </div>
@@ -12,18 +23,32 @@
 <div class="container">
   <h3>Course content</h3>
 
-  <!-- <div class="row">
-    <div class="col-md-12">
-      <ul *ngFor="let section of courseSections">
-        <li>{{section?.Title}} - {{course.Description}}</li>
-      </ul>
-    </div>
-  </div> -->
 
   <div class="row">
     <div class="col-md-8">
 
-      <accordion>
+        <table class="table">
+            <tbody>
+              <tr *ngFor="let content of courseContentsNew">
+                <td>
+                  <div class="d-flex justify-content-between text-primary font-weight-bold small" style="cursor: pointer" (click)="openModal(content)">
+
+                    <div>
+                      <i class="fa fa-play-circle pr-2" aria-hidden="true"></i> {{content?.Title}}
+                    </div>
+                    <div>
+                      Preview
+                    </div>
+                  </div>
+
+
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+
+      <!-- <accordion>
         <accordion-group *ngFor="let section of curiculam">
           <button class="btn btn-link btn-block clearfix" accordion-heading type="button">
             <div class="pull-left float-left text-dark font-weight-bold">{{section?.Title}}</div>
@@ -33,24 +58,24 @@
             <tbody>
               <tr *ngFor="let res of section.courseContents">
                 <td>
-                  <div class="d-flex justify-content-between text-primary font-weight-bold small" style="cursor: pointer"  (click)="openModal()">
-                    
+                  <div class="d-flex justify-content-between text-primary font-weight-bold small" style="cursor: pointer" (click)="openModal()">
+
                     <div>
-                        <i class="fa fa-play-circle pr-2" aria-hidden="true"></i> {{res?.SubTitle}}
+                      <i class="fa fa-play-circle pr-2" aria-hidden="true"></i> {{res?.SubTitle}}
                     </div>
                     <div>
-                        Preview
+                      Preview
                     </div>
                   </div>
-                   
-                  
-                  </td>
-  
+
+
+                </td>
+
               </tr>
             </tbody>
           </table>
         </accordion-group>
-      </accordion>
+      </accordion> -->
     </div>
     <div class="col-md-4">
       <div class="card p-3 bg-light">
