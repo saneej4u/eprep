@@ -5,22 +5,27 @@
 <mat-sidenav-container class="example-container" (backdropClick)="close('backdrop')">
     <mat-sidenav #sidenav (keydown.escape)="close('escape')" style="width:100%;" class="bg-dark" disableClose>
     
-        <div class="d-flex justify-content-between mb-4 py-3 bg-white">
+        <div class="d-flex justify-content-between mb-4 py-3 bg-white" *ngIf="false">
             <!-- <div class="mt-3">
                    <h1 class="text-dark px-4 uppercase">Novus</h1>
             </div> -->
             <img src="/assets/images/logo.png" class="logo d-block d-sm-none" alt="E-Prep" [routerLink]="['/']"
                 routerLinkActive="router-link-active" />
-            <i class="fa fa-times-circle-o fa-2x m-2 p-2 float-right text-dark mt-3" aria-hidden="true"
+            <i class="fa fa-times fa-2x m-2 p-2 float-right text-dark mt-3" aria-hidden="true"
                 (click)="close('toggle button')"></i>
     
     
         </div>
-    
+        <div class="d-flex justify-content-between mb-2 py-2 bg-dark">
+ 
+               <div></div>
+                <i class="fa fa-times fa-2x m-2 p-2 float-right text-white mt-3" aria-hidden="true"
+                    (click)="close('toggle button')"></i>
+            </div>
         <div class="d-flex flex-column text-white">
-            <div class="p-2 px-4"><h4 class="text-center"> Home  </h4></div>
-            <div class="p-2 px-4 text-center"><h4> Courses  </h4></div>
-            <div class="p-2 px-4 text-center"><h4> Teach  </h4></div>
+            <div class="p-2 px-4 text-center"><h4 (click)='onHomeClicked()'> Home  </h4></div>
+            <div class="p-2 px-4 text-center"><h4 (click)="onCourseClicked()"> Courses </h4></div>
+            <div class="p-2 px-4 text-center"><h4 (click)="onTeachClicked()"> Teach  </h4></div>
             <div class="p-2 px-4 text-center"><h4> Instructor  </h4></div>
             <div class="p-2 px-4 text-center"><h4> Log In  </h4></div>
             <div class="p-2 px-4 text-center"><h4> Sign In  </h4></div>

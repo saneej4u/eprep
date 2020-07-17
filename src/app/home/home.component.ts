@@ -3,6 +3,7 @@ import { ShopService } from '../shop/shop.service';
 import { ICourse } from '../shared/models/course';
 import { map } from 'rxjs/operators';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
   allCourses: ICourse[];
   selectedCourse: ICourse;
   itemsPerSlide = 4;
-  constructor(private shopService: ShopService) {}
+  constructor(private shopService: ShopService, private router: Router) {}
 
   ngOnInit(): void {
     //this.addCourse();
@@ -91,5 +92,22 @@ export class HomeComponent implements OnInit {
     this.sidenav.close();
   }
 
+  onHomeClicked()
+  {
+    this.router.navigate(['/']);
+    this.sidenav.close();
+  }
+
+  onCourseClicked()
+  {
+    this.router.navigate(['/shop']);
+    this.sidenav.close();
+  }
+
+  onTeachClicked()
+  {
+    this.router.navigate(['teach/instructor']);
+    this.sidenav.close();
+  }
   
 }

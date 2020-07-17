@@ -1,53 +1,52 @@
-
-
-
 <mat-sidenav-container class="example-container">
-<mat-sidenav #sidenav mode="over" [ngClass]="{cssClass: width}" class="example-sidenav bg-dark"
-                     [fixedInViewport]='false' [fixedTopGap]="0"
-                     [fixedBottomGap]="0">
+    <mat-sidenav #sidenav mode="over" [ngClass]="{cssClass: width}" class="example-sidenav bg-white text-dark p-4"
+        [fixedInViewport]='false' [fixedTopGap]="0" [fixedBottomGap]="0">
 
-                     <div class="d-flex justify-content-between mb-4 py-3">
-                         <div class=""></div>
-                            <i class="fa fa-times-circle-o fa-2x m-2 p-2 float-right text-white mt-3" aria-hidden="true"
-                                (click)='sidenav.toggle()'></i>
-                                
-                    
-                    
-                        </div>
-                        <mat-list >
-                                <mat-list-item class="text-white">Item 1</mat-list-item>
-                                <mat-divider class="text-white"></mat-divider>
-                                <mat-list-item class="text-white">Item 2</mat-list-item>
-                                <mat-divider class="text-white"></mat-divider>
-                                <mat-list-item class="text-white">Item 3</mat-list-item>
-                              </mat-list>
+        <div class="d-flex justify-content-between mb-4 py-3">
+            <div class=""></div>
+            <i class="fa fa-times fa-2x m-2 p-2 float-right text-dark mt-3" aria-hidden="true"
+                (click)='sidenav.toggle()'></i>
+        </div>
 
-                  
-        
-    
-        </mat-sidenav>
-    
-        <mat-sidenav-content>
-      
-     
+        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+            <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                {{season}}
+            </mat-radio-button>
+        </mat-radio-group>
+        <mat-list role="list">
+            <mat-divider class="text-secondary"></mat-divider>
+            <mat-list-item role="listitem">
+                <mat-checkbox class="example-margin text-dark" [labelPosition]="'after'">LDS Part 1</mat-checkbox>
+            </mat-list-item>
+            <mat-list-item role="listitem">
+                <mat-checkbox class="example-margin text-dark" [labelPosition]="'after'">LDS Part 1</mat-checkbox>
+            </mat-list-item>
+        </mat-list>
 
-          <div class="container mt-5 pt-3">
+    </mat-sidenav>
 
-                <div class="row">
-                    <div class="col-md-12 mb-5">
-                        <span class="badge badge-pill badge-dark mr-3 px-4 py-3">Sort by </span>
-                        <span class="badge badge-pill badge-secondary mr-3 px-4 py-3" (click)='sidenav.toggle()' >Filters </span>
-                    </div>
-                </div>
-                <div class="row">
-                    <section class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-3 mb-4" *ngFor="let course of courses;let index=index">
-                                <app-course-item [course]="course"></app-course-item>
-                            </div>
-                        </div>
-                    </section>
+    <mat-sidenav-content>
+
+
+
+        <div class="container mt-5 pt-3">
+
+            <div class="row">
+                <div class="col-md-12 mb-5">
+                    <span class="badge badge-pill badge-dark mr-3 px-4 py-3">Sort by </span>
+                    <span class="badge badge-pill badge-secondary mr-3 px-4 py-3" (click)='sidenav.toggle()'>Filters
+                    </span>
                 </div>
             </div>
-        </mat-sidenav-content>
-      </mat-sidenav-container>
+            <div class="row">
+                <section class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-3 mb-4" *ngFor="let course of courses;let index=index">
+                            <app-course-item [course]="course"></app-course-item>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

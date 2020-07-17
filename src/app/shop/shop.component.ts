@@ -14,6 +14,7 @@ export class ShopComponent implements OnInit {
   itemsPerSlide = 4;
   title = 'Wecome to  Novus';
   width: string;
+  seasons: string[] = ['ORE', 'LDS', 'MJDF'];
 
   constructor(private shopService: ShopService, breakpointObserver: BreakpointObserver) {
 

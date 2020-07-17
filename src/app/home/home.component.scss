@@ -13,4 +13,19 @@
       outline: none;
     }
   }
+
+
+
+a {
+  color: #343840;
+  text-decoration: none;
+
+  &.active {
+    color: white;
+  }
+}
+
+a:hover {
+  text-decoration: none;
+}
   

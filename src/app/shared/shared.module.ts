@@ -22,6 +22,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {LayoutModule} from '@angular/cdk/layout';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -47,6 +50,9 @@ import {MatListModule} from '@angular/material/list';
     LayoutModule,
     MatDividerModule,
     MatListModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatButtonModule,
     SortableModule.forRoot(),
     TabsModule.forRoot(),
     ToastrModule.forRoot({
@@ -75,7 +81,10 @@ import {MatListModule} from '@angular/material/list';
     MatSidenavModule,
     LayoutModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatButtonModule
   ]
 })
 export class SharedModule { }
