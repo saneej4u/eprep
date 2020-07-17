@@ -1,13 +1,13 @@
 <div class="jumbotron my-3 p-md-5 text-white rounded bg-dark">
   <div class="container">
     <div class="row">
-      <div class="col-md-4">
+      <!-- <div class="col-md-4">
         <div class="shadow-lg p-3 mb-5 bg-white rounded">
           <img class="img-fluid" src="{{course?.Thumbnail}}" alt="{{course?.Title}}">
         </div>
         
-      </div>
-      <div class="col-md-8">
+      </div> -->
+      <div class="col-md-12">
         <h1 class="font-bold"> {{course?.Title}} </h1>
         <h3 class="lead my-3">{{course?.Description}} </h3>
         <p>Created by <span class="text-warning"> {{course?.InstructorName}}</span></p>
@@ -34,7 +34,7 @@
         <table class="table">
             <tbody>
               <tr *ngFor="let content of courseContentsNew">
-                <td>
+                <td *ngIf="content.IsPreview; else elseBlock">
                   <div class="d-flex justify-content-between text-primary font-weight-bold small" style="cursor: pointer" (click)="openModal(content)">
 
                     <div class="text-dark">
@@ -47,6 +47,23 @@
 
 
                 </td>
+
+
+                  <ng-template #elseBlock>
+                      <td>
+                          <div class="d-flex justify-content-between text-secondary font-weight-bold small" style="cursor: pointer">
+        
+                            <div class="text-secondary">
+                              <i class="fa fa-play-circle pr-2 text-secondary" aria-hidden="true"></i> {{content?.Title}}
+                            </div>
+                            <div>
+                              <span  class="text-secondary"><i class="fa fa-lock" aria-hidden="true"></i></span> 
+                            </div>
+                          </div>
+        
+        
+                        </td>
+                  </ng-template>
 
               </tr>
             </tbody>
@@ -82,6 +99,10 @@
       </accordion> -->
     </div>
     <div class="col-md-4">
+        <div class="shadow-lg bg-white rounded">
+            <img class="img-fluid" src="{{course?.Thumbnail}}" alt="{{course?.Title}}">
+          </div>
+
       <div class="card p-3 bg-light">
         <h2 class="text-dark text-center">{{course?.Price | currency: 'GBP'}}</h2>
         
