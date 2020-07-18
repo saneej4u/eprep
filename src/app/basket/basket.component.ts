@@ -4,6 +4,7 @@ import { BasketService } from './basket.service';
 import { Router } from '@angular/router';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import { delay } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-basket',
@@ -15,7 +16,7 @@ export class BasketComponent implements OnInit {
   basket: IBasket;
   isMobile: boolean;
 
-  constructor(private basketService: BasketService, private router: Router, private breakpointObserver: BreakpointObserver) {}
+  constructor(private basketService: BasketService, private router: Router, private breakpointObserver: BreakpointObserver,  private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
 
@@ -64,5 +65,8 @@ export class BasketComponent implements OnInit {
   onRemoveBasketItem(basketItemId: string)
   {    
     this.basketService.deleteBasketItem(basketItemId);
+    this.snackBar.open('Course removed from the basket','Dismiss', {
+      duration: 2000,
+    });
   }
 }

@@ -6,6 +6,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { BasketService } from '../basket/basket.service';
 import { AccountService } from '../account/account.service';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-home',
@@ -17,11 +18,13 @@ export class HomeComponent implements OnInit {
   selectedCourse: ICourse;
   itemsPerSlide = 4;
   basketItemsCount: number;
+  isMobile: boolean;
   
   constructor(private shopService: ShopService, 
     private router: Router,
     private accoutService: AccountService,
-    private basketService: BasketService) {}
+    private basketService: BasketService,
+    private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit(): void {
     //this.addCourse();
@@ -41,6 +44,19 @@ export class HomeComponent implements OnInit {
         console.log('error');
       }
     );
+
+    this.breakpointObserver.observe([
+      Breakpoints.HandsetLandscape,
+      Breakpoints.HandsetPortrait
+    ]).subscribe(result => {
+      if (result.matches) {
+        this.isMobile = true;
+      }
+      else
+      {
+        this.isMobile = false;
+      }
+    });
 
   }
 

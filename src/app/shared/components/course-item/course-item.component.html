@@ -3,8 +3,8 @@
         <img src="{{course?.Thumbnail}}" alt="{{course.Title}}" class="img-fluid bg-info"
             style="width: 100%; min-height: 180px; height:180px">
         <div class="d-flex align-items-center justify-content-center hover-overlay">
-            <button (click)="addItemToBasket()" type="button" class="btn btn-dark fa fa-shopping-cart mr-2"></button>
-            <button routerLink="/shop/{{course?.Id}}" type="button" class="btn btn-dark">View</button>
+            <button matRipple  [matRippleCentered]="true" (click)="addItemToBasket()" type="button" class="btn btn-dark fa fa-shopping-cart mr-2"></button>
+            <button matRipple  [matRippleCentered]="true" routerLink="/shop/{{course?.Id}}" type="button" class="btn btn-dark">View</button>
         </div>
     </div>
 

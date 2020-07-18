@@ -1,58 +1,69 @@
-
-
-
-
 <mat-sidenav-container class="example-container" (backdropClick)="close('backdrop')">
     <mat-sidenav #sidenav (keydown.escape)="close('escape')" style="width:100%;" class="bg-dark" disableClose>
-    
+
         <div class="d-flex justify-content-between mb-4 py-3 bg-white" *ngIf="false">
             <!-- <div class="mt-3">
                    <h1 class="text-dark px-4 uppercase">Novus</h1>
             </div> -->
-            <img src="/assets/images/logo.png" class="logo d-block d-sm-none" alt="E-Prep" [routerLink]="['/']"
-                routerLinkActive="router-link-active" />
-            <i class="fa fa-times fa-2x m-2 p-2 float-right text-dark mt-3" aria-hidden="true"
-                (click)="close('toggle button')"></i>
-    
-    
+            <img src="/assets/images/logo.png" class="logo d-block d-sm-none" alt="E-Prep" [routerLink]="['/']" routerLinkActive="router-link-active"
+            />
+            <i class="fa fa-times fa-2x m-2 p-2 float-right text-dark mt-3" aria-hidden="true" (click)="close('toggle button')"></i>
+
+
         </div>
         <div class="d-flex justify-content-between mb-2 py-2 bg-dark">
- 
-               <div></div>
-                <i class="fa fa-times fa-2x m-2 p-2 float-right text-white mt-3" aria-hidden="true"
-                    (click)="close('toggle button')"></i>
-            </div>
+
+            <div></div>
+            <i class="fa fa-times fa-2x m-2 p-2 float-right text-white mt-3" aria-hidden="true" (click)="close('toggle button')"></i>
+        </div>
         <div class="d-flex flex-column text-white">
-            <div class="p-2 px-4 text-center"><h4 (click)='onHomeClicked()'> Home  </h4></div>
-            <div class="p-2 px-4 text-center"><h4 (click)="onCourseClicked()"> Courses </h4></div>
-            <div class="p-2 px-4 text-center"><h4 (click)="onTeachClicked()"> Teach  </h4></div>
-            <div class="p-2 px-4 text-center"><h4 (click)='onSignInClicked()'> Log In  </h4></div>
-            <div class="p-2 px-4 text-center"><h4 (click)='onSignUpClicked()'> Sign Up  </h4></div>
-            
-        
+            <div class="p-2 px-4 text-center">
+                <h4 (click)='onHomeClicked()'> Home </h4>
+            </div>
+            <div class="p-2 px-4 text-center">
+                <h4 (click)="onCourseClicked()"> Courses </h4>
+            </div>
+            <div class="p-2 px-4 text-center">
+                <h4 (click)="onTeachClicked()"> Teach </h4>
+            </div>
+            <div class="p-2 px-4 text-center">
+                <h4 (click)='onSignInClicked()'> Log In </h4>
+            </div>
+            <div class="p-2 px-4 text-center">
+                <h4 (click)='onSignUpClicked()'> Sign Up </h4>
+            </div>
+
+
         </div>
     </mat-sidenav>
 
     <mat-sidenav-content>
         <app-nav-bar></app-nav-bar>
 
-        <div
-            class="d-flex justify-content-around align-items-center bg-white border-bottom py-3 shadow-sm fixed-top d-block d-sm-none">
+        <div class="d-flex justify-content-around align-items-center bg-white border-bottom py-3 shadow-sm fixed-top d-block d-sm-none">
+            <!-- <button mat-icon-button (click)="sidenav.open()" class="logo" aria-label="Example icon-button with a menu">
+                <i class="fa fa-bars fa-2x" aria-hidden="true" (click)="sidenav.open()"></i>
+              </button> -->
             <i class="fa fa-bars fa-2x" aria-hidden="true" (click)="sidenav.open()"></i>
-            <img src="/assets/images/logo.png" class="logo d-block d-sm-none" alt="E-Prep" [routerLink]="['/']"
+            <img src="/assets/images/logo.png" class="logo d-block d-sm-none" style="height:60px;" alt="E-Prep" [routerLink]="['/']"
                 routerLinkActive="router-link-active" />
-  
+
             <a class="position-relative" routerLink='/basket'>
                 <i class="fa fa-shopping-cart fa-2x mr-4 text-dark"></i>
-              <div *ngIf="basketItemsCount" class="cart-no">{{basketItemsCount}}</div>
-              </a>
+                <div *ngIf="basketItemsCount" class="cart-no">{{basketItemsCount}}</div>
+            </a>
 
         </div>
 
-        <div style="padding-top: 6rem;">
+
+        <div *ngIf="isMobile; else desktop" style="padding-top: 4.8rem;">
             <router-outlet></router-outlet>
         </div>
-
+        <ng-template #desktop>
+            <div style="padding-top: 6rem;">
+                <router-outlet></router-outlet>
+            </div>
+        </ng-template>
 
     </mat-sidenav-content>
 </mat-sidenav-container>

@@ -7,7 +7,7 @@ import { ICourseContent } from 'src/app/shared/models/course-content';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { VideoModalComponent } from 'src/app/shared/components/video-modal/video-modal.component';
 import { BasketService } from '../../basket/basket.service';
-import { JsonPipe } from '@angular/common';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-course-details',
@@ -26,7 +26,8 @@ export class CourseDetailsComponent implements OnInit {
     private shopService: ShopService,
     private activateRoute: ActivatedRoute,
     private modalService: BsModalService,
-    private basketService: BasketService
+    private basketService: BasketService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -99,6 +100,9 @@ export class CourseDetailsComponent implements OnInit {
    console.log("basket : " + JSON.stringify(this.course));
    this.course.Id = this.activateRoute.snapshot.paramMap.get('id');
     this.basketService.addItemToBasket(this.course);
+    this.snackBar.open(this.course.Title + ' added to the basket','Dismiss', {
+      duration: 2000,
+    });
   }
 
 }

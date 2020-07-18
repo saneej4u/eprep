@@ -25,6 +25,9 @@ import {MatListModule} from '@angular/material/list';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatRippleModule} from '@angular/material/core';
 
 
 @NgModule({
@@ -53,6 +56,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatRadioModule,
     MatCheckboxModule,
     MatButtonModule,
+    MatSnackBarModule,
+    MatIconModule,
+    MatRippleModule,
     SortableModule.forRoot(),
     TabsModule.forRoot(),
     ToastrModule.forRoot({
@@ -84,7 +90,10 @@ import {MatButtonModule} from '@angular/material/button';
     MatListModule,
     MatRadioModule,
     MatCheckboxModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule,
+    MatIconModule,
+    MatRippleModule
   ]
 })
 export class SharedModule { }
