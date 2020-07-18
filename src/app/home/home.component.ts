@@ -110,4 +110,15 @@ export class HomeComponent implements OnInit {
     this.sidenav.close();
   }
   
+  onSignInClicked()
+  {
+    this.router.navigate(['/account/login']);
+    this.sidenav.close();
+  }
+
+  onSignUpClicked()
+  {
+    this.router.navigate(['/account/register']);
+    this.sidenav.close();
+  }
 }
