@@ -1,46 +1,40 @@
 <div class="modal-header">
-    <h4 class="modal-title pull-left"> {{ title }} </h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <h5 class="modal-title pull-left"> {{ title }} </h5>
+    <button type="button" class="close pull-right logo" aria-label="Close" (click)="modalRef.hide()">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body">
-        <vg-player (onPlayerReady)="onPlayerReady($event)">
-                <vg-buffering></vg-buffering>
-            
-                <vg-controls>
-                    <vg-play-pause></vg-play-pause>
-                    <vg-playback-button></vg-playback-button>
-            
-                    <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
-            
-                    <vg-scrub-bar>
-                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-                        <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
-                    </vg-scrub-bar>
-            
-                    <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
-            
-                    <vg-mute></vg-mute>
-                    <vg-volume></vg-volume>
-            
-                    <vg-fullscreen></vg-fullscreen>
-                </vg-controls>
-            
-                <video oncontextmenu="return false;" height="100%" #media
-                       [vgMedia]="media"
-                       [src]="currentItem.src"
-                       id="singleVideo"
-                       preload="auto"
-                       crossorigin>
-                </video>
-            </vg-player>
+    <vg-player (onPlayerReady)="onPlayerReady($event)">
+        <vg-buffering></vg-buffering>
+
+        <vg-controls>
+            <vg-play-pause></vg-play-pause>
+            <vg-playback-button></vg-playback-button>
+
+            <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+            <vg-scrub-bar>
+                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+            </vg-scrub-bar>
+
+            <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+            <vg-mute></vg-mute>
+            <vg-volume></vg-volume>
+
+            <vg-fullscreen></vg-fullscreen>
+        </vg-controls>
+
+        <video oncontextmenu="return false;" height="100%" #media [vgMedia]="media" [src]="currentItem.src" id="singleVideo" preload="auto"
+            crossorigin>
+        </video>
+    </vg-player>
 
 
-            <div class="list-group mt-3">
-
-                    <a *ngFor="let item of playlist; let $index = index" (click)="onClickPlaylistItem(item, $index)"
-                        [class.active]="item === currentItem"
-                class="list-group-item list-group-item-action" style="cursor: pointer">{{$index + 1}} - {{ item.title }}</a>
-                </div>
+    <div class="list-group mt-3">
+        <a *ngFor="let item of playlist; let $index = index" (click)="onClickPlaylistItem(item, $index)" [class.active]="item === currentItem"
+            class="list-group-item list-group-item-action" style="cursor: pointer">{{$index + 1}} - {{ item.title }}</a>
+    </div>
 </div>

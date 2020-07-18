@@ -1,4 +1,17 @@
 .active
 {
-    color: white !important;
+    color: black !important;
 }
+
+.logo {
+    cursor: pointer;
+  
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .list-group-item.active
+  {
+      background: white;
+  }
