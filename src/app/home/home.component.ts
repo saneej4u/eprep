@@ -4,6 +4,8 @@ import { ICourse } from '../shared/models/course';
 import { map } from 'rxjs/operators';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+import { BasketService } from '../basket/basket.service';
+import { AccountService } from '../account/account.service';
 
 @Component({
   selector: 'app-home',
@@ -14,11 +16,32 @@ export class HomeComponent implements OnInit {
   allCourses: ICourse[];
   selectedCourse: ICourse;
   itemsPerSlide = 4;
-  constructor(private shopService: ShopService, private router: Router) {}
+  basketItemsCount: number;
+  
+  constructor(private shopService: ShopService, 
+    private router: Router,
+    private accoutService: AccountService,
+    private basketService: BasketService) {}
 
   ngOnInit(): void {
     //this.addCourse();
     this.loadAllCourse();
+
+    this.basketService.getBasketItems().subscribe(
+      result => {
+        if (result) {
+          this.basketItemsCount = result.length;
+        } else {
+          this.basketItemsCount = 0;
+        }
+        console.log("Basket Count: " + this.basketItemsCount);
+        
+      },
+      error => {
+        console.log('error');
+      }
+    );
+
   }
 
   loadAllCourse() {
