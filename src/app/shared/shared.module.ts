@@ -28,6 +28,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatRippleModule} from '@angular/material/core';
+import {MatChipsModule} from '@angular/material/chips';
+
 
 
 @NgModule({
@@ -59,6 +61,7 @@ import {MatRippleModule} from '@angular/material/core';
     MatSnackBarModule,
     MatIconModule,
     MatRippleModule,
+    MatChipsModule,
     SortableModule.forRoot(),
     TabsModule.forRoot(),
     ToastrModule.forRoot({
@@ -93,7 +96,8 @@ import {MatRippleModule} from '@angular/material/core';
     MatButtonModule,
     MatSnackBarModule,
     MatIconModule,
-    MatRippleModule
+    MatRippleModule,
+    MatChipsModule
   ]
 })
 export class SharedModule { }

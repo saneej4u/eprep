@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { BasketService } from '../basket/basket.service';
 import { AccountService } from '../account/account.service';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { IUser } from '../shared/models/user';
 
 @Component({
   selector: 'app-home',
@@ -19,14 +21,28 @@ export class HomeComponent implements OnInit {
   itemsPerSlide = 4;
   basketItemsCount: number;
   isMobile: boolean;
+  currentUser: IUser;
   
   constructor(private shopService: ShopService, 
     private router: Router,
     private accoutService: AccountService,
     private basketService: BasketService,
+    private afAuth: AngularFireAuth,
     private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit(): void {
+
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.currentUser = user;
+        // console.log('Display Name: ' + JSON.stringify(this.currentUser.displayName));
+        localStorage.setItem('user', JSON.stringify(this.currentUser));
+      } else {
+        this.currentUser = null;
+        localStorage.setItem('user', null);
+      }
+    });
+
     //this.addCourse();
     this.loadAllCourse();
 
@@ -158,6 +174,13 @@ export class HomeComponent implements OnInit {
   onSignUpClicked()
   {
     this.router.navigate(['/account/register']);
+    this.sidenav.close();
+  }
+
+  onSignOutClicked()
+  {
+    this.accoutService.logout();
+    this.router.navigate(['/']);
     this.sidenav.close();
   }
 }

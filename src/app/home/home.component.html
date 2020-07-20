@@ -11,12 +11,20 @@
 
 
         </div>
-        <div class="d-flex justify-content-between mb-2 py-2 bg-dark">
-
+        <div class="d-flex justify-content-between bg-dark">
             <div></div>
-            <i class="fa fa-times fa-2x m-2 p-2 float-right text-white mt-3" aria-hidden="true" (click)="close('toggle button')"></i>
+            <i class="fa fa-times fa-2x m-2 p-2 text-white mt-3" aria-hidden="true" (click)="close('toggle button')"></i>
         </div>
-        <div class="d-flex flex-column text-white">
+        <div class="d-flex flex-column text-white">      
+                <div class="p-2 text-center">
+                        <h2 *ngIf="currentUser" class="text-white m-2 p-2 mt-3 text-secondary">Hello, {{currentUser?.displayName}}</h2>
+                        <span *ngIf="currentUser" class="text-lead text-secondary">Welcome back</span>
+                    </div>    
+            <mat-divider *ngIf="currentUser"></mat-divider>
+            <div *ngIf="currentUser" class="p-2 px-4 text-center">
+                <h4> My courses </h4>
+            </div>
+            <mat-divider *ngIf="currentUser"></mat-divider>
             <div class="p-2 px-4 text-center">
                 <h4 (click)='onHomeClicked()'> Home </h4>
             </div>
@@ -26,10 +34,14 @@
             <div class="p-2 px-4 text-center">
                 <h4 (click)="onTeachClicked()"> Teach </h4>
             </div>
-            <div class="p-2 px-4 text-center">
+            <mat-divider class="text-white"></mat-divider>
+            <div *ngIf="currentUser" class="p-2 px-4 text-center">
+                <h4 (click)='onSignOutClicked()'> Log out</h4>
+            </div>
+            <div *ngIf="(currentUser == null)" class="p-2 px-4 text-center">
                 <h4 (click)='onSignInClicked()'> Log In </h4>
             </div>
-            <div class="p-2 px-4 text-center">
+            <div *ngIf="(currentUser == null)" class="p-2 px-4 text-center">
                 <h4 (click)='onSignUpClicked()'> Sign Up </h4>
             </div>
 

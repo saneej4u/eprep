@@ -1,0 +1,20 @@
+.card
+{
+    border: none;
+}
+
+img{
+    width:130px;
+    height: auto;;
+    max-height: 80px;
+    outline: none; 
+}
+
+img:focus{
+    outline: none;
+    border:0;
+}
+div:focus{
+    outline: none;
+    border:0;
+}

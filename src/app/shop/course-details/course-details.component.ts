@@ -8,6 +8,12 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { VideoModalComponent } from 'src/app/shared/components/video-modal/video-modal.component';
 import { BasketService } from '../../basket/basket.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import { BasketConfirmComponent } from '../../shared/components/basket-confirm/basket-confirm.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { BasketConfirmModelComponent } from '../../shared/components/basket-confirm-model/basket-confirm-model.component';
+
+
 
 @Component({
   selector: 'app-course-details',
@@ -27,7 +33,9 @@ export class CourseDetailsComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private modalService: BsModalService,
     private basketService: BasketService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private bottomSheet: MatBottomSheet,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -100,8 +108,24 @@ export class CourseDetailsComponent implements OnInit {
    console.log("basket : " + JSON.stringify(this.course));
    this.course.Id = this.activateRoute.snapshot.paramMap.get('id');
     this.basketService.addItemToBasket(this.course);
-    this.snackBar.open(this.course.Title + ' added to the basket','Dismiss', {
+    this.snackBar.open('Course added to the basket','Dismiss', {
       duration: 2000,
+    });
+
+    //this.bottomSheet.open(BasketConfirmComponent);
+
+    this.openDialog();
+
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(BasketConfirmModelComponent, {
+      width: '650px',
+      data: {CourseId: this.course.Id, Title: this.course.Title, Thumbnail: this.course.Thumbnail, InstructorName: this.course.InstructorName, Price: this.course.Price, RentInDays: this.course.RentInDays}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
     });
   }
 
